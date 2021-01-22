@@ -11,7 +11,6 @@ import GoogleSignIn
 import Firebase
 
 struct LoginView: View {
-    
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     var body: some View {

@@ -72,14 +72,14 @@ struct MyLibraryView: View {
                 HStack(spacing: 3){
                     Button(action: {}){
                         HStack{
-                            Image(systemName: "questionmark.square")
+                            Image(systemName: "repeat")
                             Text("전체반복")
                         }.frame(width: geometry.size.width/2, height: 50).background(usuallyColor)
                         
                     }
                     Button(action: {}){
                         HStack{
-                            Image(systemName: "questionmark.square")
+                            Image(systemName: "shuffle")
                             Text("랜덤읽기")
                         }.frame(width: geometry.size.width/2, height: 50).background(usuallyColor)
                         
