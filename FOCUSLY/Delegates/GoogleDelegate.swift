@@ -11,7 +11,8 @@ import SwiftUI
 
 class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
     @Published var signedIn: Bool = false
-
+    @Published var userEmail: String = ""
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             print(error.localizedDescription)
@@ -25,8 +26,8 @@ class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
                 return
             }
             print("signIn result: " + authResult!.user.email!)
+            self.userEmail = authResult!.user.email!
             self.signedIn = true
         }
-
     }
 }

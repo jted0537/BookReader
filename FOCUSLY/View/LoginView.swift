@@ -12,17 +12,16 @@ import Firebase
 
 struct LoginView: View {
     
-    @EnvironmentObject var FBLogin: UserData
+    @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
-    
     var body: some View {
-        if FBLogin.loggedIn {
+        if FacebookLogin.signedIn {
             MainView()
         }
-        else if GoogleLogin.signedIn{
+        else if GoogleLogin.signedIn {
             MainView()
         }
-        else{
+        else {
             SocialLoginView()
         }
         
@@ -38,11 +37,10 @@ struct ContentView_Previews: PreviewProvider {
 
 struct SocialLoginView: View{
     
-    @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @State var manager = LoginManager()
-    @EnvironmentObject var FBLogin: UserData
     @EnvironmentObject var GoogleLogin: GoogleDelegate
+    @EnvironmentObject var FacebookLogin: FacebookDelegate
     
     var body: some View{
         VStack(spacing: 30){
@@ -51,33 +49,7 @@ struct SocialLoginView: View{
             Text("FOCUSLY").foregroundColor(Color(red: 1.0, green: 176/255, blue: 0.0)).bold().font(.system(.largeTitle, design: .rounded))
             
             Button(action: {
-                if logged{
-                    manager.logOut()
-                    email = ""
-                    logged = false
-                }
-                else{
-                    manager.logIn(permissions: ["public_profile", "email"], from: nil){ (result, err) in
-                        if err != nil {
-                            print(err!.localizedDescription)
-                            return
-                        }
-                        if !result!.isCancelled{
-                            
-                            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                            Auth.auth().signIn(with: credential) { (authResult, error) in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                    return
-                                }
-                                print("Facebook Sign In"+authResult!.user.email!)
-                            }
-                            logged = true
-                            FBLogin.loggedIn = true
-                        }
-                        
-                    }
-                }
+                FacebookLogin.logintWithFacebook()
             }){
                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/){
                     Image("Facebook")

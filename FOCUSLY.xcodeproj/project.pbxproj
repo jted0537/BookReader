@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */; };
 		DF48A5997D53CDF7428C2C05 /* Pods_FOCUSLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AA10F65D61A2C05AE0B810 /* Pods_FOCUSLY.framework */; };
 		E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010C04225B9CEA900B2297D /* MyLibraryView.swift */; };
 		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		29AA10F65D61A2C05AE0B810 /* Pods_FOCUSLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FOCUSLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		939C68ACBA6860BBD66B1835 /* Pods-FOCUSLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.release.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.release.xcconfig"; sourceTree = "<group>"; };
+		A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
 		CD8C4BCDA11DAD01CECFC832 /* Pods-FOCUSLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.debug.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.debug.xcconfig"; sourceTree = "<group>"; };
 		E010C04225B9CEA900B2297D /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 		E08CAC2625B955AB00B37165 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */,
 				E08CAC3625B95A1200B37165 /* MainView.swift */,
 				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
 				E08CAC3525B95A1200B37165 /* ReadingRow.swift */,
@@ -310,6 +313,7 @@
 				E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */,
 				E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */,
 				E08CAC3925B95A1200B37165 /* MainView.swift in Sources */,
+				A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

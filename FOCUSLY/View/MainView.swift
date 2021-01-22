@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
 let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
@@ -21,6 +22,8 @@ struct MainView: View {
     //    init() {
     //        UITabBar.appearance().isTranslucent = false
     //    }
+    @EnvironmentObject var GoogleLogin: GoogleDelegate
+    
     var body: some View {
         VStack(spacing: 0){
             TopBarView()
@@ -40,7 +43,7 @@ struct MainView: View {
                     Image(systemName: "chart.bar.fill")
                     Text("나의보관함")
                 }.tag(2)
-                Text("4").tabItem{
+                PreferenceView().tabItem{
                     Image(systemName: "gearshape.fill")
                     Text("환경설정")
                 }.tag(3)

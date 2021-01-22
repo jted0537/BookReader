@@ -22,8 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let googleDelegate = (UIApplication.shared.delegate as! AppDelegate).googleDelegate
-        let userData = UserData()
-        let loginView = LoginView().environmentObject(userData).environmentObject(googleDelegate)
+        let facebookDelegate = (UIApplication.shared.delegate as! AppDelegate).facebookDelegate
+        //let userData = UserData()
+        let loginView = LoginView().environmentObject(googleDelegate).environmentObject(facebookDelegate)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
