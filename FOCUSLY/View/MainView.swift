@@ -22,9 +22,10 @@ struct MainView: View {
     //        UITabBar.appearance().isTranslucent = false
     //    }
     var body: some View {
-        VStack{
+        VStack(spacing: 0){
             TopBarView()
             
+            Divider()
             
             TabView(selection: $selection){
                 MyLibraryView(user: User.generateUser()).tabItem{
@@ -50,7 +51,11 @@ struct MainView: View {
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        Group{
+            MainView().previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)")).previewDisplayName("iPhone SE")
+            MainView().previewDevice(PreviewDevice(rawValue: "iPhone 11")).previewDisplayName("iPhone 11")
+            MainView().previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (2nd generation)")).previewDisplayName("iPad Pro")
+        }
     }
 }
 
@@ -60,12 +65,14 @@ struct TopBarView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            VStack(alignment: .center) {
                 HStack{
                     if !self.plusPressed {
                         HStack(spacing: 0){
-                            Text("").frame(width: geometry.size.width/6)
-                            Text("FOCUSLY").foregroundColor(originalColor).bold().font(.title2).frame(width: geometry.size.width*2/3)
+                            Text("").frame(width:24, height: 24)//.frame(width: geometry.size.width/6)
+                            Spacer()
+                            Text("FOCUSLY").foregroundColor(originalColor).bold().font(.title2)//.frame(width: UIScreen)
+                            Spacer()
                             Button(action: {
                                 withAnimation{
                                     self.plusPressed.toggle()
@@ -76,10 +83,8 @@ struct TopBarView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                     ).frame(width:24, height: 24)
-                                
-                            }.frame(width: geometry.size.width/6)
-                            
-                        }
+                            }
+                        }.padding(.horizontal, 10)
                     }
                     else {
                         HStack(spacing: 0){
@@ -110,9 +115,8 @@ struct TopBarView: View {
                             }.frame(width: geometry.size.width/8)
                         }
                     }
-                }.frame(height:30).padding(.bottom, 10)
-                Divider()
+                }//.frame(width: geometry.size.width, height:30).padding(.vertical, 5)
             }
-        }.frame(height: 50)
+        }.frame(height: 40).padding(.top, 10)
     }
 }

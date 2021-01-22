@@ -33,11 +33,13 @@ struct MyLibraryView: View {
                         Text("매일 책을 읽어 통계 수치를 높이고 더 많은 도서를 완독하세요!").foregroundColor(grayLetter).font(.caption)//.frame(width: geometry.size.width/2)
                     }
                     Spacer()
-                    ZStack{
+                    
+                    
+                    ZStack(alignment: .trailing){
                         Circle()
                             .opacity(0.3)
                             .foregroundColor(grayCircle)
-                            .frame(height:120)
+                            .frame(width: 120, height:120)
                         GeometryReader { geometry in
                             Path { path in
                                 let size = min(geometry.size.width, geometry.size.height)
@@ -49,10 +51,11 @@ struct MyLibraryView: View {
                         .frame(width: 120, height: 120)
                         .rotationEffect(.degrees(90))
                         Text("\(Int(user.todayReadingRatio*100.0))%").bold().font(.title).foregroundColor(grayLetter)
+                            .frame(width: 120, height: 120)
                     }
                 }
-                .padding()
-                .padding(.vertical, 10)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 20)
                 //오늘의 읽기, Progress bar
                 
                 ZStack{
@@ -66,7 +69,7 @@ struct MyLibraryView: View {
                 }
                 //Book list
                 
-                HStack(spacing: 2){
+                HStack(spacing: 3){
                     Button(action: {}){
                         HStack{
                             Image(systemName: "questionmark.square")
