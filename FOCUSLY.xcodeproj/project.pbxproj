@@ -1,0 +1,533 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF48A5997D53CDF7428C2C05 /* Pods_FOCUSLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AA10F65D61A2C05AE0B810 /* Pods_FOCUSLY.framework */; };
+		E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010C04225B9CEA900B2297D /* MyLibraryView.swift */; };
+		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
+		E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D725B951E7009F3DF3 /* SceneDelegate.swift */; };
+		E08343DC25B951E7009F3DF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DB25B951E7009F3DF3 /* Assets.xcassets */; };
+		E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */; };
+		E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */; };
+		E08343EB25B95257009F3DF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E08343EA25B95257009F3DF3 /* GoogleService-Info.plist */; };
+		E08CAC1525B9548D00B37165 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E08CAC1425B9548D00B37165 /* FacebookLogin */; };
+		E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E08CAC1725B954D100B37165 /* focuslyIcon.png */; };
+		E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC1A25B9554F00B37165 /* FacebookDelegate.swift */; };
+		E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */; };
+		E08CAC2125B9556F00B37165 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2025B9556F00B37165 /* LoginView.swift */; };
+		E08CAC3025B959FD00B37165 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2E25B959FD00B37165 /* User.swift */; };
+		E08CAC3125B959FD00B37165 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2F25B959FD00B37165 /* Book.swift */; };
+		E08CAC3825B95A1200B37165 /* ReadingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC3525B95A1200B37165 /* ReadingRow.swift */; };
+		E08CAC3925B95A1200B37165 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC3625B95A1200B37165 /* MainView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29AA10F65D61A2C05AE0B810 /* Pods_FOCUSLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FOCUSLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		939C68ACBA6860BBD66B1835 /* Pods-FOCUSLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.release.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.release.xcconfig"; sourceTree = "<group>"; };
+		CD8C4BCDA11DAD01CECFC832 /* Pods-FOCUSLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.debug.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.debug.xcconfig"; sourceTree = "<group>"; };
+		E010C04225B9CEA900B2297D /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
+		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E08343D725B951E7009F3DF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E08343DB25B951E7009F3DF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E08343E125B951E7009F3DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E08343E325B951E7009F3DF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E08343EA25B95257009F3DF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E08CAC1725B954D100B37165 /* focuslyIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = focuslyIcon.png; sourceTree = "<group>"; };
+		E08CAC1A25B9554F00B37165 /* FacebookDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookDelegate.swift; sourceTree = "<group>"; };
+		E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDelegate.swift; sourceTree = "<group>"; };
+		E08CAC2025B9556F00B37165 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E08CAC2E25B959FD00B37165 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E08CAC2F25B959FD00B37165 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		E08CAC3525B95A1200B37165 /* ReadingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRow.swift; sourceTree = "<group>"; };
+		E08CAC3625B95A1200B37165 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E08343CF25B951E7009F3DF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E08CAC1525B9548D00B37165 /* FacebookLogin in Frameworks */,
+				DF48A5997D53CDF7428C2C05 /* Pods_FOCUSLY.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03E000439FBCF8D57334FECD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD8C4BCDA11DAD01CECFC832 /* Pods-FOCUSLY.debug.xcconfig */,
+				939C68ACBA6860BBD66B1835 /* Pods-FOCUSLY.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9E8FACD6CDD6438087117C15 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29AA10F65D61A2C05AE0B810 /* Pods_FOCUSLY.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E08343C925B951E7009F3DF3 = {
+			isa = PBXGroup;
+			children = (
+				E08343D425B951E7009F3DF3 /* FOCUSLY */,
+				E08343D325B951E7009F3DF3 /* Products */,
+				03E000439FBCF8D57334FECD /* Pods */,
+				9E8FACD6CDD6438087117C15 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E08343D325B951E7009F3DF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E08343D225B951E7009F3DF3 /* FOCUSLY.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E08343D425B951E7009F3DF3 /* FOCUSLY */ = {
+			isa = PBXGroup;
+			children = (
+				E08CAC2D25B959F400B37165 /* Models */,
+				E08CAC1725B954D100B37165 /* focuslyIcon.png */,
+				E08CAC2725B955B300B37165 /* ICON */,
+				E08CAC2625B955AB00B37165 /* View */,
+				E08CAC2425B9558200B37165 /* Delegates */,
+				E08343DB25B951E7009F3DF3 /* Assets.xcassets */,
+				E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */,
+				E08343EA25B95257009F3DF3 /* GoogleService-Info.plist */,
+				E08343E325B951E7009F3DF3 /* Info.plist */,
+				E08343DD25B951E7009F3DF3 /* Preview Content */,
+			);
+			path = FOCUSLY;
+			sourceTree = "<group>";
+		};
+		E08343DD25B951E7009F3DF3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E08CAC2425B9558200B37165 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				E08343D525B951E7009F3DF3 /* AppDelegate.swift */,
+				E08343D725B951E7009F3DF3 /* SceneDelegate.swift */,
+				E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */,
+				E08CAC1A25B9554F00B37165 /* FacebookDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		E08CAC2625B955AB00B37165 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E08CAC3625B95A1200B37165 /* MainView.swift */,
+				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
+				E08CAC3525B95A1200B37165 /* ReadingRow.swift */,
+				E08CAC2025B9556F00B37165 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E08CAC2725B955B300B37165 /* ICON */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ICON;
+			sourceTree = "<group>";
+		};
+		E08CAC2D25B959F400B37165 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E08CAC2F25B959FD00B37165 /* Book.swift */,
+				E08CAC2E25B959FD00B37165 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E08343D125B951E7009F3DF3 /* FOCUSLY */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "FOCUSLY" */;
+			buildPhases = (
+				DB9DC0030DDEFAF362A23A9D /* [CP] Check Pods Manifest.lock */,
+				E08343CE25B951E7009F3DF3 /* Sources */,
+				E08343CF25B951E7009F3DF3 /* Frameworks */,
+				E08343D025B951E7009F3DF3 /* Resources */,
+				C2316768FFCA2702274B18F5 /* [CP] Embed Pods Frameworks */,
+				51AEE97098C8E57A194EB4BF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FOCUSLY;
+			packageProductDependencies = (
+				E08CAC1425B9548D00B37165 /* FacebookLogin */,
+			);
+			productName = FOCUSLY;
+			productReference = E08343D225B951E7009F3DF3 /* FOCUSLY.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E08343CA25B951E7009F3DF3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					E08343D125B951E7009F3DF3 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "FOCUSLY" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E08343C925B951E7009F3DF3;
+			packageReferences = (
+				E08CAC1325B9548D00B37165 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
+			productRefGroup = E08343D325B951E7009F3DF3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E08343D125B951E7009F3DF3 /* FOCUSLY */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E08343D025B951E7009F3DF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */,
+				E08343EB25B95257009F3DF3 /* GoogleService-Info.plist in Resources */,
+				E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */,
+				E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */,
+				E08343DC25B951E7009F3DF3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51AEE97098C8E57A194EB4BF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2316768FFCA2702274B18F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB9DC0030DDEFAF362A23A9D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FOCUSLY-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E08343CE25B951E7009F3DF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */,
+				E08CAC2125B9556F00B37165 /* LoginView.swift in Sources */,
+				E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */,
+				E08CAC3125B959FD00B37165 /* Book.swift in Sources */,
+				E08CAC3025B959FD00B37165 /* User.swift in Sources */,
+				E08CAC3825B95A1200B37165 /* ReadingRow.swift in Sources */,
+				E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */,
+				E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */,
+				E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */,
+				E08CAC3925B95A1200B37165 /* MainView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E08343E125B951E7009F3DF3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E08343E425B951E7009F3DF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E08343E525B951E7009F3DF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E08343E725B951E7009F3DF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD8C4BCDA11DAD01CECFC832 /* Pods-FOCUSLY.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FOCUSLY/Preview Content\"";
+				DEVELOPMENT_TEAM = 6U9D6MFS2N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = FOCUSLY/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.FOCUSLY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E08343E825B951E7009F3DF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 939C68ACBA6860BBD66B1835 /* Pods-FOCUSLY.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FOCUSLY/Preview Content\"";
+				DEVELOPMENT_TEAM = 6U9D6MFS2N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = FOCUSLY/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.FOCUSLY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "FOCUSLY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E08343E425B951E7009F3DF3 /* Debug */,
+				E08343E525B951E7009F3DF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "FOCUSLY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E08343E725B951E7009F3DF3 /* Debug */,
+				E08343E825B951E7009F3DF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E08CAC1325B9548D00B37165 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E08CAC1425B9548D00B37165 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E08CAC1325B9548D00B37165 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = E08343CA25B951E7009F3DF3 /* Project object */;
+}

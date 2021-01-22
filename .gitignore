@@ -1,0 +1,3 @@
+$ curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
+$ git add .gitignore
+$ git ci -m "Add .gitignore"
