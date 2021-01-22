@@ -101,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				E08CAC2D25B959F400B37165 /* Models */,
-				E08CAC1725B954D100B37165 /* focuslyIcon.png */,
 				E08CAC2725B955B300B37165 /* ICON */,
 				E08CAC2625B955AB00B37165 /* View */,
 				E08CAC2425B9558200B37165 /* Delegates */,
@@ -147,6 +146,7 @@
 		E08CAC2725B955B300B37165 /* ICON */ = {
 			isa = PBXGroup;
 			children = (
+				E08CAC1725B954D100B37165 /* focuslyIcon.png */,
 			);
 			path = ICON;
 			sourceTree = "<group>";
