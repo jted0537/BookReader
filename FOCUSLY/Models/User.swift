@@ -5,12 +5,14 @@
 //  Created by 윤다영 on 2021/01/13.
 //
 
+// 건드릴 데이터: article key, content
+
 import Foundation
 
 class User: NSObject, Identifiable {
     public var id: Int
     public var username: String
-    public var playlist: [Book]
+    public var playlist: [Script]
     public var todayReadingGoal: Int = 0 // 초 단위로 저장
     public var todayReadingNow: Int = 0 // 초 단위로 저장
     public var todayReadingGoalMin: Int {
@@ -43,12 +45,12 @@ class User: NSObject, Identifiable {
     init(idx: Int, name: String){
         self.id = idx
         self.username = name
-        self.playlist = [Book]()
+        self.playlist = [Script]()
     }
     
     static func generateUser() -> User {
         var user = User(idx: 1, name: "dayoung")
-        user.playlist = Book.generateReadings()
+        user.playlist = Script.generateReadings()
         user.todayReadingGoal = 300
         user.todayReadingNow = 160
         return user

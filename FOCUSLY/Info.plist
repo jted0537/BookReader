@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BMJUA_ttf.ttf</string>
+		<string>BMJUA_otf.otf</string>
+		<string>PottaOne-Regular.ttf</string>
+		<string>HANDotum-LVT.ttf</string>
+		<string>HANBatang-LVT.ttf</string>
+	</array>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>focuslyIcon.png</string>

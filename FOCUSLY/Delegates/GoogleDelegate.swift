@@ -9,6 +9,7 @@ import GoogleSignIn
 import Firebase
 import SwiftUI
 
+/* For Google Login */
 class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
     @Published var signedIn: Bool = false
     @Published var userEmail: String = ""
@@ -25,8 +26,8 @@ class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
                 print(error.localizedDescription)
                 return
             }
-            print("signIn result: " + authResult!.user.email!)
-            self.userEmail = authResult!.user.email!
+            print("signIn result: " + authResult!.user.displayName!)
+            self.userEmail = authResult!.user.displayName!
             self.signedIn = true
         }
     }

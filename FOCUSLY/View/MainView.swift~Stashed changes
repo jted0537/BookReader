@@ -1,0 +1,264 @@
+//
+//  TabView.swift
+//  SwiftPlaygroud
+//
+//  Created by 정동혁 on 2021/01/15.
+//
+
+import SwiftUI
+import Firebase
+
+let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
+let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
+let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+let grayLetter: Color = Color(red: 96/255, green: 96/255, blue: 96/255)
+let grayCircle: Color = Color(red: 238/255, green: 238/255, blue: 238/255)
+let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+
+enum Tab{
+    case Tab1
+    case Tab2
+    case Tab3
+    case Tab4
+}
+
+/* 로그인시 보여질 View */
+struct MainView: View {
+    @State private var currentView: Tab = .Tab1
+    @State private var selection = 0
+    
+    //    init() {
+    //        UITabBar.appearance().isTranslucent = false
+    //    }
+    @EnvironmentObject var GoogleLogin: GoogleDelegate
+    
+    var body: some View {
+        
+        
+        VStack(spacing: 0){
+            TopBarView()
+            
+            Divider()
+            
+            CurrentScreen(currentView: self.$currentView)
+            
+            Divider()
+            TabBar(currentView: self.$currentView)
+            
+            //                TabView(selection: $selection){
+            //                    MyLibraryView(user: User.generateUser()).tabItem{
+            //                        VStack(alignment: .center) {
+            //                            Image(systemName: "folder.fill")
+            //
+            //                            if selection == 0 {
+            //                                Text("나의서재")
+            //                            }
+            //
+            //                        }
+            ////                        if selection == 0 {
+            ////                            VStack(alignment: .center) {
+            ////                                Image(systemName: "folder.fill")
+            ////                                    .scaleEffect(selection == 0 ? 1.5 : 1)
+            ////                                Text("나의서재")
+            ////                            }
+            ////                        }
+            ////                        else {
+            ////                            Image(systemName: "folder.fill")
+            ////                        }
+            //
+            //                    }.tag(0)
+            //                    Text("추천글감").tabItem{
+            //                        VStack {
+            //                            Image(systemName: "text.justifyleft")
+            //                            if selection == 1 {
+            //                                Text("추천글감")
+            //                            }
+            //                        }
+            //                        .frame(alignment: .center)
+            //                    }.tag(1)
+            //                    Text("3").tabItem{
+            //                        Image(systemName: "chart.bar.fill")
+            //                    }.tag(2)
+            //                    PreferenceView().tabItem{
+            //                        VStack {
+            //                            Image(systemName: "gearshape.fill")
+            //                            if selection == 3 {
+            //                                Text("환경설정")
+            //                            }
+            //                        }
+            //                    }.tag(3)
+            //                }
+            //                .accentColor(mainColor)
+        }
+        //.edgesIgnoringSafeArea(.bottom)
+        
+        
+        
+        //NavigationView {
+        //}
+        //.background(Color(.red))
+        //.navigationViewStyle(StackNavigationViewStyle())
+        
+    }
+} //Main화면 View, Tab View
+
+struct MainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group{
+            MainView().previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)")).previewDisplayName("iPhone SE")
+            MainView().previewDevice(PreviewDevice(rawValue: "iPhone 11")).previewDisplayName("iPhone 11")
+            MainView().previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (2nd generation)")).previewDisplayName("iPad Pro")
+        }
+    }
+}
+
+// TopBar: 상단바
+struct TopBarView: View {
+    
+    @State var plusPressed: Bool = false
+    
+    var body: some View {
+        GeometryReader { geometry in
+            VStack(alignment: .center) {
+                HStack{
+                    if !self.plusPressed {
+                        HStack(spacing: 0){
+                            Text("").frame(width:24, height: 24)//.frame(width: geometry.size.width/6)
+                            Spacer()
+                            Text("FOCUSLY").foregroundColor(originalColor).bold().font(.title2)//.frame(width: UIScreen)
+                            Spacer()
+                            Button(action: {
+                                withAnimation{
+                                    self.plusPressed.toggle()
+                                }
+                            }){
+                                LinearGradient(gradient: gradationColor, startPoint: .top, endPoint: .bottom)
+                                    .mask(Image(systemName: "plus.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                    ).frame(width:24, height: 24)
+                            }
+                        }.padding(.horizontal, 10)
+                    }
+                    else {
+                        HStack(spacing: 0){
+                            Button( action: {
+                                withAnimation{
+                                    self.plusPressed.toggle()
+                                }
+                            }){
+                                Image(systemName: "backward.end")
+                            }.frame(width: geometry.size.width/8)
+                            Spacer()
+                            Button(action: {
+                                
+                            }){
+                                Image(systemName: "pencil")
+                            }.frame(width: geometry.size.width/8)
+                            
+                            Button(action: {
+                                
+                            }){
+                                Image(systemName: "camera")
+                            }.frame(width: geometry.size.width/8)
+                            
+                            Button(action: {
+                                
+                            }){
+                                Image(systemName: "paperclip")
+                            }.frame(width: geometry.size.width/8)
+                        }
+                    }
+                }//.frame(width: geometry.size.width, height:30).padding(.vertical, 5)
+            }
+        }.frame(height: 40).padding(.top, 10)
+    }
+}
+
+// current view: 현재 화면 보여줌
+struct CurrentScreen: View {
+    @Binding var currentView: Tab
+    
+    var body: some View {
+        VStack{
+            switch self.currentView{
+            case .Tab1:
+                MyLibraryView(user: User.generateUser())
+            case .Tab2:
+                VStack{
+                    Text("추천 글감")
+                    Spacer()
+                }
+                
+            case .Tab3:
+                VStack{
+                    Text("나의 보관함")
+                    Spacer()
+                }
+                
+            case .Tab4:
+                VStack {
+                    Text("환경 설정")
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
+//                    Image(systemName: "text.justifyleft")
+//                    Text("추천글감")
+//                }.tag(1)
+//                Text("3").tabItem{
+//                    Image(systemName: "chart.bar.fill")
+//                    Text("나의보관함")
+//                }.tag(2)
+//                PreferenceView().tabItem{
+//                    Image(systemName: "gearshape.fill")
+//                    Text("환경설정")
+
+// TabBar: 커스텀 tab bar
+struct TabBar: View {
+    @Binding var currentView: Tab
+    
+    var body: some View {
+        HStack{
+            TabBarItem(currentView: self.$currentView, imageName: "folder.fill", title: "나의서재",  tab: .Tab1)
+            TabBarItem(currentView: self.$currentView, imageName: "text.justifyleft", title: "추천글감",  tab: .Tab2)
+            TabBarItem(currentView: self.$currentView, imageName: "chart.bar.fill", title: "통계", tab: .Tab3)
+            TabBarItem(currentView: self.$currentView, imageName: "gearshape.fill", title: "환경설정", tab: .Tab4)
+        }.frame(height: 80)
+    }
+}
+
+// TabBarItem: 커스텀 tab bar item
+struct TabBarItem: View {
+    @Binding var currentView: Tab
+    let imageName: String
+    let title: String
+    let tab: Tab
+    
+    var body: some View {
+        VStack(alignment: .center){
+            Image(systemName: imageName)
+                .resizable()
+                //.aspectRatio(contentMode: .fill)
+                
+                .frame(width: 25, height: 25, alignment: .center)
+                .aspectRatio(contentMode: .fill)
+                .foregroundColor(self.currentView == tab ? mainColor : grayLetter)
+            if(self.currentView == tab){
+                Text(title)
+                    .font(.footnote)
+                    .foregroundColor(mainColor)
+            }
+        }
+        .padding(.horizontal, 10)
+        .frame(width: 75, height: 75)
+        .onTapGesture { withAnimation{
+            self.currentView = self.tab
+        }
+        }
+    }
+    
+}

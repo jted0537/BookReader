@@ -14,39 +14,30 @@ struct LoginView: View {
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     var body: some View {
-        if FacebookLogin.signedIn {
-            MainView()
-        }
-        else if GoogleLogin.signedIn {
-            MainView()
-        }
-        else {
-            SocialLoginView()
-        }
-        
+//        if FacebookLogin.signedIn {
+//            MainScreenView()
+//        }
+//        else if GoogleLogin.signedIn {
+//            MainScreenView()
+//        }
+//        else {
+//            SocialLoginView()
+//        }
+        MainScreenView()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SocialLoginView()
-    }
-}
-
-
+/* Login Interface */
 struct SocialLoginView: View{
-    
-    @AppStorage("email") var email = ""
-    @State var manager = LoginManager()
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     
     var body: some View{
         VStack(spacing: 30){
             Image("focuslyImg").resizable().scaledToFit().frame(width:99, height:99).cornerRadius(15.0)
-            
             Text("FOCUSLY").foregroundColor(Color(red: 1.0, green: 176/255, blue: 0.0)).bold().font(.system(.largeTitle, design: .rounded))
             
+            /* Facebook Login */
             Button(action: {
                 FacebookLogin.logintWithFacebook()
             }){
@@ -67,8 +58,7 @@ struct SocialLoginView: View{
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
             
-            
-            
+            /* Google Login */
             Button(action: {
                 GIDSignIn.sharedInstance().signIn()
             }){
@@ -87,8 +77,9 @@ struct SocialLoginView: View{
             .background(Color.white)
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
+            
+            /* Apple Login - not ready*/
         }
-        
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
 }

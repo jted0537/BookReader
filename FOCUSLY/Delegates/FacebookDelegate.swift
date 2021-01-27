@@ -10,6 +10,7 @@ import FBSDKLoginKit
 import Firebase
 import SwiftUI
 
+/* For Facebook Login */
 class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
     @Published var signedIn: Bool = false
     @Published var userEmail: String = ""
@@ -31,8 +32,8 @@ class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
                         print(error.localizedDescription)
                         return
                     }
-                    print("Facebook Sign In" + authResult!.user.email!)
-                    self.userEmail = authResult!.user.email!
+                    print("Facebook Sign In" + authResult!.user.displayName!)
+                    self.userEmail = authResult!.user.displayName!
                     self.signedIn = true
                 }
             }
@@ -43,16 +44,3 @@ class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
         try! Auth.auth().signOut()
     }
 }
-
-//        if let error = error {
-//            print(error.localizedDescription)
-//            return
-//        }
-//        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-//        Auth.auth().signIn(with: credential) { (authResult, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            print("Facebook Sign In"+authResult!.user.email!)
-//        }

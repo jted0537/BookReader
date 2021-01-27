@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let googleDelegate = GoogleDelegate()
     let facebookDelegate = FacebookDelegate()
- //   let loginButtonDelegate = FacebookDelegate()
     
     func application(
         _ application: UIApplication,
