@@ -15,16 +15,41 @@ struct MakeScriptView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
     
-    /* Custom Back Button */
+    /* Custom Back Button - leading */
     var btnBack : some View { Button(action: {
         self.mode.wrappedValue.dismiss()
     }) {
             HStack(spacing: 0) {
                 Image(systemName: "arrow.left")
-                    .foregroundColor(grayLetter)
+                    .foregroundColor(grayIcon)
                     .aspectRatio(contentMode: .fit)
             }
 
+        }
+    }
+    
+    var trailingButton : some View {
+        HStack(spacing: 10) {
+             
+            /* Getting PDF from Device */
+            Button(action: {
+                
+            }){
+                Image(systemName: "doc.badge.plus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(grayIcon)
+            }
+            
+            /* Getting Image from Device and convert into Contents*/
+            Button(action: {
+            
+            }){
+                Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(grayIcon)
+            }
         }
     }
     
@@ -32,7 +57,8 @@ struct MakeScriptView: View {
         VStack{
             Text("gho")
                 .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: btnBack)
+                .navigationBarTitle(Text("직접입력하기"), displayMode: .inline)
+                .navigationBarItems(leading: btnBack, trailing: trailingButton)
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)

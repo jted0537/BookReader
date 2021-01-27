@@ -48,6 +48,17 @@ extension Color {
     }
 }
 
+/* Color Variables */
+let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
+let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
+let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+let grayLetter: Color = Color(red: 96/255, green: 96/255, blue: 96/255)
+let grayCircle: Color = Color(red: 238/255, green: 238/255, blue: 238/255)
+let grayBox: Color = Color(red: 229/255, green: 229/255, blue: 229/255)
+let grayIcon: Color = COlor(red: 159/255, green: 159/255, blue: 159/255)
+let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+
+
 // NavigationBar Swipe With Custom BackButton
 extension UINavigationController: UIGestureRecognizerDelegate {
     override open func viewDidLoad() {

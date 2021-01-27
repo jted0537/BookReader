@@ -174,8 +174,8 @@
 		E08CAC2625B955AB00B37165 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E08CAC3625B95A1200B37165 /* MainScreenView.swift */,
 				E08CAC2025B9556F00B37165 /* LoginView.swift */,
+				E08CAC3625B95A1200B37165 /* MainScreenView.swift */,
 				E042921925BEC1EF0054BD6F /* MyLibrary */,
 				E042921A25BEC20D0054BD6F /* Preference */,
 			);
