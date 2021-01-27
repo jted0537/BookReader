@@ -23,7 +23,7 @@ struct MainScreenView: View {
     
     init() {
         /* NaviationBar Background */
-        UINavigationBar.appearance().backgroundColor = UIColor(Color.white.opacity(0))
+        UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().isTranslucent = false
         /* NavigationBar foreground */
         UINavigationBar.appearance().largeTitleTextAttributes = [
