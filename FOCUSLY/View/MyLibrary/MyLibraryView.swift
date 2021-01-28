@@ -63,7 +63,7 @@ struct MyLibraryView: View {
                 
                 /* Book Scroll */
                 ZStack{
-                    Color.secondary.opacity(0.1)
+                    grayBackground
                     ScrollView{
                         ForEach(user.playlist){ script in
                             ReadingRow(editPressed: $editPressed, readContent: $readContent, script: $user.playlist[script.id-1])

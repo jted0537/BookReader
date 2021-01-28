@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
-
+    
     func makeCoordinator() -> MultilineTextView.Coordinator {
         return MultilineTextView.Coordinator(parent1: self)
     }
@@ -25,7 +25,7 @@ struct MultilineTextView: UIViewRepresentable {
         view.delegate = context.coordinator
         return view
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         if text.count == 0 {
             
@@ -65,7 +65,7 @@ struct MakeScriptView: View {
     /* Custom Back Button - leading */
     var btnBack : some View {
         Button(action: {
-        self.mode.wrappedValue.dismiss()
+            self.mode.wrappedValue.dismiss()
         }){
             HStack(spacing: 0) {
                 Image(systemName: "arrow.left")
@@ -78,7 +78,7 @@ struct MakeScriptView: View {
     
     var trailingButton : some View {
         HStack(spacing: 10) {
-             
+            
             /* Getting PDF from Device */
             Button(action: {
                 
@@ -92,7 +92,7 @@ struct MakeScriptView: View {
             
             /* Getting Image from Device and convert into Contents*/
             Button(action: {
-            
+                
             }){
                 Image(systemName: "photo")
                     .resizable()
@@ -105,16 +105,15 @@ struct MakeScriptView: View {
     
     var body: some View {
         ZStack{
-            offWhite.ignoresSafeArea()
-            VStack{
+            grayBackground.ignoresSafeArea()
+            VStack(spacing: 0){
                 TextField("제목을 입력하세요", text: $contentsName)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .disableAutocorrection(true)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(10)
-                    .padding(.top, 10)
-                    .padding(.horizontal, 10)
+                    .padding(20)
                 
                 MultilineTextView(text: $contents)
                     .autocapitalization(.none)
@@ -122,12 +121,22 @@ struct MakeScriptView: View {
                     .padding()
                     .background(Color.white)
                     .cornerRadius(10)
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 20)
                 
                 Button(action: {}){
-                    Text("작성완료")
+                    ZStack{
+                        HStack{
+                            Spacer()
+                            Text("작성완료")
+                            Spacer()
+                        }.foregroundColor(.white)
+                        .frame(height: 50)
+                        .background(LinearGradient(gradient: gradationColor , startPoint: .trailing, endPoint: .leading))
+                        .cornerRadius(10)
+                        .padding()
+                    }
                 }
-                 
+                
             }
             .background(offWhite)
             .navigationBarBackButtonHidden(true)

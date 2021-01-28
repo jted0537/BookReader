@@ -56,6 +56,7 @@ let grayLetter: Color = Color(red: 96/255, green: 96/255, blue: 96/255)
 let grayCircle: Color = Color(red: 238/255, green: 238/255, blue: 238/255)
 let grayBox: Color = Color(red: 229/255, green: 229/255, blue: 229/255)
 let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
+let grayBackground: Color = Color(red: 247/255, green: 247/255, blue: 247/255)
 let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
 let offWhite: Color = Color(hex: 0xF8F9F9)
 
