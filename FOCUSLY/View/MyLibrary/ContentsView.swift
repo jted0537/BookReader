@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct BookView: View {
+struct ContentsView: View {
     /* State Variables */
     @State var rollUp: Bool = false
     @State var selectColorIdx = 0
@@ -21,19 +21,37 @@ struct BookView: View {
     /* Binding Variables */
     @Binding var curContent: Contents
     
+    /* Custom Back Button Properties */
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @GestureState private var dragOffset = CGSize.zero
+    
+    /* Custom Back Button - leading */
+    var btnBack : some View {
+        Button(action: {
+            self.mode.wrappedValue.dismiss()
+        }){
+            HStack(spacing: 0) {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(grayIcon)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30, height: 30)
+            }
+        }
+    }
+    
     var body: some View {
+        /* View of each Contents */
         ZStack{
-            Color.secondary.opacity(0.1)
+            /* Setting Background Color */
+            grayBackground.ignoresSafeArea()
             
             VStack(spacing: 0){
-                
+                /* Contents Part */
                 TextField("", text: .constant(readedContent))
                     .font(scriptFonts[selectFontIdx].0)
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .background(backColors[selectColorIdx])
-                /*  책 내용  */
-                
                 
                 
                 Divider().padding(.bottom, 5)
@@ -46,8 +64,7 @@ struct BookView: View {
                     }){
                         Image(systemName: "chevron.up").font(.system(size: 13)).foregroundColor(grayLetter)
                     }.padding(.bottom, 5)
-                    .background(Color.white)
-                }
+                } /* When not roll up */
                 else{
                     VStack{
                         Button(action: {
@@ -58,11 +75,12 @@ struct BookView: View {
                             Image(systemName: "chevron.down").font(.system(size: 13)).foregroundColor(grayLetter)
                         }.padding(.bottom, 10)
                         
+                        /* Roll up Menu */
                         RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
                         
                         Text("\(curContent.readTime - count)")
                         
-                        /* 속도 및 위치 */
+                        /* Interval, Location */
                         HStack{
                             Text("속도").foregroundColor(grayLetter)
                             Spacer()
@@ -77,7 +95,7 @@ struct BookView: View {
                                     self.timer.connect()
                                 }
                             )).accentColor(usuallyColor)
-                        }.padding() // 속도
+                        }.padding()
                         HStack{
                             Text("위치: ")
                             Slider(value: Binding(
@@ -91,13 +109,12 @@ struct BookView: View {
                                     self.count = Int(Double(curContent.readTime)*newProgress)
                                 }
                             )).accentColor(usuallyColor)
-                        }.padding() // 위치
+                        }.padding()
                     }
-                    .background(Color.white)
                     
-                }
+                }/* when roll up */
                 
-                /* 재생 및 넘어가기 */
+                /* Play, Next, Prev */
                 GeometryReader{ geometry in
                     HStack{
                         Spacer()
@@ -106,9 +123,10 @@ struct BookView: View {
                         }){
                             Image(systemName: "backward.end.fill")
                         }
-                        // 뒤로가기
+                        /* Prev */
                         Spacer()
                         Spacer()
+                        
                         Button(action: {
                             if self.isActive {
                                 self.isActive = false
@@ -124,15 +142,16 @@ struct BookView: View {
                             else {
                                 Image(systemName: "play.fill")
                             }
-                        } // 재생 및 정지
+                        }/* Play */
                         Spacer()
                         Spacer()
+                        
                         Button(action: {
                             
                         }){
                             Image(systemName: "forward.end.fill")
                         }
-                        // 앞으로가기
+                        /* Next */
                         Spacer()
                     }
                     .frame(height: 60)
@@ -153,12 +172,15 @@ struct BookView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.isActive = true
-            }//outer vstack
-        }// outer zstack
+            }
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+        .edgesIgnoringSafeArea(.top)
         
-        
-    }//body
-}//struct
+    }
+}
 
 
 struct RollUpMenuView: View {
@@ -167,7 +189,7 @@ struct RollUpMenuView: View {
     @Binding var selectFontIdx: Int
     
     var body: some View {
-        /* 배경색상 */
+        /* BackGround Color */
         HStack(spacing: 10) {
             ForEach(0...backColors.count-1, id: \.self) { colorIdx in
                 Button(action: {
@@ -181,7 +203,7 @@ struct RollUpMenuView: View {
         }.padding(.vertical, 10)
         
         Divider()
-        /* 글꼴 */
+        /* Setting Fonts */
         HStack{
             Text("글꼴").foregroundColor(grayLetter)
             Spacer()

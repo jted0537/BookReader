@@ -27,7 +27,7 @@
 		E08CAC3025B959FD00B37165 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2E25B959FD00B37165 /* User.swift */; };
 		E08CAC3125B959FD00B37165 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2F25B959FD00B37165 /* Contents.swift */; };
 		E08CAC3925B95A1200B37165 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC3625B95A1200B37165 /* MainScreenView.swift */; };
-		E0A79F7B25BE64F3000A4A06 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A79F7A25BE64F3000A4A06 /* BookView.swift */; };
+		E0A79F7B25BE64F3000A4A06 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */; };
 		E0D4908525BFBF9A004551A8 /* HANBatang-LVT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */; };
 		E0D4908625BFBF9A004551A8 /* HANDotum-LVT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0D4908425BFBF9A004551A8 /* HANDotum-LVT.ttf */; };
 /* End PBXBuildFile section */
@@ -56,7 +56,7 @@
 		E08CAC2E25B959FD00B37165 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E08CAC2F25B959FD00B37165 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		E08CAC3625B95A1200B37165 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
-		E0A79F7A25BE64F3000A4A06 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
 		E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HANBatang-LVT.ttf"; sourceTree = "<group>"; };
 		E0D4908425BFBF9A004551A8 /* HANDotum-LVT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HANDotum-LVT.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 			children = (
 				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
 				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
-				E0A79F7A25BE64F3000A4A06 /* BookView.swift */,
+				E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */,
 				E059B10525C19DFE006AB7EF /* ReadingRow.swift */,
 			);
 			path = MyLibrary;
@@ -360,7 +360,7 @@
 				E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */,
 				E08CAC3025B959FD00B37165 /* User.swift in Sources */,
 				E059B10625C19DFE006AB7EF /* ReadingRow.swift in Sources */,
-				E0A79F7B25BE64F3000A4A06 /* BookView.swift in Sources */,
+				E0A79F7B25BE64F3000A4A06 /* ContentsView.swift in Sources */,
 				E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */,
 				E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */,
 				E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */,

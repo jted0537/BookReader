@@ -56,7 +56,7 @@ struct ReadingRow: View {
         return
             /* Each NavigationLink */
             VStack {
-                NavigationLink(destination: BookView(curContent: $contents), tag: 1, selection: $NavActivate){
+                NavigationLink(destination: ContentsView(curContent: $contents), tag: 1, selection: $NavActivate){
                     EmptyView()
                 }
                 
