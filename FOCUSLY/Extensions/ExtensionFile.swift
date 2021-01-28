@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// String length, substring
+/* String length, substring */
 extension String {
 
     var length: Int {
@@ -35,7 +35,7 @@ extension String {
     }
 }
 
-// Color Hex Code
+/* Using Color Hex Code */
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(
@@ -59,6 +59,8 @@ let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let grayBackground: Color = Color(red: 247/255, green: 247/255, blue: 247/255)
 let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
 let offWhite: Color = Color(hex: 0xF8F9F9)
+let backColors = [Color(hex: 0xF8F9F9), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let scriptFonts = [(Font.custom("HANBatang-LVT", size: 33), "한초롱바탕"), (Font.custom("HANDotum-LVT", size: 33), "한초롱돋움"), (Font.custom("PottaOne-Regular", size: 33), "포타원")]
 
 /* NavigationBar Swipe With Custom BackButton */
 extension UINavigationController: UIGestureRecognizerDelegate {

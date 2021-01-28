@@ -55,7 +55,7 @@ struct MultilineTextView: UIViewRepresentable {
 
 
 /* Making own cotents */
-struct MakeScriptView: View {
+struct MakeContentsView: View {
     
     @State var contentsName: String = ""
     @State var contents: String = ""
@@ -150,6 +150,6 @@ struct MakeScriptView: View {
 
 struct MakeScriptView_Previews: PreviewProvider {
     static var previews: some View {
-        MakeScriptView()
+        MakeContentsView()
     }
 }

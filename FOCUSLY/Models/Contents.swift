@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Script: NSObject, Identifiable {
+class Contents: NSObject, Identifiable {
     public var id: Int
     public var title: String
     public var publisher: String
@@ -40,11 +40,11 @@ class Script: NSObject, Identifiable {
     }
     
     // dummy data 30개 생성
-    static func generateReadings() -> [Script] {
-        var readings = [Script]()
+    static func generateReadings() -> [Contents] {
+        var readings = [Contents]()
         
         for idx in 1...30{
-            let newReading = Script(recordId: idx, title: "\(idx)th 게시물", pub: "\(idx)th auth")
+            let newReading = Contents(recordId: idx, title: "\(idx)th 게시물", pub: "\(idx)th auth")
             readings.append(newReading)
         }
         

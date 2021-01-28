@@ -12,7 +12,7 @@ import Foundation
 class User: NSObject, Identifiable {
     public var id: Int
     public var username: String
-    public var playlist: [Script]
+    public var playlist: [Contents]
     public var todayReadingGoal: Int = 0 // 초 단위로 저장
     public var todayReadingNow: Int = 0 // 초 단위로 저장
     public var todayReadingGoalMin: Int {
@@ -45,12 +45,12 @@ class User: NSObject, Identifiable {
     init(idx: Int, name: String){
         self.id = idx
         self.username = name
-        self.playlist = [Script]()
+        self.playlist = [Contents]()
     }
     
     static func generateUser() -> User {
         var user = User(idx: 1, name: "dayoung")
-        user.playlist = Script.generateReadings()
+        user.playlist = Contents.generateReadings()
         user.todayReadingGoal = 300
         user.todayReadingNow = 160
         return user

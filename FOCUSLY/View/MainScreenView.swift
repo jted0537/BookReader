@@ -34,23 +34,21 @@ struct MainScreenView: View {
             .font : UIFont(name: "HelveticaNeue-Thin", size: 20)!]
     }
     
-    func trailingBarItems()-> some View {
-        switch self.currentView{
-        case .Library:
-            return AnyView(NavigationLink(destination: MakeScriptView()){
-                LinearGradient(gradient: gradationColor, startPoint: .top, endPoint: .bottom)
-                    .mask(Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    ).frame(width: 30, height: 30)
-            })
-        case .Folder:
-            return AnyView(Text("ddd"))
-        case .Statics:
-             return AnyView(Text("eeee"))
-        case .Preference:
-            return AnyView(Text("fffff"))
-            
+    /* For topTrailing Plus Button functions */
+    var trailingBarItems: some View {
+        VStack{
+            switch self.currentView{
+            case .Library:
+                NavigationLink(destination: MakeContentsView()){
+                    plusButton()
+                } /* Make own Contents */
+            case .Folder:
+                textFieldAlert() /* Make Folder Alert */
+            case .Statics:
+                plusButton()
+            case .Preference:
+                plusButton()
+            }
         }
     }
     
@@ -74,7 +72,7 @@ struct MainScreenView: View {
             }.edgesIgnoringSafeArea(.bottom).navigationBarTitle(
                 Text("FOCUSLY")
                 , displayMode: .inline)
-            .navigationBarItems(trailing: trailingBarItems())
+            .navigationBarItems(trailing: trailingBarItems)
         }.navigationViewStyle(StackNavigationViewStyle()) /* Outer Navigation View */
     }
 }
@@ -126,5 +124,90 @@ struct TabBarItem: View {
         }
         .padding(.top, 5)
         .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 0 : 20)
+    }
+}
+
+/* Custom Alert Message with TextField */
+struct textFieldAlert: View {
+    @State private var newFolder: String? = ""
+    
+    /* Customizing Part */
+    private func alert() {
+        let alert = UIAlertController(title: "새로운 폴더 추가", message: nil, preferredStyle: .alert)
+        alert.addTextField() { textField in
+            textField.placeholder = "폴더 이름"
+        }
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { _ in })
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+            newFolder = alert.textFields?[0].text
+            if let folderName = newFolder {
+                /* When FolderName is available */
+                if folderName.count != 0 {
+                    print("\(folderName)!!")
+                }
+                /* When Not */
+                else {
+                    print("fail")
+                }
+            }
+        })
+        showAlert(alert: alert)
+    }
+    func showAlert(alert: UIAlertController) {
+        if let controller = topMostViewController() {
+            controller.present(alert, animated: true)
+        }
+    }
+    
+    private func keyWindow() -> UIWindow? {
+        return UIApplication.shared.connectedScenes
+            .filter {$0.activationState == .foregroundActive}
+            .compactMap {$0 as? UIWindowScene}
+            .first?.windows.filter {$0.isKeyWindow}.first
+    }
+    
+    private func topMostViewController() -> UIViewController? {
+        guard let rootController = keyWindow()?.rootViewController else {
+            return nil
+        }
+        return topMostViewController(for: rootController)
+    }
+    
+    private func topMostViewController(for controller: UIViewController) -> UIViewController {
+        if let presentedController = controller.presentedViewController {
+            return topMostViewController(for: presentedController)
+        } else if let navigationController = controller as? UINavigationController {
+            guard let topController = navigationController.topViewController else {
+                return navigationController
+            }
+            return topMostViewController(for: topController)
+        } else if let tabController = controller as? UITabBarController {
+            guard let topController = tabController.selectedViewController else {
+                return tabController
+            }
+            return topMostViewController(for: topController)
+        }
+        return controller
+    }
+    
+    var body: some View {
+        VStack{
+            Button(action: {
+                self.alert()
+            }) {
+                plusButton()
+            }
+        }
+    }
+}
+
+/* Plus Button UI */
+struct plusButton: View {
+    var body: some View {
+        LinearGradient(gradient: gradationColor, startPoint: .top, endPoint: .bottom)
+            .mask(Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            ).frame(width: 30, height: 30)
     }
 }

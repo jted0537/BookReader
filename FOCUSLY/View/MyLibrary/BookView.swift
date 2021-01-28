@@ -6,11 +6,8 @@
 //
 import SwiftUI
 
-let backColors = [Color(hex: 0xF8F9F9), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
-let scriptFonts = [(Font.custom("HANBatang-LVT", size: 33), "한초롱바탕"), (Font.custom("HANDotum-LVT", size: 33), "한초롱돋움"), (Font.custom("PottaOne-Regular", size: 33), "포타원")]
-
 struct BookView: View {
-    
+    /* State Variables */
     @State var rollUp: Bool = false
     @State var selectColorIdx = 0
     @State var selectFontIdx = 0
@@ -19,44 +16,16 @@ struct BookView: View {
     @State var timer: Timer.TimerPublisher = Timer.publish(every: 0.6, on: .main, in: .common)
     @State var interval: Double = 0.5
     @State var place: Double = 0.0
-    
-    //@Binding var readContentKey: Int
-    @Binding var curContent: Script
     @State var readedContent: String=""
+    
+    /* Binding Variables */
+    @Binding var curContent: Contents
     
     var body: some View {
         ZStack{
             Color.secondary.opacity(0.1)
             
             VStack(spacing: 0){
-                /* 상단바 */
-                HStack(spacing: 20){
-    //                Button(action: {
-    //                    withAnimation{
-    //                        self.readContentKey =
-    //                    }
-    //                }){
-    //                    Image(systemName: "arrow.backward")
-    //                }
-                    Spacer()
-                    Button(action: {
-                        
-                    }){
-                        Image(systemName: "dot.square")
-                    }
-                    Button(action: {
-                        
-                    }){
-                        Image(systemName: "gearshape.fill")
-                    }
-                }
-                .foregroundColor(grayLetter)
-                .frame(height: 40)
-                .padding(.top, 10)
-                .padding(.horizontal, 10)
-                .background(Color.white)
-                
-                Divider()
                 
                 TextField("", text: .constant(readedContent))
                     .font(scriptFonts[selectFontIdx].0)

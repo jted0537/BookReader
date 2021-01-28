@@ -11,7 +11,7 @@
 		E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010C04225B9CEA900B2297D /* MyLibraryView.swift */; };
 		E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */; };
 		E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E042921D25BEC3800054BD6F /* ExtensionFile.swift */; };
-		E0438F2525C118D2001662EC /* MakeScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0438F2425C118D2001662EC /* MakeScriptView.swift */; };
+		E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0438F2425C118D2001662EC /* MakeContentsView.swift */; };
 		E059B10625C19DFE006AB7EF /* ReadingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E059B10525C19DFE006AB7EF /* ReadingRow.swift */; };
 		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
 		E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D725B951E7009F3DF3 /* SceneDelegate.swift */; };
@@ -25,7 +25,7 @@
 		E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */; };
 		E08CAC2125B9556F00B37165 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2025B9556F00B37165 /* LoginView.swift */; };
 		E08CAC3025B959FD00B37165 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2E25B959FD00B37165 /* User.swift */; };
-		E08CAC3125B959FD00B37165 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2F25B959FD00B37165 /* Script.swift */; };
+		E08CAC3125B959FD00B37165 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2F25B959FD00B37165 /* Contents.swift */; };
 		E08CAC3925B95A1200B37165 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC3625B95A1200B37165 /* MainScreenView.swift */; };
 		E0A79F7B25BE64F3000A4A06 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A79F7A25BE64F3000A4A06 /* BookView.swift */; };
 		E0D4908525BFBF9A004551A8 /* HANBatang-LVT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */; };
@@ -39,7 +39,7 @@
 		E010C04225B9CEA900B2297D /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PottaOne-Regular.ttf"; sourceTree = "<group>"; };
 		E042921D25BEC3800054BD6F /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
-		E0438F2425C118D2001662EC /* MakeScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeScriptView.swift; sourceTree = "<group>"; };
+		E0438F2425C118D2001662EC /* MakeContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeContentsView.swift; sourceTree = "<group>"; };
 		E059B10525C19DFE006AB7EF /* ReadingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRow.swift; sourceTree = "<group>"; };
 		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDelegate.swift; sourceTree = "<group>"; };
 		E08CAC2025B9556F00B37165 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E08CAC2E25B959FD00B37165 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E08CAC2F25B959FD00B37165 /* Script.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
+		E08CAC2F25B959FD00B37165 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		E08CAC3625B95A1200B37165 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		E0A79F7A25BE64F3000A4A06 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HANBatang-LVT.ttf"; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
-				E0438F2425C118D2001662EC /* MakeScriptView.swift */,
+				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
 				E0A79F7A25BE64F3000A4A06 /* BookView.swift */,
 				E059B10525C19DFE006AB7EF /* ReadingRow.swift */,
 			);
@@ -193,7 +193,7 @@
 		E08CAC2D25B959F400B37165 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E08CAC2F25B959FD00B37165 /* Script.swift */,
+				E08CAC2F25B959FD00B37165 /* Contents.swift */,
 				E08CAC2E25B959FD00B37165 /* User.swift */,
 			);
 			path = Models;
@@ -356,8 +356,8 @@
 				E08CAC2125B9556F00B37165 /* LoginView.swift in Sources */,
 				E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */,
 				E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */,
-				E08CAC3125B959FD00B37165 /* Script.swift in Sources */,
-				E0438F2525C118D2001662EC /* MakeScriptView.swift in Sources */,
+				E08CAC3125B959FD00B37165 /* Contents.swift in Sources */,
+				E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */,
 				E08CAC3025B959FD00B37165 /* User.swift in Sources */,
 				E059B10625C19DFE006AB7EF /* ReadingRow.swift in Sources */,
 				E0A79F7B25BE64F3000A4A06 /* BookView.swift in Sources */,
