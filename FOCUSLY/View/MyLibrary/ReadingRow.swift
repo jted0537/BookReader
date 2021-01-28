@@ -22,7 +22,20 @@ struct ReadingRow: View {
     
     var body: some View {
         
-        /* Open Source for Tap Gesture */
+        /* for Tap Gesture ( short press / long press classified ) */
+        
+        /* When Short Pressed */
+        let shortPressGesture = LongPressGesture(minimumDuration: 0)
+            .onEnded { _ in
+                if !editPressed {
+                    NavActivate = 1
+                }
+                else{
+                    isSelected.toggle()
+                }
+            }
+        
+        /* When Long Pressed */
         let longPressGestureDelay = DragGesture(minimumDistance: 0)
             .updating($longDrag) { currentstate, gestureState, transaction in
                 gestureState = true
@@ -35,17 +48,6 @@ struct ReadingRow: View {
                 isSelected.toggle()
             }
         
-        let shortPressGesture = LongPressGesture(minimumDuration: 0)
-            .onEnded { _ in
-                print("short press goes here")
-                if !editPressed {
-                    NavActivate = 1
-                }
-                else{
-                    isSelected.toggle()
-                }
-            }
-        
         let longTapGesture = LongPressGesture(minimumDuration: 0.5)
             .updating($longPress) { currentstate, gestureState, transaction in
                 gestureState = true
@@ -53,6 +55,7 @@ struct ReadingRow: View {
         
         let tapBeforeLongGestures = longTapGesture.sequenced(before:longPressGestureDelay).exclusively(before: shortPressGesture)
         
+        /* Body of ReadingRow */
         return
             /* RowUI Vstack */
             VStack(alignment: .leading, spacing: 10) {
@@ -114,9 +117,3 @@ struct ReadingRow: View {
         
     }
 }
-
-//struct ReadingRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReadingRow(editPressed: .constant(false), script: Script(recordId: 0, title: "noname", pub: "noauth"))
-//    }
-//}

@@ -47,7 +47,7 @@ struct ContentsView: View {
             Color.white.ignoresSafeArea()
             
             VStack(spacing: 0){
-                /* Contents Part */
+                /* Display Contents Part */
                 Text("\(readedContent)")
                 //TextField("", text: .constant(readedContent))
                     .font(scriptFonts[selectFontIdx].0)
@@ -58,6 +58,8 @@ struct ContentsView: View {
                 
                 Divider().padding(.bottom, 5)
                 
+                /* Rollup Bar */
+                /* When not roll up */
                 if !rollUp {
                     Button(action: {
                         withAnimation(){
@@ -66,7 +68,8 @@ struct ContentsView: View {
                     }){
                         Image(systemName: "chevron.up").font(.system(size: 13)).foregroundColor(grayLetter)
                     }.padding(.bottom, 5)
-                } /* When not roll up */
+                }
+                /* When roll up */
                 else{
                     VStack{
                         Button(action: {
@@ -77,7 +80,7 @@ struct ContentsView: View {
                             Image(systemName: "chevron.down").font(.system(size: 13)).foregroundColor(grayLetter)
                         }.padding(.bottom, 10)
                         
-                        /* Roll up Menu */
+                        /* Roll up Menu View */
                         RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
                         
                         
@@ -88,7 +91,7 @@ struct ContentsView: View {
                         
                         
                         
-                        /* Interval, Location */
+                        /* Interval */
                         HStack{
                             Text("속도").foregroundColor(grayLetter)
                             Spacer()
@@ -104,6 +107,7 @@ struct ContentsView: View {
                                 }
                             )).accentColor(usuallyColor)
                         }.padding()
+                        /* Location */
                         HStack{
                             Text("위치: ")
                             Slider(value: Binding(
@@ -120,7 +124,7 @@ struct ContentsView: View {
                         }.padding()
                     }
                     
-                }/* when roll up */
+                }
                 
                 /* Play, Next, Prev */
                 GeometryReader{ geometry in
