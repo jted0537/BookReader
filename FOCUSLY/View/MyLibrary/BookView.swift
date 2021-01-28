@@ -7,7 +7,7 @@
 import SwiftUI
 
 let backColors = [Color(hex: 0xF8F9F9), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
-let scriptFonts = [(Font.custom("HANBatang-LVT", size: 33), "한초롱바탕"), (Font.custom("HANDotum-LVT", size: 33), "한초롱돋움"), (Font.custom("PottaOne-Regular", size: 33), "포타원"), (Font.custom("BMJUA_otf", size: 33), "배민주아체"), (Font.custom("BMJUA_ttf", size: 33), "배민주아체2")]
+let scriptFonts = [(Font.custom("HANBatang-LVT", size: 33), "한초롱바탕"), (Font.custom("HANDotum-LVT", size: 33), "한초롱돋움"), (Font.custom("PottaOne-Regular", size: 33), "포타원")]
 
 struct BookView: View {
     

@@ -59,7 +59,7 @@ let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
 let offWhite: Color = Color(hex: 0xF8F9F9)
 
-// NavigationBar Swipe With Custom BackButton
+/* NavigationBar Swipe With Custom BackButton */
 extension UINavigationController: UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
