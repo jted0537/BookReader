@@ -63,11 +63,12 @@ struct MyLibraryView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            /* Book Scroll */
+            /* Contents Scroll */
             ZStack{
-                Color.secondary.opacity(0.1)
+                grayBackground.ignoresSafeArea()
 
                 ScrollView{
+                    Rectangle().opacity(0).frame(height: 10)
                     ForEach(user.playlist){ contents in
                         ReadingRow(editPressed: $editPressed, readContent: $readContent, contents: $user.playlist[contents.id-1])
                     }
@@ -82,7 +83,7 @@ struct MyLibraryView: View {
                         Image(systemName: "repeat")
                         Text("전체반복")
                         Spacer()
-                    }.frame(height: 50).background(usuallyColor)
+                    }.frame(height: 60).background(usuallyColor)
                     
                 }
                 Button(action: {}){
@@ -91,7 +92,7 @@ struct MyLibraryView: View {
                         Image(systemName: "shuffle")
                         Text("랜덤읽기")
                         Spacer()
-                    }.frame(height: 50).background(usuallyColor)
+                    }.frame(height: 60).background(usuallyColor)
                     
                 }
             }.foregroundColor(.white)

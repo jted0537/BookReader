@@ -13,7 +13,7 @@ struct ContentsView: View {
     @State var selectFontIdx = 0
     @State var count = 0
     @State var isActive = false
-    @State var timer: Timer.TimerPublisher = Timer.publish(every: 0.6, on: .main, in: .common)
+    @State var timer: Timer.TimerPublisher = Timer.publish(every: 0.1, on: .main, in: .common)
     @State var interval: Double = 0.5
     @State var place: Double = 0.0
     @State var readedContent: String=""
@@ -40,14 +40,16 @@ struct ContentsView: View {
     }
     
     var body: some View {
+        
         /* View of each Contents */
         ZStack{
             /* Setting Background Color */
-            grayBackground.ignoresSafeArea()
+            Color.white.ignoresSafeArea()
             
             VStack(spacing: 0){
                 /* Contents Part */
-                TextField("", text: .constant(readedContent))
+                Text("\(readedContent)")
+                //TextField("", text: .constant(readedContent))
                     .font(scriptFonts[selectFontIdx].0)
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -78,7 +80,13 @@ struct ContentsView: View {
                         /* Roll up Menu */
                         RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
                         
-                        Text("\(curContent.readTime - count)")
+                        
+                        
+                        /*ddd*/
+                        //Text("\(curContent.readTime - count)")
+                        /*ddd*/
+                        
+                        
                         
                         /* Interval, Location */
                         HStack{
@@ -91,7 +99,7 @@ struct ContentsView: View {
                                 set: {(newInterval) in
                                     self.interval = newInterval
                                     self.timer.connect().cancel()
-                                    self.timer = Timer.publish(every: 1.1 - self.interval, on: .main, in: .common)
+                                    self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
                                     self.timer.connect()
                                 }
                             )).accentColor(usuallyColor)
@@ -176,13 +184,14 @@ struct ContentsView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitle(curContent.title)
         .navigationBarItems(leading: btnBack)
         .edgesIgnoringSafeArea(.top)
         
     }
 }
 
-
+/* RollUp Menu */
 struct RollUpMenuView: View {
     
     @Binding var selectColorIdx: Int
