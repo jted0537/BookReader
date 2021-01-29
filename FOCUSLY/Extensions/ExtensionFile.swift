@@ -60,7 +60,7 @@ let grayBackground: Color = Color(red: 247/255, green: 247/255, blue: 247/255)
 let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
 let offWhite: Color = Color(hex: 0xF7F7F7)
 let backColors = [Color(hex: 0xF7F7F7), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
-let scriptFonts = [(Font.custom("HANBatang-LVT", size: 33), "한초롱바탕"), (Font.custom("HANDotum-LVT", size: 33), "한초롱돋움"), (Font.custom("PottaOne-Regular", size: 33), "포타원")]
+let scriptFonts = [(Font.custom("Calibri", size: 33), "Calibri"), (Font.custom("Inconsolata", size: 33), "Inconsolata"), (Font.custom("PottaOne-Regular", size: 33), "PottaOne")]
 
 /* NavigationBar Swipe With Custom BackButton */
 extension UINavigationController: UIGestureRecognizerDelegate {
@@ -71,5 +71,42 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
+    }
+}
+
+struct MultilineTextView: UIViewRepresentable {
+    @Binding var text: String
+    
+    func makeCoordinator() -> MultilineTextView.Coordinator {
+        return MultilineTextView.Coordinator(parent1: self)
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> UITextView {
+        let view = UITextView()
+        view.isScrollEnabled = true
+        view.isEditable = true
+        view.isUserInteractionEnabled = true
+        view.text = "내용을 입력하세요"
+        view.textColor = UIColor(grayIcon.opacity(0.5))
+        view.font = .systemFont(ofSize: 16)
+        view.delegate = context.coordinator
+        return view
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+    }
+    
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent : MultilineTextView
+        init(parent1: MultilineTextView){
+            parent = parent1
+        }
+        func textViewDidChange(_ textView: UITextView) {
+            self.parent.text = textView.text
+        }
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            textView.text = ""
+            textView.textColor = .label
+        }
     }
 }

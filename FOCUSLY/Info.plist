@@ -4,11 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>BMJUA_ttf.ttf</string>
-		<string>BMJUA_otf.otf</string>
+		<string>Inconsolata.ttf</string>
+		<string>Calibri.ttf</string>
 		<string>PottaOne-Regular.ttf</string>
-		<string>HANDotum-LVT.ttf</string>
-		<string>HANBatang-LVT.ttf</string>
 	</array>
 	<key>CFBundleIconFiles</key>
 	<array>

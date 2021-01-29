@@ -93,7 +93,6 @@ struct TabBarView: View {
     }
 }
 
-
 /* Tab Bar UI */
 struct TabBarItem: View {
     @Binding var currentView: Tab

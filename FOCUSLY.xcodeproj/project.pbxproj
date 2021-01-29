@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */; };
+		E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E008ABE225C3A47500CD9EC4 /* Inconsolata.ttf */; };
+		E008ABE725C3A81A00CD9EC4 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E008ABE625C3A81A00CD9EC4 /* Calibri.ttf */; };
 		E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010C04225B9CEA900B2297D /* MyLibraryView.swift */; };
 		E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */; };
 		E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E042921D25BEC3800054BD6F /* ExtensionFile.swift */; };
@@ -28,14 +30,14 @@
 		E08CAC3125B959FD00B37165 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2F25B959FD00B37165 /* Contents.swift */; };
 		E08CAC3925B95A1200B37165 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC3625B95A1200B37165 /* MainScreenView.swift */; };
 		E0A79F7B25BE64F3000A4A06 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */; };
-		E0D4908525BFBF9A004551A8 /* HANBatang-LVT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */; };
-		E0D4908625BFBF9A004551A8 /* HANDotum-LVT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0D4908425BFBF9A004551A8 /* HANDotum-LVT.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		939C68ACBA6860BBD66B1835 /* Pods-FOCUSLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.release.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.release.xcconfig"; sourceTree = "<group>"; };
 		A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
 		CD8C4BCDA11DAD01CECFC832 /* Pods-FOCUSLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FOCUSLY.debug.xcconfig"; path = "Target Support Files/Pods-FOCUSLY/Pods-FOCUSLY.debug.xcconfig"; sourceTree = "<group>"; };
+		E008ABE225C3A47500CD9EC4 /* Inconsolata.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Inconsolata.ttf; sourceTree = "<group>"; };
+		E008ABE625C3A81A00CD9EC4 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
 		E010C04225B9CEA900B2297D /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PottaOne-Regular.ttf"; sourceTree = "<group>"; };
 		E042921D25BEC3800054BD6F /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
@@ -57,8 +59,6 @@
 		E08CAC2F25B959FD00B37165 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		E08CAC3625B95A1200B37165 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
-		E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HANBatang-LVT.ttf"; sourceTree = "<group>"; };
-		E0D4908425BFBF9A004551A8 /* HANDotum-LVT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HANDotum-LVT.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,8 +202,8 @@
 		E09B66D125BE958E005BD237 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E0D4908325BFBF98004551A8 /* HANBatang-LVT.ttf */,
-				E0D4908425BFBF9A004551A8 /* HANDotum-LVT.ttf */,
+				E008ABE625C3A81A00CD9EC4 /* Calibri.ttf */,
+				E008ABE225C3A47500CD9EC4 /* Inconsolata.ttf */,
 				E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */,
 			);
 			path = Fonts;
@@ -275,14 +275,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E008ABE725C3A81A00CD9EC4 /* Calibri.ttf in Resources */,
 				E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */,
 				E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */,
 				E08343EB25B95257009F3DF3 /* GoogleService-Info.plist in Resources */,
 				E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */,
 				E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */,
 				E08343DC25B951E7009F3DF3 /* Assets.xcassets in Resources */,
-				E0D4908525BFBF9A004551A8 /* HANBatang-LVT.ttf in Resources */,
-				E0D4908625BFBF9A004551A8 /* HANDotum-LVT.ttf in Resources */,
+				E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
