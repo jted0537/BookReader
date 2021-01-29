@@ -29,6 +29,7 @@ struct MakeContentsView: View {
         }
     }
     
+    /* PDF, Image callin */
     var trailingButton : some View {
         HStack(spacing: 10) {
             
@@ -68,10 +69,10 @@ struct MakeContentsView: View {
                     .cornerRadius(10)
                     .padding(20)
                 
-                MultilineTextView(text: $contents)
+                MakeContentsMultilineText(text: $contents)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                    .padding()
+                    .padding(10)
                     .background(Color.white)
                     .cornerRadius(10)
                     .padding(.horizontal, 20)
