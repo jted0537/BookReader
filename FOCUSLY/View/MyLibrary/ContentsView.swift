@@ -43,118 +43,114 @@ struct ContentsView: View {
     var body: some View {
         
         /* View of each Contents */
-        ZStack{
-            /* Setting Background Color */
-            Color.white.ignoresSafeArea()
+        
             
-            VStack(spacing: 0){
-                /* Contents Part */
-                MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
-                
-                Divider().padding(.bottom, 5)
-                
-                if !rollUp {
+        VStack(spacing: 0){
+            /* Contents Part */
+            MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
+            
+            Divider().padding(.bottom, 5)
+            
+            if !rollUp {
+                Button(action: {
+                    withAnimation(.easeIn){
+                        rollUp.toggle()
+                    }
+                }){
+                    Image(systemName: "chevron.up").font(.system(size: 15)).foregroundColor(grayLetter)
+                }.padding(.bottom, 5)
+            } /* When not roll up */
+            else{
+                VStack{
                     Button(action: {
                         withAnimation(.easeIn){
                             rollUp.toggle()
                         }
                     }){
-                        Image(systemName: "chevron.up").font(.system(size: 13)).foregroundColor(grayLetter)
-                    }.padding(.bottom, 5)
-                } /* When not roll up */
-                else{
-                    VStack{
-                        Button(action: {
-                            withAnimation(.easeIn){
-                                rollUp.toggle()
-                            }
-                        }){
-                            Image(systemName: "chevron.down").font(.system(size: 13)).foregroundColor(grayLetter)
-                        }.padding(.bottom, 10)
-                        
-                        /* Roll up Menu */
-                        RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
-                        /*ddd*/
-                        //Text("\(curContent.readTime - count)")
-                        /*ddd*/
-                        /* Interval, Location */
-                        HStack{
-                            Text("속도 ").foregroundColor(grayLetter)
-                            Spacer()
-                            Slider(value: Binding(
-                                get: {
-                                    self.interval
-                                },
-                                set: {(newInterval) in
-                                    self.interval = newInterval
-                                    self.timer.connect().cancel()
-                                    self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
-                                    self.timer.connect()
-                                }
-                            )).accentColor(usuallyColor)
-                        }.padding()
-                        HStack{
-                            Text("위치 ").foregroundColor(grayLetter)
-                            Slider(value: Binding(
-                                get: {
-                                    self.place
-                                },
-                                set: {(newProgress) in
-                                    self.place = newProgress
-                                    self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
-                                    readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
-                                    self.count = Int(Double(curContent.readTime)*newProgress)
-                                }
-                            )).accentColor(usuallyColor)
-                        }.padding()
-                    }
-                }/* when roll up */
-                
-                /* Play, Next, Prev */
-                GeometryReader{ geometry in
+                        Image(systemName: "chevron.down").font(.system(size: 15)).foregroundColor(grayLetter)
+                    }.padding(.bottom, 10)
+                    
+                    /* Roll up Menu */
+                    RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
+                    
+                    /* Interval, Location */
                     HStack{
+                        Text("속도 ").foregroundColor(grayLetter)
                         Spacer()
-                        Button(action: {
-                            
-                        }){
-                            Image(systemName: "backward.end.fill")
-                        }/* Prev */
-                        Spacer()
-                        Spacer()
-                        
-                        Button(action: {
-                            if self.isActive {
-                                self.isActive = false
-                            }
-                            else {
+                        Slider(value: Binding(
+                            get: {
+                                self.interval
+                            },
+                            set: {(newInterval) in
+                                self.interval = newInterval
+                                self.timer.connect().cancel()
+                                self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
                                 self.timer.connect()
-                                self.isActive = true
                             }
-                        }){
-                            if(self.isActive){
-                                Image(systemName: "stop.fill")
+                        )).accentColor(usuallyColor)
+                    }.padding() /* Interval */
+                    HStack{
+                        Text("위치 ").foregroundColor(grayLetter)
+                        Slider(value: Binding(
+                            get: {
+                                self.place
+                            },
+                            set: {(newProgress) in
+                                self.place = newProgress
+                                self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
+                                readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
+                                self.count = Int(Double(curContent.readTime)*newProgress)
                             }
-                            else {
-                                Image(systemName: "play.fill")
-                            }
-                        }/* Play */
-                        Spacer()
-                        Spacer()
-                        
-                        Button(action: {
-                            
-                        }){
-                            Image(systemName: "forward.end.fill")
-                        }
-                        /* Next */
-                        Spacer()
+                        )).accentColor(usuallyColor)
+                    }.padding() /* Location */
+                }//.background(Color.background)
+            }/* when roll up */
+            
+            /* Play, Next, Prev */
+            
+            HStack{
+                Spacer()
+                Button(action: {
+                    
+                }){
+                    Image(systemName: "backward.end.fill")
+                }/* Prev */
+                Spacer()
+                Spacer()
+                
+                Button(action: {
+                    if self.isActive {
+                        self.isActive = false
                     }
-                    .frame(height: 60)
-                    .foregroundColor(Color.white)
-                    .background(usuallyColor)
-                }
-                .frame(height: 60).padding(.bottom, 30)
-            }.onReceive(timer) { time in
+                    else {
+                        self.timer.connect()
+                        self.isActive = true
+                    }
+                }){
+                    if(self.isActive){
+                        Image(systemName: "stop.fill")
+                    }
+                    else {
+                        Image(systemName: "play.fill")
+                    }
+                }/* Play */
+                Spacer()
+                Spacer()
+                
+                Button(action: {
+                    
+                }){
+                    Image(systemName: "forward.end.fill")
+                }/* Next */
+                Spacer()
+            }
+            .frame(height: 60)
+            .foregroundColor(Color.white)
+            .background(usuallyColor)
+            .padding(.bottom, 30)
+            
+        }
+            .onReceive(timer) { time in
                 if isActive && curContent.readIdx < curContent.fullContent.length - 1{
                     self.count += 1
                     readedContent.append(curContent.fullContent[self.curContent.readIdx])
@@ -162,18 +158,17 @@ struct ContentsView: View {
                     self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
                 }
             }
+            .background(Color.background)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 self.isActive = false
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.isActive = true
             }
-        }
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarTitle(curContent.title)
-        .navigationBarItems(leading: btnBack)
-        .edgesIgnoringSafeArea(.top)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarTitle(curContent.title)
+            .navigationBarItems(leading: btnBack)
+            .edgesIgnoringSafeArea(.vertical)
         
     }
 }

@@ -21,7 +21,7 @@ let grayBackground: Color = Color.secondary.opacity(0.1)
 let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
 let offWhite: Color = Color(hex: 0xF7F7F7)
 
-let backColors = [Color(hex: 0xF7F7F7), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let backColors = [Color(hex: 0xF7F7F7), Color(hex: 0xCACFD2), Color(hex: 0x080808), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
 let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 
@@ -64,6 +64,15 @@ extension Color {
             opacity: alpha
         )
     }
+    #if os(macOS)
+    static let background = Color(NSColor.windowBackgroundColor)
+    static let secondaryBackground = Color(NSColor.underPageBackgroundColor)
+    static let tertiaryBackground = Color(NSColor.controlBackgroundColor)
+    #else
+    static let background = Color(UIColor.systemBackground)
+    static let secondaryBackground = Color(UIColor.secondarySystemBackground)
+    static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
+    #endif
 }
 
 /* NavigationBar Swipe With Custom BackButton */

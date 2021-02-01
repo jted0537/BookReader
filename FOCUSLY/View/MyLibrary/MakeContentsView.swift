@@ -73,7 +73,7 @@ struct MakeContentsView: View {
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .disableAutocorrection(true)
                     .padding(20) /* Inner Padding */
-                    .background(Color.primary)
+                    .background(Color.background)
                     .cornerRadius(10)
                     .padding(20) /* Outer Padding */
                 
@@ -89,7 +89,11 @@ struct MakeContentsView: View {
                         .offset(y: 3)
                         .foregroundColor(.secondary).opacity(0.6)
                         .opacity(contents == "" ? 1 : 0)
-                }.cornerRadius(10).padding(.horizontal, 20)
+                }
+                .padding(20) /* Inner Padding */
+                .background(Color.background)
+                .cornerRadius(10)
+                .padding(.horizontal, 20) /* Outer Padding */
                 
                 /* "작성완료" Button */
                 Button(action: {

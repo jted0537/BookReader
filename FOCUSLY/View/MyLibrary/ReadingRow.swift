@@ -96,7 +96,7 @@ struct ReadingRow: View {
                 .padding()
                 .padding(.vertical, 5)
             }
-            .background(isSelected ? grayBox : Color.white)
+            .background(isSelected ? Color.secondary : Color.white)
             .cornerRadius(10)
             .padding(.top, 10)
             .padding(.horizontal, 20)
