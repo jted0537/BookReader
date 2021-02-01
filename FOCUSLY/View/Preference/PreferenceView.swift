@@ -19,14 +19,14 @@ struct PreferenceView: View {
     var body: some View {
         VStack(spacing: 20) {
             if FacebookLogin.signedIn {
-                Text("\(FacebookLogin.userEmail)님 안녕하세요!")
+                Text("userID : \(FacebookLogin.userID)")
             }
             else if GoogleLogin.signedIn {
-                Text("\(GoogleLogin.userEmail)님 안녕하세요!")
+                Text("userID : \(GoogleLogin.userID)")
             }
             Button(action: {
                do {
-                 try firebaseAuth.signOut()
+                try firebaseAuth.signOut()
                 FacebookLogin.signedIn = false
                 GoogleLogin.signedIn = false
                } catch let signOutError as NSError {

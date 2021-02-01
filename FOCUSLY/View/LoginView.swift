@@ -41,7 +41,7 @@ struct SocialLoginView: View{
             Button(action: {
                 FacebookLogin.logintWithFacebook()
             }){
-                HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/){
+                HStack{
                     Image("Facebook")
                         .renderingMode(.original)
                         .resizable()

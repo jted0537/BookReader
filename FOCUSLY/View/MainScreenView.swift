@@ -28,10 +28,10 @@ struct MainScreenView: View {
         /* NavigationBar foreground */
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),
-            .font : UIFont(name:"Papyrus", size: 40)!]
+            .font : UIFont(name: "Calibri", size: 40)!]
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),
-            .font : UIFont(name: "HelveticaNeue-Thin", size: 20)!]
+            .font : UIFont(name: "Calibri", size: 20)!]
     }
     
     /* For topTrailing Plus Button functions */
@@ -43,7 +43,8 @@ struct MainScreenView: View {
                     plusButton()
                 } /* Make own Contents */
             case .Folder:
-                textFieldAlert() /* Make Folder Alert */
+                textFieldAlert()
+                /* Make Folder Alert */
             case .Statics:
                 plusButton()
             case .Preference:

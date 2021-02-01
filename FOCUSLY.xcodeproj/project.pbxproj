@@ -93,8 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
-				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
 				E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */,
+				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
 				E059B10525C19DFE006AB7EF /* ReadingRow.swift */,
 			);
 			path = MyLibrary;
@@ -138,9 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				E042921C25BEC36A0054BD6F /* Extensions */,
+				E08CAC2725B955B300B37165 /* ICON */,
 				E09B66D125BE958E005BD237 /* Fonts */,
 				E08CAC2D25B959F400B37165 /* Models */,
-				E08CAC2725B955B300B37165 /* ICON */,
+				E0B6ED0A25C78E02004CDD43 /* ViewModel */,
 				E08CAC2625B955AB00B37165 /* View */,
 				E08CAC2425B9558200B37165 /* Delegates */,
 				E08343DB25B951E7009F3DF3 /* Assets.xcassets */,
@@ -207,6 +208,13 @@
 				E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E0B6ED0A25C78E02004CDD43 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

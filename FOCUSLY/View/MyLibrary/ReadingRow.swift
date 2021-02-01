@@ -114,9 +114,3 @@ struct ReadingRow: View {
         
     }
 }
-
-//struct ReadingRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReadingRow(editPressed: .constant(false), script: Script(recordId: 0, title: "noname", pub: "noauth"))
-//    }
-//}

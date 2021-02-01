@@ -24,6 +24,7 @@ struct MyLibraryView: View {
         return time < 10 ? "0\(time)" : "\(time)"
     }
     
+    /* My Library Main */
     var body: some View {
         VStack(spacing: 0) {
             /* 1st Item: "오늘의 읽기", Progress Bar */
@@ -31,22 +32,21 @@ struct MyLibraryView: View {
                 VStack(alignment: .leading, spacing: 10){
                     
                     HStack(alignment: .top) {
-                        Text("오늘의 읽기").font(.title).bold().foregroundColor(grayLetter)
+                        Text("오늘의 읽기").font(.title).bold().foregroundColor(grayLetter).bold()
                         
                         Image(systemName: "gearshape.fill").font(.system(size: 10)).foregroundColor(.secondary).opacity(0.8)
                         
                     }
-                    HStack(spacing:0){Text("\(user.todayReadingNowMin):"+getTimeFormat(time: user.todayReadingNowSec)).foregroundColor(usuallyColor).bold()
-                        Text("/\(user.todayReadingGoalMin):" + getTimeFormat(time: user.todayReadingGoalSec)).foregroundColor(grayLetter).bold()}.padding(.bottom, 15)
+                    HStack(spacing:0){Text("\(user.todayReadingNowMin):"+getTimeFormat(time: user.todayReadingNowSec)).foregroundColor(usuallyColor)
+                        Text("/\(user.todayReadingGoalMin):" + getTimeFormat(time: user.todayReadingGoalSec)).foregroundColor(grayLetter)}.padding(.bottom, 15)
                     Text("매일 책을 읽어 통계 수치를 높이고 더 많은 도서를 완독하세요!").foregroundColor(grayLetter).font(.caption)
                 }
                 Spacer()
                 
                 ZStack(alignment: .trailing){
                     Circle()
-                        .opacity(0.3)
                         .foregroundColor(grayCircle)
-                        .frame(width: 120, height:120)
+                        .frame(width: 120, height: 120)
                     
                     Path { path in
                         path.addArc(center: .init(x: 60, y: 60), radius: 60, startAngle: .degrees(0), endAngle: .degrees(360*user.todayReadingRatio), clockwise: true)
@@ -56,9 +56,9 @@ struct MyLibraryView: View {
                     .frame(width: 120, height: 120)
                     .rotationEffect(.degrees(90))
                     
-                    Text("\(Int(user.todayReadingRatio*100.0))%").bold().font(.title).foregroundColor(grayLetter)
+                    Text("\(Int(user.todayReadingRatio*100.0))%").foregroundColor(grayLetter).font(.title).bold()
                         .frame(width: 120, height: 120)
-                } /* Progress bar */
+                } /* Progress Circle */
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
@@ -66,9 +66,9 @@ struct MyLibraryView: View {
             /* Contents Scroll */
             ZStack{
                 grayBackground.ignoresSafeArea()
-
+                
                 ScrollView{
-                    Rectangle().opacity(0).frame(height: 10)
+                    Rectangle().opacity(0).frame(height: 5)
                     ForEach(user.playlist){ contents in
                         ReadingRow(editPressed: $editPressed, readContent: $readContent, contents: $user.playlist[contents.id-1])
                     }
@@ -95,7 +95,7 @@ struct MyLibraryView: View {
                     }.frame(height: 60).background(usuallyColor)
                     
                 }
-            }.foregroundColor(.white)
+            }.foregroundColor(Color.white)
             
     }
        

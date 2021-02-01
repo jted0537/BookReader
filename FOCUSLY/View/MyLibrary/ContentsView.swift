@@ -55,7 +55,7 @@ struct ContentsView: View {
                 
                 if !rollUp {
                     Button(action: {
-                        withAnimation(){
+                        withAnimation(.easeIn){
                             rollUp.toggle()
                         }
                     }){
@@ -65,7 +65,7 @@ struct ContentsView: View {
                 else{
                     VStack{
                         Button(action: {
-                            withAnimation(.linear){
+                            withAnimation(.easeIn){
                                 rollUp.toggle()
                             }
                         }){
@@ -74,18 +74,12 @@ struct ContentsView: View {
                         
                         /* Roll up Menu */
                         RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
-                        
-                        
-                        
                         /*ddd*/
                         //Text("\(curContent.readTime - count)")
                         /*ddd*/
-                        
-                        
-                        
                         /* Interval, Location */
                         HStack{
-                            Text("속도").foregroundColor(grayLetter)
+                            Text("속도 ").foregroundColor(grayLetter)
                             Spacer()
                             Slider(value: Binding(
                                 get: {
@@ -100,7 +94,7 @@ struct ContentsView: View {
                             )).accentColor(usuallyColor)
                         }.padding()
                         HStack{
-                            Text("위치: ")
+                            Text("위치 ").foregroundColor(grayLetter)
                             Slider(value: Binding(
                                 get: {
                                     self.place
@@ -114,7 +108,6 @@ struct ContentsView: View {
                             )).accentColor(usuallyColor)
                         }.padding()
                     }
-                    
                 }/* when roll up */
                 
                 /* Play, Next, Prev */
@@ -125,8 +118,7 @@ struct ContentsView: View {
                             
                         }){
                             Image(systemName: "backward.end.fill")
-                        }
-                        /* Prev */
+                        }/* Prev */
                         Spacer()
                         Spacer()
                         

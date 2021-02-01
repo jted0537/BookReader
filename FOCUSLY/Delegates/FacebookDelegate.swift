@@ -13,7 +13,7 @@ import SwiftUI
 /* For Facebook Login */
 class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
     @Published var signedIn: Bool = false
-    @Published var userEmail: String = ""
+    @Published var userID: String = ""
     let manager = LoginManager()
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) { }
@@ -32,8 +32,8 @@ class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
                         print(error.localizedDescription)
                         return
                     }
-                    print("Facebook Sign In" + authResult!.user.displayName!)
-                    self.userEmail = authResult!.user.displayName!
+                    print("SignIn userID : " + authResult!.user.uid)
+                    self.userID = authResult!.user.uid
                     self.signedIn = true
                 }
             }
@@ -41,6 +41,5 @@ class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        try! Auth.auth().signOut()
     }
 }
