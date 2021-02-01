@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ContentsView: View {
     /* State Variables */
-    @State var rollUp: Bool = false
-    @State var selectColorIdx = 0
-    @State var selectFontIdx = 0
-    @State var count = 0
-    @State var isActive = false
-    @State var timer: Timer.TimerPublisher = Timer.publish(every: 0.1, on: .main, in: .common)
-    @State var interval: Double = 0.5
-    @State var place: Double = 0.0
-    @State var readedContent: String=""
+    @State private var rollUp: Bool = false
+    @State private var selectColorIdx = 0
+    @State private var selectFontIdx = 0
+    @State private var count = 0
+    @State private var isActive = false
+    @State private var timer: Timer.TimerPublisher = Timer.publish(every: 0.1, on: .main, in: .common)
+    @State private var interval: Double = 0.5
+    @State private var place: Double = 0.0
+    @State private var readedContent: String=""
     
     /* Binding Variables */
     @Binding var curContent: Contents
@@ -43,18 +43,16 @@ struct ContentsView: View {
     var body: some View {
         
         /* View of each Contents */
-        
-            
         VStack(spacing: 0){
             /* Contents Part */
             MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
             
             Divider().padding(.bottom, 5)
             
-            if !rollUp {
+            if !self.rollUp {
                 Button(action: {
                     withAnimation(.easeIn){
-                        rollUp.toggle()
+                        self.rollUp.toggle()
                     }
                 }){
                     Image(systemName: "chevron.up").font(.system(size: 15)).foregroundColor(grayLetter)
@@ -64,7 +62,7 @@ struct ContentsView: View {
                 VStack{
                     Button(action: {
                         withAnimation(.easeIn){
-                            rollUp.toggle()
+                            self.rollUp.toggle()
                         }
                     }){
                         Image(systemName: "chevron.down").font(.system(size: 15)).foregroundColor(grayLetter)
@@ -98,7 +96,7 @@ struct ContentsView: View {
                             set: {(newProgress) in
                                 self.place = newProgress
                                 self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
-                                readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
+                                self.readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
                                 self.count = Int(Double(curContent.readTime)*newProgress)
                             }
                         )).accentColor(usuallyColor)
@@ -150,25 +148,25 @@ struct ContentsView: View {
             .padding(.bottom, 30)
             
         }
-            .onReceive(timer) { time in
-                if isActive && curContent.readIdx < curContent.fullContent.length - 1{
-                    self.count += 1
-                    readedContent.append(curContent.fullContent[self.curContent.readIdx])
-                    curContent.readIdx += 1
-                    self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
-                }
+        .onReceive(self.timer) { time in
+            if self.isActive && curContent.readIdx < curContent.fullContent.length - 1{
+                self.count += 1
+                readedContent.append(curContent.fullContent[self.curContent.readIdx])
+                curContent.readIdx += 1
+                self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
             }
-            .background(Color.background)
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-                self.isActive = false
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                self.isActive = true
-            }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarTitle(curContent.title)
-            .navigationBarItems(leading: btnBack)
-            .edgesIgnoringSafeArea(.vertical)
+        }
+        .background(Color.background)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            self.isActive = false
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            self.isActive = true
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle(curContent.title)
+        .navigationBarItems(leading: btnBack)
+        .edgesIgnoringSafeArea(.vertical)
         
     }
 }
@@ -184,7 +182,7 @@ struct RollUpMenuView: View {
         HStack(spacing: 10) {
             ForEach(0...backColors.count-1, id: \.self) { colorIdx in
                 Button(action: {
-                    selectColorIdx = colorIdx
+                    self.selectColorIdx = colorIdx
                 }){
                     Circle()
                         .frame(width: 30, height: 30)
@@ -199,21 +197,21 @@ struct RollUpMenuView: View {
             Text("글꼴").foregroundColor(grayLetter)
             Spacer()
             Button(action: {
-                selectFontIdx -= 1
-                if selectFontIdx < 0 {
-                    selectFontIdx = scriptFonts.count - 1
+                self.selectFontIdx -= 1
+                if self.selectFontIdx < 0 {
+                    self.selectFontIdx = scriptFonts.count - 1
                 }
             }){
                 Image(systemName: "chevron.backward")
                     .foregroundColor(grayLetter)
             }
             
-            Text("\(scriptFonts[selectFontIdx].1)").foregroundColor(grayLetter)
+            Text("\(scriptFonts[self.selectFontIdx].1)").foregroundColor(grayLetter)
             
             Button(action: {
-                selectFontIdx += 1
-                if selectFontIdx >= scriptFonts.count {
-                    selectFontIdx = 0
+                self.selectFontIdx += 1
+                if self.selectFontIdx >= scriptFonts.count {
+                    self.selectFontIdx = 0
                 }
             }){
                 Image(systemName: "chevron.right")

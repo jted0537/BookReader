@@ -11,9 +11,7 @@ import SwiftUI
 struct MyLibraryView: View {
     /* State Variables */
     @State var user: User
-    @State var plusPressed: Bool = false
-    @State var editPressed: Bool = false
-    @State private var presentActionSheet = false
+    @State private var editPressed: Bool = false
     @State private var readContent: Int? = nil
     
     /* Binding Variables */
@@ -74,6 +72,7 @@ struct MyLibraryView: View {
                     }
                 }
             }
+            
             
             /* Repeat Button */
             HStack(spacing: 3){

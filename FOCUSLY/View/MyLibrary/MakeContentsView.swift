@@ -10,10 +10,10 @@ import SwiftUI
 /* Making own cotents */
 struct MakeContentsView: View {
     
-    @State var contentsName: String = ""
-    @State var contents: String = ""
+    @State private var contentsName: String = ""
+    @State private var contents: String = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @GestureState private var dragOffset = CGSize.zero
+    //@GestureState private var dragOffset = CGSize.zero
     
     
     /* Custom Back Button - leading */
@@ -88,7 +88,7 @@ struct MakeContentsView: View {
                         .padding(5)
                         .offset(y: 3)
                         .foregroundColor(.secondary).opacity(0.6)
-                        .opacity(contents == "" ? 1 : 0)
+                        .opacity(self.contents == "" ? 1 : 0)
                 }
                 .padding(20) /* Inner Padding */
                 .background(Color.background)

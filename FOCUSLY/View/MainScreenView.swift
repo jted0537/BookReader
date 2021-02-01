@@ -19,7 +19,6 @@ enum Tab{
 /* When Login Success */
 struct MainScreenView: View {
     @State private var currentView: Tab = .Library
-    @State private var selection = 0
     
     init() {
         /* NaviationBar Background */
@@ -77,7 +76,6 @@ struct MainScreenView: View {
         }.navigationViewStyle(StackNavigationViewStyle()) /* Outer Navigation View */
     }
 }
-
 
 /* Calling Tab bar */
 struct TabBarView: View {
@@ -139,8 +137,8 @@ struct textFieldAlert: View {
         }
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { _ in })
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            newFolder = alert.textFields?[0].text
-            if let folderName = newFolder {
+            self.newFolder = alert.textFields?[0].text
+            if let folderName = self.newFolder {
                 /* When FolderName is available */
                 if folderName.count != 0 {
                     print("\(folderName)!!")

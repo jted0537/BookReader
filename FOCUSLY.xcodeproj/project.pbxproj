@@ -14,6 +14,7 @@
 		E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */; };
 		E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E042921D25BEC3800054BD6F /* ExtensionFile.swift */; };
 		E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0438F2425C118D2001662EC /* MakeContentsView.swift */; };
+		E047E7EA25C83CAE00E39535 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047E7E925C83CAE00E39535 /* Article.swift */; };
 		E059B10625C19DFE006AB7EF /* ReadingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E059B10525C19DFE006AB7EF /* ReadingRow.swift */; };
 		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
 		E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D725B951E7009F3DF3 /* SceneDelegate.swift */; };
@@ -42,6 +43,7 @@
 		E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PottaOne-Regular.ttf"; sourceTree = "<group>"; };
 		E042921D25BEC3800054BD6F /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		E0438F2425C118D2001662EC /* MakeContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeContentsView.swift; sourceTree = "<group>"; };
+		E047E7E925C83CAE00E39535 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		E059B10525C19DFE006AB7EF /* ReadingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRow.swift; sourceTree = "<group>"; };
 		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				E08CAC2F25B959FD00B37165 /* Contents.swift */,
+				E047E7E925C83CAE00E39535 /* Article.swift */,
 				E08CAC2E25B959FD00B37165 /* User.swift */,
 			);
 			path = Models;
@@ -374,6 +377,7 @@
 				E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */,
 				E08CAC3925B95A1200B37165 /* MainScreenView.swift in Sources */,
 				A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */,
+				E047E7EA25C83CAE00E39535 /* Article.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
