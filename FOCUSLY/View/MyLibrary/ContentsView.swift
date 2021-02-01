@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+
 struct ContentsView: View {
     /* State Variables */
     @State var rollUp: Bool = false
@@ -47,14 +48,9 @@ struct ContentsView: View {
             Color.white.ignoresSafeArea()
             
             VStack(spacing: 0){
-                /* Display Contents Part */
-                Text("\(readedContent)")
-                //TextField("", text: .constant(readedContent))
-                    .font(scriptFonts[selectFontIdx].0)
-                    .padding()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .background(backColors[selectColorIdx])
-                
+
+                /* Contents Part */
+                MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
                 
                 Divider().padding(.bottom, 5)
                 
