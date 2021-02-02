@@ -41,7 +41,6 @@ struct ContentsView: View {
     }
     
     var body: some View {
-        
         /* View of each Contents */
         VStack(spacing: 0){
             /* Contents Part */

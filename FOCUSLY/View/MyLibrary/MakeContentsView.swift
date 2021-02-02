@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import UIKit
+import PDFKit
+import UniformTypeIdentifiers
 
 /* Making own cotents */
 struct MakeContentsView: View {
     
     @State private var contentsName: String = ""
     @State private var contents: String = ""
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    //@GestureState private var dragOffset = CGSize.zero
+    @State private var fileName: String = ""
+    @State private var openFile: Bool = false
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     /* Custom Back Button - leading */
     var btnBack : some View {
@@ -36,7 +40,7 @@ struct MakeContentsView: View {
             
             /* Getting PDF from Device */
             Button(action: {
-                
+                self.openFile.toggle()
             }){
                 Image(systemName: "doc.badge.plus")
                     .resizable()
@@ -97,33 +101,91 @@ struct MakeContentsView: View {
                 
                 /* "작성완료" Button */
                 Button(action: {
-                    
+                    //self.openFile.toggle()
                 }){
-                    ZStack{
-                        HStack{
-                            Spacer()
-                            Text("작성완료")
-                            Spacer()
-                        }.foregroundColor(.white)
-                        .frame(height: 50)
-                        .background(LinearGradient(gradient: gradationColor , startPoint: .trailing, endPoint: .leading))
-                        .cornerRadius(10)
-                        .padding()
-                    }
+                    HStack{
+                        Spacer()
+                        Text("작성완료")
+                        Spacer()
+                    }.foregroundColor(.white)
+                    .frame(height: 50)
+                    .background(LinearGradient(gradient: gradationColor , startPoint: .trailing, endPoint: .leading))
+                    .cornerRadius(10)
+                    .padding()
                 }
-                
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle(Text("직접입력하기"), displayMode: .inline)
             .navigationBarItems(leading: btnBack, trailing: trailingButton)
             .edgesIgnoringSafeArea(.top)
+            .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .word, .epub, .text]) { (res) in
+                do {
+                    let fileURL = try res.get()
+                    guard fileURL.startAccessingSecurityScopedResource() else{
+                        return
+                    } /* Setting Accessability */
+                    
+                    self.fileName = fileURL.lastPathComponent
+                    
+                    /* Remove FileName extensions {ex) .pdf, .docx} */
+                    self.contentsName = String(fileURL.lastPathComponent.prefix(upTo: self.fileName.lastIndex { $0 == "." } ?? self.fileName.endIndex))
+                    let extensionFormat = String(fileURL.lastPathComponent.suffix(from: self.fileName.lastIndex { $0 == "." } ?? self.fileName.endIndex))
+                    
+                    /* Read Content from File */
+                    if extensionFormat == ".pdf" {
+                        if let pdf = PDFDocument(url: fileURL) {
+                            let pageCount = pdf.pageCount
+                            let documentContent = NSMutableAttributedString()
+
+                            for i in 0 ..< pageCount {
+                                guard let page = pdf.page(at: i) else { continue }
+                                guard let pageContent = page.attributedString else { continue }
+                                documentContent.append(pageContent)
+                            }
+                            self.contents = documentContent.string
+                        }
+                    }
+                    else if extensionFormat == ".docx" {
+                        let newURL = fileURL.deletingPathExtension().appendingPathExtension("pdf")
+                        print(fileURL)
+                        print(newURL)
+                        guard newURL.startAccessingSecurityScopedResource() else{
+                            return
+                        }
+                        try FileManager.default.moveItem(at: fileURL, to: newURL)
+                        
+                        if let pdf = PDFDocument(url: newURL) {
+                            let pageCount = pdf.pageCount
+                            let documentContent = NSMutableAttributedString()
+
+                            for i in 0 ..< pageCount {
+                                guard let page = pdf.page(at: i) else { continue }
+                                guard let pageContent = page.attributedString else { continue }
+                                documentContent.append(pageContent)
+                            }
+                            self.contents = documentContent.string
+                        }
+                    }
+                    else if extensionFormat == ".epub" {
+                        
+                        
+                    }
+                    else if extensionFormat == ".txt" {
+                        self.contents = try String(contentsOf: fileURL, encoding: .utf8)
+                    }
+                    else {return}
+                    
+
+                }
+                catch {
+                    print("error reading")
+                    print(error.localizedDescription)
+                }
+            }
+            
         }
         
     }
 }
 
-struct MakeScriptView_Previews: PreviewProvider {
-    static var previews: some View {
-        MakeContentsView()
-    }
-}
+

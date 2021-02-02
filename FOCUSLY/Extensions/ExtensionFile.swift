@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-
+import UniformTypeIdentifiers
 
 /* Color Variables */
 /* Like Orange */
@@ -21,7 +21,7 @@ let grayCircle: Color = Color.secondary.opacity(0.1)
 let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let grayBackground: Color = Color.secondary.opacity(0.1)
 
-let backColors = [Color.background, Color(hex: 0xCACFD2), Color.primary, Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let backColors = [Color.secondary.opacity(0.08), Color.secondary.opacity(0.5), Color.primary.opacity(0.9), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
 let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 
@@ -94,12 +94,22 @@ extension View {
     }
 }
 
+/* Bring Data from .docx file */
+extension UTType {
+    // Word documents are not an existing property on UTType
+    static var word: UTType {
+        // Look up the type from the file extension
+        UTType.types(tag: "docx", tagClass: .filenameExtension, conformingTo: nil).first!
+    }
+}
+
 
 struct MultilineTextView: UIViewRepresentable {
     
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
+    @State var yOffset: CGFloat = 0 // 여기에 yoffset 계속 저장
     
     func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
         let view = MultilineUITextView(frame: .zero)
@@ -116,12 +126,10 @@ struct MultilineTextView: UIViewRepresentable {
         uiView.font = UIFont(name: scriptFonts[selectFontIdx].0, size: 50)
         uiView.backgroundColor = UIColor(backColors[selectColorIdx])
         
-        print(uiView.endOfDocument)// 현재 몇글자 나왔는지 확인 가능^_^
-        
-        // 한줄의 모든 글자마다 offset이 증가함 -> 버그 고쳐야됨
-        if Double(uiView.contentSize.height - uiView.contentOffset.y)/Double(UIScreen.main.bounds.height) > 0.3{
-            print(uiView.contentSize.height - uiView.contentOffset.y)
-            uiView.contentOffset.y += 40
+        /* Update the y offset of the textView */
+        if (uiView.contentSize.height - uiView.contentOffset.y) > (UIScreen.main.bounds.height * 0.5){
+            let yOffset = uiView.contentSize.height - UIScreen.main.bounds.height * 0.5
+            uiView.contentOffset.y = yOffset
         }
         
     }
@@ -132,7 +140,7 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         switch action{
-            case #selector(copy_),
+        case     #selector(copy(_:)),
                  #selector(highlight),
                  #selector(repeatPlay): return true
             default: return false
@@ -143,13 +151,12 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     /* UIMenuController Functions */
     
     @objc
-    func copy_() {
-        print("copy the text!")
-    }
-    
-    @objc
     func highlight() {
-        print("highlight the text!")
+        print("highlight")
+//        let selectedTextRange = self.selectedRange
+//
+//        let attribute = [NSAttributedString.Key.backgroundColor: Color.yellow]
+//        let attributedText = NSAttributedString(String: selectedTextRange, attributes: attribute)
     }
     
     @objc
@@ -160,9 +167,8 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
    /*  UITextViewDelegate Methods */
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        let copyMenu = UIMenuItem(title: "복사하기", action: #selector(MultilineUITextView.copy_))
         let highlightMenu = UIMenuItem(title: "하이라이트", action: #selector(MultilineUITextView.highlight))
         let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(MultilineUITextView.repeatPlay))
-        UIMenuController.shared.menuItems = [copyMenu, highlightMenu, repeatMenu]
+        UIMenuController.shared.menuItems = [highlightMenu, repeatMenu]
     }
 }
