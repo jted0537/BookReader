@@ -10,18 +10,18 @@ import UIKit
 
 
 /* Color Variables */
+/* Like Orange */
 let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
 let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
 let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+/* Gray Values*/
 let grayLetter: Color = Color.secondary.opacity(1.5)
 let grayCircle: Color = Color.secondary.opacity(0.1)
-let grayBox: Color = Color(red: 229/255, green: 229/255, blue: 229/255)
 let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let grayBackground: Color = Color.secondary.opacity(0.1)
-let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
-let offWhite: Color = Color(hex: 0xF7F7F7)
 
-let backColors = [Color(hex: 0xF7F7F7), Color(hex: 0xCACFD2), Color(hex: 0x080808), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let backColors = [Color.background, Color(hex: 0xCACFD2), Color.primary, Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
 let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 
