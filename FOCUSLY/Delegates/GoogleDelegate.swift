@@ -12,7 +12,7 @@ import SwiftUI
 /* For Google Login */
 class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
     @Published var signedIn: Bool = false
-    @Published var userEmail: String = ""
+    @Published var userID: String = ""
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
@@ -26,8 +26,8 @@ class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
                 print(error.localizedDescription)
                 return
             }
-            print("signIn result: " + authResult!.user.displayName!)
-            self.userEmail = authResult!.user.displayName!
+            print("signIn userID: " + authResult!.user.uid)
+            self.userID = authResult!.user.uid
             self.signedIn = true
         }
     }

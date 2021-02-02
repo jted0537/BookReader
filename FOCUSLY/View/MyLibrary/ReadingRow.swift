@@ -19,7 +19,6 @@ struct ReadingRow: View {
     @Binding var readContent: Int?
     @Binding var contents: Contents
     
-    
     var body: some View {
         
         /* for Tap Gesture ( short press / long press classified ) */
@@ -36,6 +35,44 @@ struct ReadingRow: View {
             }
         
         /* When Long Pressed */
+        //        VStack(alignment: .leading, spacing: 10) {
+        //            NavigationLink(destination: ContentsView(curContent: $contents), tag: 1, selection: $NavActivate) {
+        //                VStack{
+        //                    HStack {
+        //                        /* Script Info */
+        //                        VStack(alignment: .leading){
+        //                            Text(contents.title)
+        //                                .foregroundColor(.primary)
+        //                            HStack{
+        //                                Text(contents.publisher + "   ")
+        //                                    .font(.footnote)
+        //                                    .foregroundColor(.primary)
+        //                                Text(contents.formater.string(from: contents.date))
+        //                                    .font(.footnote)
+        //                                    .foregroundColor(.primary)
+        //                            }
+        //                        }
+        //                        Spacer()
+        //                    }
+        //                    /* Script Progress */
+        //                    Text("진척도: \(Int(contents.readProgress*100))%")
+        //                        .font(.caption)
+        //                        .foregroundColor(.primary)
+        //                }.onTapGesture {
+        //                    self.NavActivate = 1
+        //                }.onLongPressGesture {
+        //                    self.editPressed = true
+        //                }
+        //                .padding()
+        //                .padding(.vertical, 5)
+        //                //.background(self.editPressed ? Color.secondary : Color.background)
+        //            }.background(self.editPressed ? Color.secondary : Color.background)
+        //        }
+        //        .cornerRadius(10)
+        //        .padding(.top, 10)
+        //        .padding(.horizontal, 20)
+        //        .shadow(color: Color.secondary.opacity(0.5), radius: 5, y: 5)
+        /* Open Source for Tap Gesture */
         let longPressGestureDelay = DragGesture(minimumDistance: 0)
             .updating($longDrag) { currentstate, gestureState, transaction in
                 gestureState = true
@@ -99,7 +136,7 @@ struct ReadingRow: View {
                 .padding()
                 .padding(.vertical, 5)
             }
-            .background(isSelected ? grayBox : Color.white)
+            .background(isSelected ? Color.secondary : Color.white)
             .cornerRadius(10)
             .padding(.top, 10)
             .padding(.horizontal, 20)
@@ -114,6 +151,5 @@ struct ReadingRow: View {
                     .cancel()
                 ])
             }
-        
     }
 }

@@ -19,7 +19,6 @@ enum Tab{
 /* When Login Success */
 struct MainScreenView: View {
     @State private var currentView: Tab = .Library
-    @State private var selection = 0
     
     init() {
         /* NaviationBar Background */
@@ -28,10 +27,10 @@ struct MainScreenView: View {
         /* NavigationBar foreground */
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),
-            .font : UIFont(name:"Papyrus", size: 40)!]
+            .font : UIFont(name: "Calibri", size: 40)!]
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),
-            .font : UIFont(name: "HelveticaNeue-Thin", size: 20)!]
+            .font : UIFont(name: "Calibri", size: 20)!]
     }
     
     /* For topTrailing Plus Button functions */
@@ -43,7 +42,8 @@ struct MainScreenView: View {
                     plusButton()
                 } /* Make own Contents */
             case .Folder:
-                textFieldAlert() /* Make Folder Alert */
+                textFieldAlert()
+                /* Make Folder Alert */
             case .Statics:
                 plusButton()
             case .Preference:
@@ -76,7 +76,6 @@ struct MainScreenView: View {
         }.navigationViewStyle(StackNavigationViewStyle()) /* Outer Navigation View */
     }
 }
-
 
 /* Calling Tab bar */
 struct TabBarView: View {
@@ -138,8 +137,8 @@ struct textFieldAlert: View {
         }
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { _ in })
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            newFolder = alert.textFields?[0].text
-            if let folderName = newFolder {
+            self.newFolder = alert.textFields?[0].text
+            if let folderName = self.newFolder {
                 /* When FolderName is available */
                 if folderName.count != 0 {
                     print("\(folderName)!!")

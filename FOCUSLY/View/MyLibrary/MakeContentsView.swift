@@ -10,10 +10,11 @@ import SwiftUI
 /* Making own cotents */
 struct MakeContentsView: View {
     
-    @State var contentsName: String = ""
-    @State var contents: String = ""
+    @State private var contentsName: String = ""
+    @State private var contents: String = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @GestureState private var dragOffset = CGSize.zero
+    //@GestureState private var dragOffset = CGSize.zero
+    
     
     /* Custom Back Button - leading */
     var btnBack : some View {
@@ -59,25 +60,45 @@ struct MakeContentsView: View {
     
     var body: some View {
         ZStack{
-            grayBackground.ignoresSafeArea()
+            /* When User touch background, hide Keyborad */
+            grayBackground.ignoresSafeArea().onTapGesture {
+                hideKeyboard()
+            }
+            
             VStack(spacing: 0){
+                /* Get Contents Name */
+                
                 TextField("제목을 입력하세요", text: $contentsName)
+                    .font(.title3)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .disableAutocorrection(true)
-                    .padding()
-                    .background(Color.white)
+                    .padding(20) /* Inner Padding */
+                    .background(Color.background)
                     .cornerRadius(10)
-                    .padding(20)
+                    .padding(20) /* Outer Padding */
                 
-                MakeContentsMultilineText(text: $contents)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .padding(10)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal, 20)
                 
-                Button(action: {}){
+                /* Get Contents */
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $contents)
+                        .font(.subheadline)
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                        .disableAutocorrection(true)
+                    Text("내용을 입력하세요")
+                        .padding(5)
+                        .offset(y: 3)
+                        .foregroundColor(.secondary).opacity(0.6)
+                        .opacity(self.contents == "" ? 1 : 0)
+                }
+                .padding(20) /* Inner Padding */
+                .background(Color.background)
+                .cornerRadius(10)
+                .padding(.horizontal, 20) /* Outer Padding */
+                
+                /* "작성완료" Button */
+                Button(action: {
+                    
+                }){
                     ZStack{
                         HStack{
                             Spacer()
@@ -92,7 +113,6 @@ struct MakeContentsView: View {
                 }
                 
             }
-            .background(offWhite)
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle(Text("직접입력하기"), displayMode: .inline)
             .navigationBarItems(leading: btnBack, trailing: trailingButton)

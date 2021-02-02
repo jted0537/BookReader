@@ -6,6 +6,24 @@
 //
 
 import SwiftUI
+import UIKit
+
+
+/* Color Variables */
+/* Like Orange */
+let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
+let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
+let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
+/* Gray Values*/
+let grayLetter: Color = Color.secondary.opacity(1.5)
+let grayCircle: Color = Color.secondary.opacity(0.1)
+let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
+let grayBackground: Color = Color.secondary.opacity(0.1)
+
+let backColors = [Color.background, Color(hex: 0xCACFD2), Color.primary, Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
+
 
 /* String length, substring */
 extension String {
@@ -46,22 +64,16 @@ extension Color {
             opacity: alpha
         )
     }
+    #if os(macOS)
+    static let background = Color(NSColor.windowBackgroundColor)
+    static let secondaryBackground = Color(NSColor.underPageBackgroundColor)
+    static let tertiaryBackground = Color(NSColor.controlBackgroundColor)
+    #else
+    static let background = Color(UIColor.systemBackground)
+    static let secondaryBackground = Color(UIColor.secondarySystemBackground)
+    static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
+    #endif
 }
-
-/* Color Variables */
-let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
-let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
-let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
-let grayLetter: Color = Color(red: 96/255, green: 96/255, blue: 96/255)
-let grayCircle: Color = Color(red: 238/255, green: 238/255, blue: 238/255)
-let grayBox: Color = Color(red: 229/255, green: 229/255, blue: 229/255)
-let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
-let grayBackground: Color = Color(red: 247/255, green: 247/255, blue: 247/255)
-let mainColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
-let offWhite: Color = Color(hex: 0xF7F7F7)
-
-let backColors = [Color(hex: 0xF7F7F7), Color(hex: 0xCACFD2), Color(hex: 0x000000), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
-let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 /* NavigationBar Swipe With Custom BackButton */
 extension UINavigationController: UIGestureRecognizerDelegate {
@@ -75,87 +87,82 @@ extension UINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-/* Make Aritificial TextField MultiLine */
-struct MakeContentsMultilineText: UIViewRepresentable {
-    @Binding var text: String
-    
-    func makeCoordinator() -> MakeContentsMultilineText.Coordinator {
-        return MakeContentsMultilineText.Coordinator(parent1: self)
-    }
-    
-    func makeUIView(context: UIViewRepresentableContext<MakeContentsMultilineText>) -> UITextView {
-        let view = UITextView()
-        view.isScrollEnabled = true
-        view.isEditable = true
-        view.isUserInteractionEnabled = true
-        view.text = "내용을 입력하세요"
-        view.textColor = UIColor(grayIcon.opacity(0.6))
-        view.font = .systemFont(ofSize: 17)
-        view.delegate = context.coordinator
-        return view
-    }
-    
-    func updateUIView(_ uiView: UITextView, context: Context) {
-    }
-    
-    class Coordinator: NSObject, UITextViewDelegate {
-        var parent : MakeContentsMultilineText
-        init(parent1: MakeContentsMultilineText){
-            parent = parent1
-        }
-        func textViewDidChange(_ textView: UITextView) {
-            self.parent.text = textView.text
-        }
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            textView.text = ""
-            textView.textColor = .label
-        }
+/* Hiding KeyBoard extension */
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
+
 struct MultilineTextView: UIViewRepresentable {
+    
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
     
-    func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> UITextView {
-        let view = newTextView()
+    func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
+        let view = MultilineUITextView(frame: .zero)
+        view.delegate = view
         view.isScrollEnabled = true
         view.isSelectable = true
         view.isEditable = false
         view.text = self.text
-        //view.delegate = context.coordinator
         return view
     }
     
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    func updateUIView(_ uiView: MultilineUITextView, context: UIViewRepresentableContext<MultilineTextView>) {
         uiView.text = self.text
-        uiView.font = UIFont(name: scriptFonts[selectFontIdx].0, size: 60)
+        uiView.font = UIFont(name: scriptFonts[selectFontIdx].0, size: 50)
         uiView.backgroundColor = UIColor(backColors[selectColorIdx])
+        
+        print(uiView.endOfDocument)// 현재 몇글자 나왔는지 확인 가능^_^
+        
+        // 한줄의 모든 글자마다 offset이 증가함 -> 버그 고쳐야됨
+        if Double(uiView.contentSize.height - uiView.contentOffset.y)/Double(UIScreen.main.bounds.height) > 0.3{
+            print(uiView.contentSize.height - uiView.contentOffset.y)
+            uiView.contentOffset.y += 40
+        }
+        
     }
     
 }
 
-//extension UITextView {
-//    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-//        return (action == #selector(userSelect))
-//    }
-//
-//}
-
-func textViewDidBeginEditing(_ textView: UITextView) {
-    let menu = UIMenuItem(title: "zedd", action: #selector(newTextView.userSelect))
-    UIMenuController.shared.menuItems = [menu]
-}
-
-class newTextView: UITextView {
+class MultilineUITextView: UITextView, UITextViewDelegate {
+    
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return (action == #selector(userSelect))
+        switch action{
+            case #selector(copy_),
+                 #selector(highlight),
+                 #selector(repeatPlay): return true
+            default: return false
+        }
+        
+    }
+    
+    /* UIMenuController Functions */
+    
+    @objc
+    func copy_() {
+        print("copy the text!")
     }
     
     @objc
+    func highlight() {
+        print("highlight the text!")
+    }
     
-    func userSelect() {
-        print("wdmqlmqwklmdqwkmdwqlmqwklmwdqlmqwlmkdqwk")
+    @objc
+    func repeatPlay() {
+        print("repeat the text!")
+    }
+    
+   /*  UITextViewDelegate Methods */
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        let copyMenu = UIMenuItem(title: "복사하기", action: #selector(MultilineUITextView.copy_))
+        let highlightMenu = UIMenuItem(title: "하이라이트", action: #selector(MultilineUITextView.highlight))
+        let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(MultilineUITextView.repeatPlay))
+        UIMenuController.shared.menuItems = [copyMenu, highlightMenu, repeatMenu]
     }
 }
