@@ -14,16 +14,16 @@ struct LoginView: View {
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     var body: some View {
-        if FacebookLogin.signedIn {
-            MainScreenView()
-        }
-        else if GoogleLogin.signedIn {
-            MainScreenView()
-        }
-        else {
-            SocialLoginView()
-        }
-        //MainScreenView()
+//        if FacebookLogin.signedIn {
+//            MainScreenView()
+//        }
+//        else if GoogleLogin.signedIn {
+//            MainScreenView()
+//        }
+//        else {
+//            SocialLoginView()
+//        }
+        MainScreenView()
     }
 }
 

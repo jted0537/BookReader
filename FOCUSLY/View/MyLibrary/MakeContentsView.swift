@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import PDFKit
 import UniformTypeIdentifiers
+import SNDocx
 
 /* Making own cotents */
 struct MakeContentsView: View {
@@ -147,6 +148,9 @@ struct MakeContentsView: View {
                     }
                     else if extensionFormat == ".docx" {
                         print("docx")
+                        let fileContents = SNDocx.shared.getText(fileUrl: fileURL) ?? "error"
+                        self.contents = SNDocx.shared.getText(fileUrl: fileURL) ?? "불러오기 실패"
+                        
                     }
                     else if extensionFormat == ".epub" {
                         
@@ -155,7 +159,6 @@ struct MakeContentsView: View {
                         self.contents = try String(contentsOf: fileURL, encoding: .utf8)
                     }
                     else {return}
-                    
 
                 }
                 catch {
