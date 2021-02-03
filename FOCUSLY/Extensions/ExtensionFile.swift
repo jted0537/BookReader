@@ -106,10 +106,10 @@ extension UTType {
 
 struct MultilineTextView: UIViewRepresentable {
     
+    //@State var highlightedWords: NSAttributedString// 쓸지 미지수
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
-    @State var yOffset: CGFloat = 0 // 여기에 yoffset 계속 저장
     
     func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
         let view = MultilineUITextView(frame: .zero)
@@ -149,14 +149,17 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     }
     
     /* UIMenuController Functions */
-    
     @objc
     func highlight() {
-        print("highlight")
-//        let selectedTextRange = self.selectedRange
+//        print("highlight")
 //
-//        let attribute = [NSAttributedString.Key.backgroundColor: Color.yellow]
-//        let attributedText = NSAttributedString(String: selectedTextRange, attributes: attribute)
+//        let mstr = NSMutableAttributedString(attributedString: self.attributedText)
+//        mstr.addAttribute(NSAttributedString.Key.backgroundColor, value: Color.yellow, range: self.selectedRange)
+//
+//        self.attributedText = NSAttributedString(attributedString: mstr)
+//
+        let attributes = [NSAttributedString.Key.backgroundColor: UIColor(Color.yellow)]
+        self.textStorage.addAttributes(attributes as [NSAttributedString.Key : Any], range: self.selectedRange)
     }
     
     @objc
@@ -167,8 +170,8 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
    /*  UITextViewDelegate Methods */
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        let highlightMenu = UIMenuItem(title: "하이라이트", action: #selector(MultilineUITextView.highlight))
-        let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(MultilineUITextView.repeatPlay))
+        let highlightMenu = UIMenuItem(title: "하이라이트", action: #selector(highlight))
+        let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(repeatPlay))
         UIMenuController.shared.menuItems = [highlightMenu, repeatMenu]
     }
 }

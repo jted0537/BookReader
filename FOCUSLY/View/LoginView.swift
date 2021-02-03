@@ -14,16 +14,16 @@ struct LoginView: View {
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     var body: some View {
-//        if FacebookLogin.signedIn {
-//            MainScreenView()
-//        }
-//        else if GoogleLogin.signedIn {
-//            MainScreenView()
-//        }
-//        else {
-//            SocialLoginView()
-//        }
-        MainScreenView()
+        if FacebookLogin.signedIn {
+            MainScreenView()
+        }
+        else if GoogleLogin.signedIn {
+            MainScreenView()
+        }
+        else {
+            SocialLoginView()
+        }
+        //MainScreenView()
     }
 }
 
@@ -34,7 +34,7 @@ struct SocialLoginView: View{
     
     var body: some View{
         VStack(spacing: 30){
-            Image("focuslyImg").resizable().scaledToFit().frame(width:99, height:99).cornerRadius(15.0)
+            Image("focuslyImg").resizable().scaledToFit().frame(width:99, height:99).cornerRadius(22.0)
             Text("FOCUSLY").foregroundColor(Color(red: 1.0, green: 176/255, blue: 0.0)).bold().font(.system(.largeTitle, design: .rounded))
             
             /* Facebook Login */

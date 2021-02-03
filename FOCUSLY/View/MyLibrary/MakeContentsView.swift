@@ -146,29 +146,9 @@ struct MakeContentsView: View {
                         }
                     }
                     else if extensionFormat == ".docx" {
-//                        let newURL = fileURL.deletingPathExtension().appendingPathExtension("pdf")
-//                        print(fileURL)
-//                        print(newURL)
-//                        guard newURL.startAccessingSecurityScopedResource() else{
-//                            return
-//                        }
-//                        try FileManager.default.moveItem(at: fileURL, to: newURL)
-//
-//                        if let pdf = PDFDocument(url: newURL) {
-//                            let pageCount = pdf.pageCount
-//                            let documentContent = NSMutableAttributedString()
-//
-//                            for i in 0 ..< pageCount {
-//                                guard let page = pdf.page(at: i) else { continue }
-//                                guard let pageContent = page.attributedString else { continue }
-//                                documentContent.append(pageContent)
-//                            }
-//                            self.contents = documentContent.string
-//                        }
                         print("docx")
                     }
                     else if extensionFormat == ".epub" {
-                        
                         
                     }
                     else if extensionFormat == ".txt" {

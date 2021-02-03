@@ -98,14 +98,14 @@ struct ReadingRow: View {
                             /* Script Info */
                             VStack(alignment: .leading){
                                 Text(contents.title)
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color.primary)
                                 HStack{
                                     Text(contents.publisher + "   ")
                                         .font(.footnote)
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color.primary)
                                     Text(contents.formater.string(from: contents.date))
                                         .font(.footnote)
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color.primary)
                                 }
                                 
                             }
@@ -122,7 +122,7 @@ struct ReadingRow: View {
                         /* Script Progress */
                         Text("진척도: \(Int(contents.readProgress*100))%")
                             .font(.caption)
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.primary)
                     }
                     /* Tap Gesture */
                     .gesture(tapBeforeLongGestures)
@@ -131,7 +131,7 @@ struct ReadingRow: View {
                 .padding()
                 .padding(.vertical, 5)
             }
-            .background(isSelected ? Color.secondary : Color.white)
+            .background(isSelected ? Color.secondary : Color.background)
             .cornerRadius(10)
             .padding(.top, 10)
             .padding(.horizontal, 20)
