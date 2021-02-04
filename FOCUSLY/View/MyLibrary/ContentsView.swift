@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-
 struct ContentsView: View {
     /* State Variables */
     @State private var rollUp: Bool = false
