@@ -346,12 +346,16 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.12)
+  - SNDocx (0.1.1):
+    - Zippy (~> 0.2.1)
+  - Zippy (0.2.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
   - GoogleSignIn
+  - SNDocx
 
 SPEC REPOS:
   trunk:
@@ -376,6 +380,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SNDocx
+    - Zippy
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -399,7 +405,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SNDocx: 3c1c91cfde83a62d8c76c60e7aee72573ae2c621
+  Zippy: f9e88ce43474b27d58dbb88a1cb25a84f9bfeb0d
 
-PODFILE CHECKSUM: c82e02272d30198a7b3f6a75ca5573de60a993cb
+PODFILE CHECKSUM: 6c369c5bc513d14681d2e1289de11cbedde50770
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

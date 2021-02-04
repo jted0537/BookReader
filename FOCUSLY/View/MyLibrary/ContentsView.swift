@@ -41,7 +41,6 @@ struct ContentsView: View {
     }
     
     var body: some View {
-        
         /* View of each Contents */
         VStack(spacing: 0){
             /* Contents Part */
@@ -148,6 +147,10 @@ struct ContentsView: View {
             .padding(.bottom, 30)
             
         }
+        .background(Color.background)
+        .onAppear() {
+            self.readedContent = self.curContent.fullContent.substring(toIndex: curContent.readIdx)
+        }
         .onReceive(self.timer) { time in
             if self.isActive && curContent.readIdx < curContent.fullContent.length - 1{
                 self.count += 1
@@ -156,13 +159,12 @@ struct ContentsView: View {
                 self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
             }
         }
-        .background(Color.background)
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            self.isActive = false
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            self.isActive = true
-        }
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+//            self.isActive = false
+//        }
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+//            self.isActive = true
+//        }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle(curContent.title)
         .navigationBarItems(leading: btnBack)
