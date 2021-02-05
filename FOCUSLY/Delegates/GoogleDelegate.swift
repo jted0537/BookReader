@@ -9,7 +9,7 @@ import GoogleSignIn
 import Firebase
 import SwiftUI
 
-/* For Google Login */
+// For Google Login
 class GoogleDelegate: NSObject, GIDSignInDelegate, ObservableObject {
     @Published var signedIn: Bool = false
     @Published var userID: String = ""

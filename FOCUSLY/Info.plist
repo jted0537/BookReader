@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>파일에 대한 접근을 허용하시겠습니까?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라에 접근을 허용하시겠습니까?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진을 통해 텍스트를 추출하기 위해서는 사진 앨범의 접근 권한이 필요합니다.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ko_KR</string>
 	<key>CFBundleExecutable</key>

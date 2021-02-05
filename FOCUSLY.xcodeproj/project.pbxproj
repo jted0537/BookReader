@@ -7,21 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F01C0DA9AB229E88C92BE2F /* Pods_FOCUSLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AE5428C233F653B606AEFE /* Pods_FOCUSLY.framework */; };
 		A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AF896C25BA9C2500BA3A92 /* PreferenceView.swift */; };
 		E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E008ABE225C3A47500CD9EC4 /* Inconsolata.ttf */; };
 		E008ABE725C3A81A00CD9EC4 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E008ABE625C3A81A00CD9EC4 /* Calibri.ttf */; };
 		E010C04325B9CEA900B2297D /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010C04225B9CEA900B2297D /* MyLibraryView.swift */; };
+		E02ED0B825CD449000AAFFE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E02ED0B725CD449000AAFFE7 /* Assets.xcassets */; };
 		E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */; };
 		E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E042921D25BEC3800054BD6F /* ExtensionFile.swift */; };
 		E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0438F2425C118D2001662EC /* MakeContentsView.swift */; };
 		E047E7EA25C83CAE00E39535 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047E7E925C83CAE00E39535 /* Article.swift */; };
 		E059B10625C19DFE006AB7EF /* ReadingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E059B10525C19DFE006AB7EF /* ReadingRow.swift */; };
+		E06F3AE925CCF69700968B4C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06F3AE825CCF69700968B4C /* ImagePicker.swift */; };
+		E06F3AED25CD287A00968B4C /* 12345.png in Resources */ = {isa = PBXBuildFile; fileRef = E06F3AEC25CD287A00968B4C /* 12345.png */; };
 		E0715BE325CC4F47007DB0C5 /* temp.json in Resources */ = {isa = PBXBuildFile; fileRef = E0715BE225CC4F47007DB0C5 /* temp.json */; };
 		E0715BE725CCD77D007DB0C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */; };
 		E0754AD825CBD2C400455A2E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E0754AD725CBD2C400455A2E /* loading.json */; };
 		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
 		E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D725B951E7009F3DF3 /* SceneDelegate.swift */; };
-		E08343DC25B951E7009F3DF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DB25B951E7009F3DF3 /* Assets.xcassets */; };
 		E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */; };
 		E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */; };
 		E08CAC1525B9548D00B37165 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E08CAC1425B9548D00B37165 /* FacebookLogin */; };
@@ -42,18 +45,20 @@
 		E008ABE225C3A47500CD9EC4 /* Inconsolata.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Inconsolata.ttf; sourceTree = "<group>"; };
 		E008ABE625C3A81A00CD9EC4 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
 		E010C04225B9CEA900B2297D /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
+		E02ED0B725CD449000AAFFE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E042920A25BEBC760054BD6F /* PottaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PottaOne-Regular.ttf"; sourceTree = "<group>"; };
 		E042921D25BEC3800054BD6F /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		E0438F2425C118D2001662EC /* MakeContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeContentsView.swift; sourceTree = "<group>"; };
 		E047E7E925C83CAE00E39535 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		E059B10525C19DFE006AB7EF /* ReadingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRow.swift; sourceTree = "<group>"; };
+		E06F3AE825CCF69700968B4C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E06F3AEC25CD287A00968B4C /* 12345.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12345.png; sourceTree = "<group>"; };
 		E0715BE225CC4F47007DB0C5 /* temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = temp.json; sourceTree = "<group>"; };
 		E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0754AD725CBD2C400455A2E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08343D725B951E7009F3DF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E08343DB25B951E7009F3DF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E08343E125B951E7009F3DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E08343E325B951E7009F3DF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +70,7 @@
 		E08CAC2F25B959FD00B37165 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		E08CAC3625B95A1200B37165 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
+		E1AE5428C233F653B606AEFE /* Pods_FOCUSLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FOCUSLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E08CAC1525B9548D00B37165 /* FacebookLogin in Frameworks */,
+				0F01C0DA9AB229E88C92BE2F /* Pods_FOCUSLY.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +98,18 @@
 		9E8FACD6CDD6438087117C15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1AE5428C233F653B606AEFE /* Pods_FOCUSLY.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E02ED0B525CD434D00AAFFE7 /* MakeContents */ = {
+			isa = PBXGroup;
+			children = (
+				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
+				E059B10525C19DFE006AB7EF /* ReadingRow.swift */,
+			);
+			path = MakeContents;
 			sourceTree = "<group>";
 		};
 		E042921925BEC1EF0054BD6F /* MyLibrary */ = {
@@ -100,8 +117,8 @@
 			children = (
 				E010C04225B9CEA900B2297D /* MyLibraryView.swift */,
 				E0A79F7A25BE64F3000A4A06 /* ContentsView.swift */,
-				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
-				E059B10525C19DFE006AB7EF /* ReadingRow.swift */,
+				E06F3AE825CCF69700968B4C /* ImagePicker.swift */,
+				E02ED0B525CD434D00AAFFE7 /* MakeContents */,
 			);
 			path = MyLibrary;
 			sourceTree = "<group>";
@@ -144,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E0754AD725CBD2C400455A2E /* loading.json */,
+				E06F3AEC25CD287A00968B4C /* 12345.png */,
 				E0715BE225CC4F47007DB0C5 /* temp.json */,
 				E042921C25BEC36A0054BD6F /* Extensions */,
 				E08CAC2725B955B300B37165 /* ICON */,
@@ -152,10 +170,10 @@
 				E0B6ED0A25C78E02004CDD43 /* ViewModel */,
 				E08CAC2625B955AB00B37165 /* View */,
 				E08CAC2425B9558200B37165 /* Delegates */,
-				E08343DB25B951E7009F3DF3 /* Assets.xcassets */,
 				E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */,
 				E08343E325B951E7009F3DF3 /* Info.plist */,
 				E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */,
+				E02ED0B725CD449000AAFFE7 /* Assets.xcassets */,
 				E08343DD25B951E7009F3DF3 /* Preview Content */,
 			);
 			path = FOCUSLY;
@@ -292,12 +310,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E06F3AED25CD287A00968B4C /* 12345.png in Resources */,
 				E008ABE725C3A81A00CD9EC4 /* Calibri.ttf in Resources */,
+				E02ED0B825CD449000AAFFE7 /* Assets.xcassets in Resources */,
 				E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */,
 				E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */,
 				E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */,
 				E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */,
-				E08343DC25B951E7009F3DF3 /* Assets.xcassets in Resources */,
 				E0715BE325CC4F47007DB0C5 /* temp.json in Resources */,
 				E0715BE725CCD77D007DB0C5 /* GoogleService-Info.plist in Resources */,
 				E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */,
@@ -384,6 +403,7 @@
 				E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */,
 				E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */,
 				E08CAC3925B95A1200B37165 /* MainScreenView.swift in Sources */,
+				E06F3AE925CCF69700968B4C /* ImagePicker.swift in Sources */,
 				A3AF896D25BA9C2500BA3A92 /* PreferenceView.swift in Sources */,
 				E047E7EA25C83CAE00E39535 /* Article.swift in Sources */,
 			);
