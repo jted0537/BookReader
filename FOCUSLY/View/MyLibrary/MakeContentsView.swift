@@ -19,6 +19,8 @@ struct MakeContentsView: View {
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
     @State var isLoading: Bool = false
+    @State var hasTimeElapsed = false
+    
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     /* Custom Back Button - leading */
@@ -117,9 +119,12 @@ struct MakeContentsView: View {
             .navigationBarTitle(Text("직접입력하기"), displayMode: .inline)
             .navigationBarItems(leading: btnBack, trailing: trailingButton)
             .edgesIgnoringSafeArea(.top)
-            .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .word, .epub, .text]) { (res) in
+            .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .docx, .epub, .text]) { (res) in
                 do {
                     self.isLoading = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                        hasTimeElapsed = true
+                    }
                     let fileURL = try res.get()
                     guard fileURL.startAccessingSecurityScopedResource() else{
                         return
@@ -165,8 +170,8 @@ struct MakeContentsView: View {
                 }
             }
             
-            if isLoading {
-                AnimationsView(show: $isLoading)
+            if self.openFile {
+                LottieView()
             }
         }
         
@@ -191,4 +196,34 @@ struct AnimationsView: UIViewRepresentable {
     
     func updateUIView(_ uiView: AnimationView, context: UIViewRepresentableContext<AnimationsView>) {
     }
+}
+
+struct LottieView: UIViewRepresentable {
+  typealias UIViewType = UIView
+  var filename: String = "temp"
+  
+  func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+    let view = UIView(frame: .zero)
+    
+    let animationView = AnimationView()
+    let animation = Animation.named(filename)
+    animationView.animation = animation
+    //animationView.contentMode = .scaleAspectFit
+    animationView.loopMode = .loop
+    animationView.play()
+    
+    animationView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(animationView)
+    
+    NSLayoutConstraint.activate([
+      animationView.widthAnchor.constraint(equalTo: view.widthAnchor),
+      animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
+      animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    ])
+    
+    return view
+  }
+  
+  func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) { }
 }

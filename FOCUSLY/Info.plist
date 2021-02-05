@@ -2,26 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    
-    
-    
-    
-    
-    
-	<key>UIAppFonts</key>
-	<array>
-		<string>Inconsolata.ttf</string>
-		<string>Calibri.ttf</string>
-		<string>PottaOne-Regular.ttf</string>
-	</array>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>focuslyIcon.png</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ko_KR</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>focuslyIcon.png</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -45,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.350201742571-cgmonv9vmsr7a69cfi90h3ts9j0d61pu</string>
+				<string>com.googleusercontent.apps.3039136007-duueo8271g239eo9hbc8ijlhmdsa5a7h</string>
 			</array>
 		</dict>
 	</array>
@@ -75,6 +63,12 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Inconsolata.ttf</string>
+		<string>Calibri.ttf</string>
+		<string>PottaOne-Regular.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>350201742571-cgmonv9vmsr7a69cfi90h3ts9j0d61pu.apps.googleusercontent.com</string>
+	<string>3039136007-duueo8271g239eo9hbc8ijlhmdsa5a7h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.350201742571-cgmonv9vmsr7a69cfi90h3ts9j0d61pu</string>
+	<string>com.googleusercontent.apps.3039136007-duueo8271g239eo9hbc8ijlhmdsa5a7h</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>3039136007-0jsrp5uc0a9gbbrlcuvepvqmqhu8crdt.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA83VZgcvDaAUpfCBrLSDA50Qhq4rxsHXE</string>
+	<string>AIzaSyA9NexLY7xvJwr--DBqhXvNq486q7OhOpo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>350201742571</string>
+	<string>3039136007</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.IOS.FOCUSLY</string>
 	<key>PROJECT_ID</key>
-	<string>focusly-c23ef</string>
+	<string>focuslypractice</string>
 	<key>STORAGE_BUCKET</key>
-	<string>focusly-c23ef.appspot.com</string>
+	<string>focuslypractice.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:350201742571:ios:f8997bf1f00a90b6dcaaae</string>
+	<string>1:3039136007:ios:88cff9dc437ee9a7805da2</string>
+	<key>DATABASE_URL</key>
+	<string>https://focuslypractice-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>
