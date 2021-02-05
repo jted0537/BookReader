@@ -60,16 +60,20 @@ public class SNDocx:NSObject{
             return nil
         }
         let str = String.init(data: data, encoding: .utf8)
-        
         return matches(str ?? "")
     }
     
     
     private func matches(_ originalText:String)->String{
+        var paragraphs = [String]()
         var result = [String]()
         var re: NSRegularExpression!
+        var re2: NSRegularExpression!
+        
         do {
-            re = try NSRegularExpression(pattern: "<w:t.*?>(.*?)<\\/w:t>", options: [])
+            re = try NSRegularExpression(pattern: "<w:p.*?>(.*?)</w:p>", options: [])
+            re2 = try NSRegularExpression(pattern: "<w:t.*?>(.*?)</w:t>", options: [])
+            
         } catch {
             
         }
@@ -77,8 +81,17 @@ public class SNDocx:NSObject{
         let matches = re.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
         
         for match in matches {
-            
-            result.append((originalText as NSString).substring(with: match.range(at: 1)))
+            paragraphs.append((originalText as NSString).substring(with: match.range(at: 0)))
+        }
+        
+        for paragraph in paragraphs {
+            var sentences = [String]()
+            let components = re2.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count))
+
+            for component in components {
+                sentences.append((paragraph as NSString).substring(with: component.range(at: 1)))
+            }
+            result.append(sentences.joined(separator: ""))
         }
         return result.joined(separator: "\n")
     }

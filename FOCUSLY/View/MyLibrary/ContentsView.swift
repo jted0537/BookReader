@@ -41,113 +41,126 @@ struct ContentsView: View {
     }
     
     var body: some View {
-        /* View of each Contents */
-        VStack(spacing: 0){
-            /* Contents Part */
-            MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
-            
-            Divider().padding(.bottom, 5)
-            
-            if !self.rollUp {
-                Button(action: {
-                    withAnimation(.easeIn){
-                        self.rollUp.toggle()
-                    }
-                }){
-                    Image(systemName: "chevron.up").font(.system(size: 15)).foregroundColor(grayLetter)
-                }.padding(.bottom, 5)
-            } /* When not roll up */
-            else{
-                VStack{
-                    Button(action: {
-                        withAnimation(.easeIn){
-                            self.rollUp.toggle()
-                        }
-                    }){
-                        Image(systemName: "chevron.down").font(.system(size: 15)).foregroundColor(grayLetter)
-                    }.padding(.bottom, 10)
-                    
-                    /* Roll up Menu */
-                    RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
-                    
-                    /* Interval, Location */
-                    HStack{
-                        Text("속도 ").foregroundColor(grayLetter)
-                        Spacer()
-                        Slider(value: Binding(
-                            get: {
-                                self.interval
-                            },
-                            set: {(newInterval) in
-                                self.interval = newInterval
-                                self.timer.connect().cancel()
-                                self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
-                                self.timer.connect()
-                            }
-                        )).accentColor(usuallyColor)
-                    }.padding() /* Interval */
-                    HStack{
-                        Text("위치 ").foregroundColor(grayLetter)
-                        Slider(value: Binding(
-                            get: {
-                                self.place
-                            },
-                            set: {(newProgress) in
-                                self.place = newProgress
-                                self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
-                                self.readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
-                                self.count = Int(Double(curContent.readTime)*newProgress)
-                            }
-                        )).accentColor(usuallyColor)
-                    }.padding() /* Location */
-                }//.background(Color.background)
-            }/* when roll up */
-            
-            /* Play, Next, Prev */
-            
-            HStack{
-                Spacer()
-                Button(action: {
-                    
-                }){
-                    Image(systemName: "backward.end.fill")
-                }/* Prev */
-                Spacer()
-                Spacer()
+        ZStack{
+            /* View of each Contents */
+            VStack(spacing: 0){
+                /* Contents Part */
+                MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
                 
-                Button(action: {
-                    if self.isActive {
-                        self.isActive = false
-                    }
-                    else {
-                        self.timer.connect()
-                        self.isActive = true
-                    }
-                }){
-                    if(self.isActive){
-                        Image(systemName: "stop.fill")
-                    }
-                    else {
-                        Image(systemName: "play.fill")
-                    }
-                }/* Play */
-                Spacer()
-                Spacer()
-                
-                Button(action: {
-                    
-                }){
-                    Image(systemName: "forward.end.fill")
-                }/* Next */
-                Spacer()
             }
-            .frame(height: 60)
-            .foregroundColor(Color.white)
-            .background(usuallyColor)
-            .padding(.bottom, 30)
+            .background(Color.background)
+            // end of contents VStack
+            
+            
+            VStack(){
+                
+                Spacer()
+                
+                VStack{
+                    Divider().padding(.bottom, 5)
+                    
+                    if !self.rollUp {
+                        Button(action: {
+                            withAnimation(.easeIn){
+                                self.rollUp.toggle()
+                            }
+                        }){
+                            Image(systemName: "chevron.up").font(.system(size: 20)).foregroundColor(grayLetter)
+                        }.padding(.bottom, 5)
+                    } /* When not roll up */
+                    else{
+                        VStack(spacing: 0){
+                            Button(action: {
+                                withAnimation(.easeIn){
+                                    self.rollUp.toggle()
+                                }
+                            }){
+                                Image(systemName: "chevron.down").font(.system(size: 20)).foregroundColor(grayLetter)
+                            }.padding(.bottom, 5)
+                            
+                            /* Roll up Menu */
+                            RollUpMenuView(selectColorIdx: $selectColorIdx, selectFontIdx: $selectFontIdx)
+                            
+                            /* Interval, Location */
+                            HStack{
+                                Text("속도 ").foregroundColor(grayLetter)
+                                Spacer()
+                                Slider(value: Binding(
+                                    get: {
+                                        self.interval
+                                    },
+                                    set: {(newInterval) in
+                                        self.interval = newInterval
+                                        self.timer.connect().cancel()
+                                        self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
+                                        self.timer.connect()
+                                    }
+                                )).accentColor(usuallyColor)
+                            }.padding([.top, .horizontal]) /* Interval */
+                            HStack{
+                                Text("위치 ").foregroundColor(grayLetter)
+                                Slider(value: Binding(
+                                    get: {
+                                        self.place
+                                    },
+                                    set: {(newProgress) in
+                                        self.place = newProgress
+                                        self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
+                                        self.readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
+                                        self.count = Int(Double(curContent.readTime)*newProgress)
+                                    }
+                                )).accentColor(usuallyColor)
+                            }.padding() /* Location */
+                        }//.background(Color.background)
+                    }/* when roll up */
+                    
+                    /* Play, Next, Prev */
+                    HStack{
+                        Spacer()
+                        Button(action: {
+                            
+                        }){
+                            Image(systemName: "backward.end.fill")
+                        }/* Prev */
+                        Spacer()
+                        Spacer()
+                        
+                        Button(action: {
+                            if self.isActive {
+                                self.isActive = false
+                            }
+                            else {
+                                self.timer.connect()
+                                self.isActive = true
+                            }
+                        }){
+                            if(self.isActive){
+                                Image(systemName: "stop.fill")
+                            }
+                            else {
+                                Image(systemName: "play.fill")
+                            }
+                        }/* Play */
+                        Spacer()
+                        Spacer()
+                        
+                        Button(action: {
+                            
+                        }){
+                            Image(systemName: "forward.end.fill")
+                        }/* Next */
+                        Spacer()
+                    }
+                    .frame(height: 55)
+                    .foregroundColor(Color.white)
+                    .background(usuallyColor)
+                    .padding(.bottom, 30)
+                }
+                .background(Color.background)
+                
+            }
             
         }
-        .background(Color.background)
         .onAppear() {
             self.readedContent = self.curContent.fullContent.substring(toIndex: curContent.readIdx)
         }

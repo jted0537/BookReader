@@ -10,7 +10,7 @@ import UIKit
 import PDFKit
 import UniformTypeIdentifiers
 import SNDocx
-
+import Lottie
 /* Making own cotents */
 struct MakeContentsView: View {
     
@@ -18,7 +18,7 @@ struct MakeContentsView: View {
     @State private var contents: String = ""
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
-    
+    @State var isLoading: Bool = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     /* Custom Back Button - leading */
@@ -69,10 +69,8 @@ struct MakeContentsView: View {
             grayBackground.ignoresSafeArea().onTapGesture {
                 hideKeyboard()
             }
-            
             VStack(spacing: 0){
                 /* Get Contents Name */
-                
                 TextField("제목을 입력하세요", text: $contentsName)
                     .font(.title3)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -121,6 +119,7 @@ struct MakeContentsView: View {
             .edgesIgnoringSafeArea(.top)
             .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .word, .epub, .text]) { (res) in
                 do {
+                    self.isLoading = true
                     let fileURL = try res.get()
                     guard fileURL.startAccessingSecurityScopedResource() else{
                         return
@@ -148,7 +147,6 @@ struct MakeContentsView: View {
                     }
                     else if extensionFormat == ".docx" {
                         print("docx")
-                        let fileContents = SNDocx.shared.getText(fileUrl: fileURL) ?? "error"
                         self.contents = SNDocx.shared.getText(fileUrl: fileURL) ?? "불러오기 실패"
                         
                     }
@@ -159,7 +157,7 @@ struct MakeContentsView: View {
                         self.contents = try String(contentsOf: fileURL, encoding: .utf8)
                     }
                     else {return}
-
+                    self.isLoading = false
                 }
                 catch {
                     print("error reading")
@@ -167,9 +165,30 @@ struct MakeContentsView: View {
                 }
             }
             
+            if isLoading {
+                AnimationsView(show: $isLoading)
+            }
         }
         
     }
 }
 
 
+struct AnimationsView: UIViewRepresentable {
+    @Binding var show: Bool
+    
+    func makeUIView(context: Context) -> AnimationView {
+        let view = AnimationView(name: "loading", bundle: Bundle.main)
+        view.loopMode = .loop
+        if show {
+            view.play()
+        }
+        else {
+            view.stop()
+        }
+        return view
+    }
+    
+    func updateUIView(_ uiView: AnimationView, context: UIViewRepresentableContext<AnimationsView>) {
+    }
+}

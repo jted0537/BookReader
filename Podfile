@@ -14,4 +14,5 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'GoogleSignIn'
 pod 'SNDocx'
+pod 'lottie-ios'
 end
