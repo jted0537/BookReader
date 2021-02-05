@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="focuslyImg" translatesAutoresizingMaskIntoConstraints="NO" id="baf-xh-Q50">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FocuslyRemoveBack" translatesAutoresizingMaskIntoConstraints="NO" id="baf-xh-Q50">
                                 <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="E6R-TN-CCq"/>
@@ -32,6 +32,8 @@
                             <constraint firstItem="baf-xh-Q50" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="637-Vq-UiX"/>
                             <constraint firstItem="baf-xh-Q50" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="87C-f5-Aa6"/>
                             <constraint firstItem="baf-xh-Q50" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KPM-fz-7WX"/>
+                            <constraint firstItem="baf-xh-Q50" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PQS-RT-0JW"/>
+                            <constraint firstItem="baf-xh-Q50" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="e7v-MK-qQp"/>
                             <constraint firstItem="baf-xh-Q50" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ePh-UU-3S1"/>
                             <constraint firstItem="baf-xh-Q50" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="y7a-h3-FwJ"/>
                         </constraints>
@@ -39,11 +41,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="focuslyImg" width="400" height="400"/>
+        <image name="FocuslyRemoveBack" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

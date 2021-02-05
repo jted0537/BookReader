@@ -26,8 +26,8 @@ struct MakeContentsView: View {
     
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
-    @State var showImagePicker : Bool = false
-    @State var imageLoadSuccess: Bool = false
+    @State var showImagePicker : Bool = false // Show Action Sheet
+    @State var imageLoadState: Bool = false // Every time recognize image, this will toggle
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -100,6 +100,7 @@ struct MakeContentsView: View {
             // Getting Image from Device and convert into Contents
             Button(action: {
                 self.openImage.toggle()
+                // When Click the button -> openImage toggle -> actionsheet appear
             }){
                 Image(systemName: "photo")
                     .resizable()
@@ -108,7 +109,7 @@ struct MakeContentsView: View {
                     .frame(width: 30, height: 30)
             }
             .actionSheet(isPresented: $openImage) {
-                ActionSheet(title: Text("방법"), buttons: [
+                ActionSheet(title: Text("이미지를 불러올 방법을 선택하세요"), buttons: [
                     .default(Text("사진")) {
                         self.showImagePicker = true
                         self.sourceType = .photoLibrary
@@ -117,16 +118,16 @@ struct MakeContentsView: View {
                         self.showImagePicker = true
                         self.sourceType = .camera
                     },
-                    .cancel()
+                    .cancel(Text("취소"))
                 ])
             }
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, imageLoadSuccess: self.$imageLoadSuccess, sourceType: self.sourceType)
-        }
-        .onChange(of: self.imageLoadSuccess, perform: { value in
-            self.recognizeText()
+        .fullScreenCover(isPresented: self.$showImagePicker, content: { // Make Camera or Album Full Screen
+            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, imageLoadState: self.$imageLoadState, sourceType: self.sourceType).edgesIgnoringSafeArea(.all) // When Success, showImagePicker is false
         })
+        .onChange(of: self.imageLoadState, perform: { value in
+            self.recognizeText()
+        }) // Each Image input, imageLoadState will toggle
     }
     
     var body: some View {
@@ -141,10 +142,10 @@ struct MakeContentsView: View {
                     .font(.title3)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .disableAutocorrection(true)
-                    .padding(20) // Inner Padding
+                    .padding(20)
                     .background(Color.background)
                     .cornerRadius(10)
-                    .padding(20) // Outer Padding
+                    .padding(20)
                 
                 
                 // Get Contents
@@ -159,10 +160,10 @@ struct MakeContentsView: View {
                         .foregroundColor(.secondary).opacity(0.6)
                         .opacity(self.contents == "" ? 1 : 0)
                 }
-                .padding(20) // Inner Padding
+                .padding(20)
                 .background(Color.background)
                 .cornerRadius(10)
-                .padding(.horizontal, 20) // Outer Padding
+                .padding(.horizontal, 20)
                 
                 // "작성완료" Button
                 Button(action: {

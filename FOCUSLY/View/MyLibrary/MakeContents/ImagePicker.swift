@@ -12,27 +12,25 @@ class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImageP
     
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool
-    @Binding var imageLoadSuccess: Bool
+    @Binding var imageLoadState: Bool
     
-    init(image: Binding<UIImage?>, showImagePicker: Binding<Bool>, imageLoadSuccess: Binding<Bool>) {
+    init(image: Binding<UIImage?>, showImagePicker: Binding<Bool>, imageLoadState: Binding<Bool>) {
         _image = image
         _showImagePicker = showImagePicker
-        _imageLoadSuccess = imageLoadSuccess
+        _imageLoadState = imageLoadState
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             image = uiImage
             showImagePicker = false
-            imageLoadSuccess.toggle()
+            imageLoadState.toggle()
         }
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         showImagePicker = false
-        imageLoadSuccess.toggle()
+        imageLoadState.toggle()
     }
     
 }
@@ -45,7 +43,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool
-    @Binding var imageLoadSuccess: Bool
+    @Binding var imageLoadState: Bool
     
     var sourceType: UIImagePickerController.SourceType = .camera
     
@@ -53,7 +51,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
     func makeCoordinator() -> ImagePicker.Coordinator {
-        return ImagePickerCoordinator(image: $image, showImagePicker: $showImagePicker, imageLoadSuccess: $imageLoadSuccess)
+        return ImagePickerCoordinator(image: $image, showImagePicker: $showImagePicker, imageLoadState: $imageLoadState)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
