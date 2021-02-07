@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-/* Tab enum */
+// Tab enum
 enum Tab{
     case Library
     case Folder
@@ -16,15 +16,15 @@ enum Tab{
     case Preference
 }
 
-/* When Login Success */
+// When Login Success
 struct MainScreenView: View {
     @State private var currentView: Tab = .Library
     
     init() {
-        /* NaviationBar Background */
+        // NaviationBar Background
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().isTranslucent = false
-        /* NavigationBar foreground */
+        // NavigationBar foreground
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),
             .font : UIFont(name: "Calibri", size: 40)!]
@@ -33,7 +33,7 @@ struct MainScreenView: View {
             .font : UIFont(name: "Calibri", size: 20)!]
     }
     
-    /* For topTrailing Plus Button functions */
+    // For topTrailing Plus Button functions
     var trailingBarItems: some View {
         VStack{
             switch self.currentView{
@@ -43,7 +43,7 @@ struct MainScreenView: View {
                 } /* Make own Contents */
             case .Folder:
                 textFieldAlert()
-                /* Make Folder Alert */
+            /* Make Folder Alert */
             case .Statics:
                 plusButton()
             case .Preference:
@@ -67,7 +67,7 @@ struct MainScreenView: View {
                 case .Preference:
                     PreferenceView()
                     Spacer()
-                }/* Each Tab Menu */
+                }// Each Tab Menu
                 TabBarView(currentView: self.$currentView) /* Tab bar */
             }.edgesIgnoringSafeArea(.bottom).navigationBarTitle(
                 Text("FOCUSLY")
@@ -77,7 +77,7 @@ struct MainScreenView: View {
     }
 }
 
-/* Calling Tab bar */
+// Calling Tab bar
 struct TabBarView: View {
     @Binding var currentView: Tab
     
@@ -92,7 +92,7 @@ struct TabBarView: View {
     }
 }
 
-/* Tab Bar UI */
+// Tab Bar UI
 struct TabBarItem: View {
     @Binding var currentView: Tab
     let imageName: String
@@ -125,11 +125,11 @@ struct TabBarItem: View {
     }
 }
 
-/* Custom Alert Message with TextField */
+// Custom Alert Message with TextField
 struct textFieldAlert: View {
     @State private var newFolder: String? = ""
     
-    /* Customizing Part */
+    // Customizing Alert Message Part
     private func alert() {
         let alert = UIAlertController(title: "새로운 폴더 추가", message: nil, preferredStyle: .alert)
         alert.addTextField() { textField in
@@ -139,11 +139,11 @@ struct textFieldAlert: View {
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
             self.newFolder = alert.textFields?[0].text
             if let folderName = self.newFolder {
-                /* When FolderName is available */
+                // When FolderName is available
                 if folderName.count != 0 {
                     print("\(folderName)!!")
                 }
-                /* When Not */
+                // When Not
                 else {
                     print("fail")
                 }

@@ -6,25 +6,23 @@
 //
 import SwiftUI
 
-/* My Library Middle Screen */
+// My Library Middle Screen
 struct MyLibraryView: View {
-    /* State Variables */
     @State var user: User
     @State private var editPressed: Bool = false
     @State private var readContent: Int? = nil
     
-    /* Binding Variables */
     @Binding var currentView: Tab
     
-    /* Time Formatter */
+    // Time Formatter
     func getTimeFormat(time: Int) -> String {
         return time < 10 ? "0\(time)" : "\(time)"
     }
     
-    /* My Library Main */
+    // My Library Main View
     var body: some View {
         VStack(spacing: 0) {
-            /* 1st Item: "오늘의 읽기", Progress Bar */
+            // 1st Item: "오늘의 읽기", Progress Bar
             HStack{
                 VStack(alignment: .leading, spacing: 10){
                     
@@ -55,12 +53,12 @@ struct MyLibraryView: View {
                     
                     Text("\(Int(user.todayReadingRatio*100.0))%").foregroundColor(grayLetter).font(.title).bold()
                         .frame(width: 120, height: 120)
-                } /* Progress Circle */
+                } // Progress Circle
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            /* Contents Scroll */
+            // Contents Scroll
             ZStack{
                 grayBackground.ignoresSafeArea()
                 
@@ -73,7 +71,7 @@ struct MyLibraryView: View {
             }
             
             
-            /* Repeat Button */
+            // Repeat Button
             HStack(spacing: 3){
                 Button(action: {}){
                     HStack{

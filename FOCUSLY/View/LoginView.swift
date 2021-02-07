@@ -27,7 +27,7 @@ struct LoginView: View {
     }
 }
 
-/* Login Interface */
+// Login Interface
 struct SocialLoginView: View{
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     @EnvironmentObject var FacebookLogin: FacebookDelegate
@@ -37,7 +37,7 @@ struct SocialLoginView: View{
             Image("focuslyImg").resizable().scaledToFit().frame(width:99, height:99).cornerRadius(22.0)
             Text("FOCUSLY").foregroundColor(Color(red: 1.0, green: 176/255, blue: 0.0)).bold().font(.system(.largeTitle, design: .rounded))
             
-            /* Facebook Login */
+            // Facebook Login
             Button(action: {
                 FacebookLogin.logintWithFacebook()
             }){
@@ -58,7 +58,7 @@ struct SocialLoginView: View{
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
             
-            /* Google Login */
+            // Google Login
             Button(action: {
                 GIDSignIn.sharedInstance().signIn()
             }){
@@ -78,7 +78,7 @@ struct SocialLoginView: View{
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
             
-            /* Apple Login - not ready*/
+            // Apple Login - not ready
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }

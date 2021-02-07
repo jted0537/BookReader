@@ -10,7 +10,7 @@ import FBSDKLoginKit
 import Firebase
 import SwiftUI
 
-/* For Facebook Login */
+// For Facebook Login
 class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
     @Published var signedIn: Bool = false
     @Published var userID: String = ""

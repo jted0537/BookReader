@@ -97,7 +97,7 @@ extension View {
 /* Bring Data from .docx file */
 extension UTType {
     // Word documents are not an existing property on UTType
-    static var word: UTType {
+    static var docx: UTType {
         // Look up the type from the file extension
         UTType.types(tag: "docx", tagClass: .filenameExtension, conformingTo: nil).first!
     }
