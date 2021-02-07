@@ -65,31 +65,60 @@ public class SNDocx:NSObject{
     
     
     private func matches(_ originalText:String)->String{
-        var paragraphs = [String]()
+        //var paragraphs = [String]() // rsid : contents
+        var linefeedsRsids = [String]()
         var result = [String]()
         var re: NSRegularExpression!
         var re2: NSRegularExpression!
+        var re3: NSRegularExpression!
+        var reTab: NSRegularExpression!
+        
+        print("open the docx")
         
         do {
-            re = try NSRegularExpression(pattern: "<w:p.*?>(.*?)</w:p>", options: [])
-            re2 = try NSRegularExpression(pattern: "<w:t.*?>(.*?)</w:t>", options: [])
-            
+            re = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"(.*?)>(.*?)</w:p>", options: [])
+//            re = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\">(.*?)</w:p>", options: [])
+            // 예외적인 linefeed를 추가해주기 위한 정규화식
+            reTab = try NSRegularExpression(pattern: "(.*?)<w:ind w:firstLine=\"800\"/>(.*?)", options: [])
+//            reSpace = try NSRegularExpression(pattern: "<w:t xml:space=\"([a-z+]*\">(.*?)</w:t>")
+            reSpace = try NSRegularExpression(pattern: "(.*?)<w:br/>(.*?)")
+            re2 = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"/>", options: [])
+            re3 = try NSRegularExpression(pattern: "<w:t(\\s?)(.*?)>(.*?)</w:t>", options: [])
         } catch {
             
         }
         
-        let matches = re.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
+        let lmatches = re2.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
         
-        for match in matches {
-            paragraphs.append((originalText as NSString).substring(with: match.range(at: 0)))
+        for lmatch in lmatches {
+            linefeedsRsids.append((originalText as NSString).substring(with: lmatch.range(at: 2)))
         }
         
-        for paragraph in paragraphs {
+        let pmatches = re.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
+        
+        var i = 0
+        for pmatch in pmatches {
+            var paragraph = (originalText as NSString).substring(with: pmatch.range(at:4))
+            var rsid = (originalText as NSString).substring(with: pmatch.range(at:2))
             var sentences = [String]()
-            let components = re2.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count))
-
+            let components = re3.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count))
+            let istab: Bool = !(reTab.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count)).isEmpty)
+            
+            
+            if istab {
+                sentences.append("\t")
+            }
+            
+            // 여기서 문단의 rsid랑 개행의 rsid가 일치하면 sentences 앞에 개행 문자 추가
+            if linefeedsRsids.count > i {
+                if rsid == linefeedsRsids[i]{
+                    result.append("")
+                    i += 1
+                }
+            }
+            
             for component in components {
-                sentences.append((paragraph as NSString).substring(with: component.range(at: 1)))
+                sentences.append((paragraph as NSString).substring(with: component.range(at: 3)))
             }
             result.append(sentences.joined(separator: ""))
         }
