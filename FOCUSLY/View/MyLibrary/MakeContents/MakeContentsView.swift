@@ -20,7 +20,7 @@ struct MakeContentsView: View {
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
     @State private var openImage: Bool = false
-    @State private var isLoading: Bool = true
+    @State private var isLoading: Bool = false
     
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
@@ -128,6 +128,7 @@ struct MakeContentsView: View {
         })
         .onChange(of: self.imageLoadState, perform: { value in
             self.recognizeDocumentText()
+            self.isLoading.toggle()
         }) // Each Image input, imageLoadState will toggle
     }
     
@@ -231,6 +232,9 @@ struct MakeContentsView: View {
                 }
             }
             
+            if isLoading {
+                LottieView()
+            }
         }
     }
 }
@@ -250,7 +254,6 @@ struct LottieView: UIViewRepresentable {
         animationView.contentMode = .scaleAspectFill
         animationView.loopMode = .loop
         animationView.play()
-        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
         
@@ -263,6 +266,20 @@ struct LottieView: UIViewRepresentable {
         return view
     }
     
+    func pl() {
+        let animationView = AnimationView()
+        let animation = Animation.named(filename)
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        animationView.play()
+    }
+    
+    func st() {
+        let animationView = AnimationView()
+        let animation = Animation.named(filename)
+        animationView.stop()
+    }
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
 
     }
