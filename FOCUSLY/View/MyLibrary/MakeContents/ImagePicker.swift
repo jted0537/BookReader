@@ -7,32 +7,73 @@
 //
 import Foundation
 import SwiftUI
+import UIKit
+import Firebase
+import AVKit
 
 class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool
-    @Binding var imageLoadState: Bool
+    @Binding var contents: String
     
-    init(image: Binding<UIImage?>, showImagePicker: Binding<Bool>, imageLoadState: Binding<Bool>) {
+    init(image: Binding<UIImage?>, showImagePicker: Binding<Bool>, contents: Binding<String>) {
         _image = image
         _showImagePicker = showImagePicker
-        _imageLoadState = imageLoadState
+        _contents = contents
     }
     
+    // Using ML for text Recognize Document Text
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            image = uiImage
-            showImagePicker = false
-            imageLoadState.toggle()
+            self.showImagePicker = false
+            self.image = uiImage
+            // ML Part
+            let vision = Vision.vision()
+            let options = VisionCloudDocumentTextRecognizerOptions()
+            options.languageHints = ["ko", "en"]
+            let textRecognizer = vision.cloudDocumentTextRecognizer()
+            
+            let cameraPosition = AVCaptureDevice.Position.back
+            let metadata = VisionImageMetadata()
+            metadata.orientation = imageOrientation(
+                deviceOrientation: UIDevice.current.orientation,
+                cameraPosition: cameraPosition
+            )
+            if let realImage = self.image {
+                let visionImage = VisionImage(image: realImage)
+                visionImage.metadata = metadata
+                textRecognizer.process(visionImage) { result, error in
+                    guard error == nil, let result = result else { return }
+                    self.contents = result.text
+                }
+            }
+            // ML Part Done
         }
     }
     
+    // When user cancel select images
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        showImagePicker = false
-        imageLoadState.toggle()
+        self.showImagePicker = false
     }
     
+    // Set Camera Position
+    func imageOrientation(deviceOrientation: UIDeviceOrientation, cameraPosition: AVCaptureDevice.Position) -> VisionDetectorImageOrientation {
+        switch deviceOrientation {
+        case .portrait:
+            return cameraPosition == .front ? .leftTop : .rightTop
+        case .landscapeLeft:
+            return cameraPosition == .front ? .bottomLeft : .topLeft
+        case .portraitUpsideDown:
+            return cameraPosition == .front ? .rightBottom : .leftBottom
+        case .landscapeRight:
+            return cameraPosition == .front ? .topRight : .bottomRight
+        case .faceDown, .faceUp, .unknown:
+            return .leftTop
+        default :
+            return .leftTop
+        }
+    }
 }
 
 
@@ -43,7 +84,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool
-    @Binding var imageLoadState: Bool
+    @Binding var contents: String
     
     var sourceType: UIImagePickerController.SourceType = .camera
     
@@ -51,7 +92,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
     func makeCoordinator() -> ImagePicker.Coordinator {
-        return ImagePickerCoordinator(image: $image, showImagePicker: $showImagePicker, imageLoadState: $imageLoadState)
+        return ImagePickerCoordinator(image: $image, showImagePicker: $showImagePicker, contents: $contents)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {

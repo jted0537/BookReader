@@ -25,50 +25,8 @@ struct MakeContentsView: View {
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
     @State var showImagePicker : Bool = false // Show Action Sheet
-    @State var imageLoadState: Bool = false // Every time recognize image, this will toggle
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode> // Get Back with Swipe
-    
-    // Set Camera Position
-    func imageOrientation(deviceOrientation: UIDeviceOrientation, cameraPosition: AVCaptureDevice.Position) -> VisionDetectorImageOrientation {
-        switch deviceOrientation {
-        case .portrait:
-            return cameraPosition == .front ? .leftTop : .rightTop
-        case .landscapeLeft:
-            return cameraPosition == .front ? .bottomLeft : .topLeft
-        case .portraitUpsideDown:
-            return cameraPosition == .front ? .rightBottom : .leftBottom
-        case .landscapeRight:
-            return cameraPosition == .front ? .topRight : .bottomRight
-        case .faceDown, .faceUp, .unknown:
-            return .leftTop
-        default :
-            return .leftTop
-        }
-    }
-    
-    // Using ML for text Recognize Document Text
-    func recognizeDocumentText(){
-        let vision = Vision.vision()
-        let options = VisionCloudDocumentTextRecognizerOptions()
-        options.languageHints = ["ko", "en"]
-        let textRecognizer = vision.cloudDocumentTextRecognizer()
-        
-        let cameraPosition = AVCaptureDevice.Position.back
-        let metadata = VisionImageMetadata()
-        metadata.orientation = imageOrientation(
-            deviceOrientation: UIDevice.current.orientation,
-            cameraPosition: cameraPosition
-        )
-        if let realImage = self.image {
-            let visionImage = VisionImage(image: realImage)
-            visionImage.metadata = metadata
-            textRecognizer.process(visionImage) { result, error in
-                guard error == nil, let result = result else { return }
-                self.contents = result.text
-            }
-        }
-    }
     
     // Custom Back Button - leading
     var btnBack : some View {
@@ -89,7 +47,7 @@ struct MakeContentsView: View {
         HStack(spacing: 10) {
             // Getting .pdf, .docx, .epub, .txt from Device
             Button(action: {
-                self.openFile.toggle()
+                self.openFile = true
             }){
                 Image(systemName: "doc.badge.plus")
                     .resizable()
@@ -100,7 +58,7 @@ struct MakeContentsView: View {
             
             // Getting Image from Device and convert into Contents
             Button(action: {
-                self.openImage.toggle()
+                self.openImage = true
                 // When Click the button -> openImage toggle -> actionsheet appear
             }){
                 Image(systemName: "photo")
@@ -110,7 +68,7 @@ struct MakeContentsView: View {
                     .frame(width: 30, height: 30)
             }
             .actionSheet(isPresented: $openImage) {
-                ActionSheet(title: Text("이미지를 불러올 방법을 선택하세요"), buttons: [
+                ActionSheet(title: Text("이미지를 불러올 방법을 선택하세요."), buttons: [
                     .default(Text("사진")) {
                         self.showImagePicker = true
                         self.sourceType = .photoLibrary
@@ -124,12 +82,9 @@ struct MakeContentsView: View {
             }
         }
         .fullScreenCover(isPresented: self.$showImagePicker, content: { // Make Camera or Album Full Screen
-            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, imageLoadState: self.$imageLoadState, sourceType: self.sourceType).edgesIgnoringSafeArea(.all) // When Success, showImagePicker is false
+            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, contents: self.$contents, sourceType: self.sourceType)
+            // When Success, showImagePicker is false
         })
-        .onChange(of: self.imageLoadState, perform: { value in
-            self.recognizeDocumentText()
-            self.isLoading.toggle()
-        }) // Each Image input, imageLoadState will toggle
     }
     
     var body: some View {
@@ -188,10 +143,7 @@ struct MakeContentsView: View {
             .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .docx, .epub, .text]) { (res) in
                 do {
                     let fileURL = try res.get()
-                    guard fileURL.startAccessingSecurityScopedResource() else{
-                        self.isLoading = false
-                        return
-                    } // Setting Accessability
+                    guard fileURL.startAccessingSecurityScopedResource() else{ return } // Setting Accessability
                     
                     self.fileName = fileURL.lastPathComponent
                     
@@ -214,7 +166,7 @@ struct MakeContentsView: View {
                         }
                     }
                     else if extensionFormat == ".docx" {
-                        self.contents = SNDocx.shared.getText(fileUrl: fileURL) ?? "불러오기 실패"
+                        self.contents = SNDocx.shared.getText(fileUrl: fileURL) ?? "Load Failed"
                     }
                     else if extensionFormat == ".epub" {
                         
@@ -222,30 +174,27 @@ struct MakeContentsView: View {
                     else if extensionFormat == ".txt" {
                         self.contents = try String(contentsOf: fileURL, encoding: .utf8)
                     }
-                    else {
-                        return
-                    }
+                    else {}
+                    fileURL.stopAccessingSecurityScopedResource() // Stop Access to File
                 }
                 catch {
-                    print("error reading")
                     print(error.localizedDescription)
                 }
             }
             
-            if isLoading {
-                LottieView()
-            }
+            ActivityIndicator(animate: self.$openFile)
+            //ActivityIndicator(animate: .constant(self.openFile || self.showImagePicker))
         }
     }
 }
 
 
-
-struct LottieView: UIViewRepresentable {
+struct LoadLottieView: UIViewRepresentable {
     typealias UIViewType = UIView
-    var filename: String = "temp"
+    var filename: String = "loading"
+    @Binding var isLoading: Bool
     
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+    func makeUIView(context: UIViewRepresentableContext<LoadLottieView>) -> UIView {
         let view = UIView(frame: .zero)
         
         let animationView = AnimationView()
@@ -255,8 +204,9 @@ struct LottieView: UIViewRepresentable {
         animationView.loopMode = .loop
         animationView.play()
         animationView.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .red
         view.addSubview(animationView)
-        
+
         NSLayoutConstraint.activate([
             animationView.widthAnchor.constraint(equalTo: view.widthAnchor),
             animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
@@ -266,21 +216,19 @@ struct LottieView: UIViewRepresentable {
         return view
     }
     
-    func pl() {
-        let animationView = AnimationView()
-        let animation = Animation.named(filename)
-        animationView.animation = animation
-        animationView.contentMode = .scaleAspectFill
-        animationView.loopMode = .loop
-        animationView.play()
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoadLottieView>) {
+        isLoading ? AnimationView().play() : AnimationView().stop()
+    }
+}
+
+struct ActivityIndicator: UIViewRepresentable {
+    @Binding var animate: Bool
+    
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView(style: .large)
     }
     
-    func st() {
-        let animationView = AnimationView()
-        let animation = Animation.named(filename)
-        animationView.stop()
-    }
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
-
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
+        self.animate ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }

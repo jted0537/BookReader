@@ -65,16 +65,12 @@ public class SNDocx:NSObject{
     
     
     private func matches(_ originalText:String)->String{
-        //var paragraphs = [String]() // rsid : contents
         var linefeedsRsids = [String]()
         var result = [String]()
         var rePara: NSRegularExpression!
         var reTab: NSRegularExpression!
         var reLF: NSRegularExpression!
         var reWord: NSRegularExpression!
-       
-        
-        print("open the docx")
         
         do {
             rePara = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"(.*?)>(.*?)</w:p>", options: [])
