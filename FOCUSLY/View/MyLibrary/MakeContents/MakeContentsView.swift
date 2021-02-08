@@ -4,7 +4,6 @@
 //
 //  Created by 정동혁 on 2021/01/27.
 //
-
 import SwiftUI
 import UIKit
 import PDFKit
@@ -22,14 +21,14 @@ struct MakeContentsView: View {
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
     @State private var openImage: Bool = false
-    @State var isLoading: Bool = false
+    @State private var isLoading: Bool = false
     
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
     @State var showImagePicker : Bool = false // Show Action Sheet
     @State var imageLoadState: Bool = false // Every time recognize image, this will toggle
     
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode> // Get Back with Swipe
     
     // Set Camera Position
     func imageOrientation(deviceOrientation: UIDeviceOrientation, cameraPosition: AVCaptureDevice.Position) -> VisionDetectorImageOrientation {
@@ -49,10 +48,13 @@ struct MakeContentsView: View {
         }
     }
     
-    // Using ML for text recognize text
-    func recognizeText(){
+    // Using ML for text Recognize Document Text
+    func recognizeDocumentText(){
         let vision = Vision.vision()
-        let textRecognizer = vision.cloudTextRecognizer()
+        let options = VisionCloudDocumentTextRecognizerOptions()
+        options.languageHints = ["ko", "en"]
+        let textRecognizer = vision.cloudDocumentTextRecognizer()
+        
         let cameraPosition = AVCaptureDevice.Position.back
         let metadata = VisionImageMetadata()
         metadata.orientation = imageOrientation(
@@ -126,7 +128,9 @@ struct MakeContentsView: View {
             ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, imageLoadState: self.$imageLoadState, sourceType: self.sourceType).edgesIgnoringSafeArea(.all) // When Success, showImagePicker is false
         })
         .onChange(of: self.imageLoadState, perform: { value in
-            self.recognizeText()
+            self.isLoading = true
+            self.recognizeDocumentText()
+            self.isLoading = false
         }) // Each Image input, imageLoadState will toggle
     }
     
@@ -136,8 +140,8 @@ struct MakeContentsView: View {
             grayBackground.ignoresSafeArea().onTapGesture {
                 hideKeyboard()
             }
-            VStack(spacing: 0){
-                // Get Contents Name
+            VStack(spacing: 0) {
+                // Contents Name TextField
                 TextField("제목을 입력하세요", text: $contentsName)
                     .font(.title3)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -147,8 +151,7 @@ struct MakeContentsView: View {
                     .cornerRadius(10)
                     .padding(20)
                 
-                
-                // Get Contents
+                // Contents TextField
                 ZStack(alignment: .topLeading) {
                     TextEditor(text: $contents)
                         .font(.subheadline)
@@ -186,8 +189,6 @@ struct MakeContentsView: View {
             .edgesIgnoringSafeArea(.top)
             .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .docx, .epub, .text]) { (res) in
                 do {
-                    self.isLoading = true
-                    
                     let fileURL = try res.get()
                     guard fileURL.startAccessingSecurityScopedResource() else{
                         self.isLoading = false
@@ -224,10 +225,8 @@ struct MakeContentsView: View {
                         self.contents = try String(contentsOf: fileURL, encoding: .utf8)
                     }
                     else {
-                        self.isLoading = false
                         return
                     }
-                    self.isLoading = false
                 }
                 catch {
                     print("error reading")
@@ -235,6 +234,9 @@ struct MakeContentsView: View {
                 }
             }
             
+            if self.isLoading {
+                LottieView()
+            }
         }
         
     }
@@ -243,6 +245,8 @@ struct MakeContentsView: View {
 
 
 struct LottieView: UIViewRepresentable {
+    
+
     typealias UIViewType = UIView
     var filename: String = "temp"
     
@@ -265,9 +269,10 @@ struct LottieView: UIViewRepresentable {
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
         return view
     }
     
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) { }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
+
+    }
 }

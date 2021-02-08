@@ -68,43 +68,42 @@ public class SNDocx:NSObject{
         //var paragraphs = [String]() // rsid : contents
         var linefeedsRsids = [String]()
         var result = [String]()
-        var re: NSRegularExpression!
-        var re2: NSRegularExpression!
-        var re3: NSRegularExpression!
+        var rePara: NSRegularExpression!
         var reTab: NSRegularExpression!
+        var reLF: NSRegularExpression!
+        var reWord: NSRegularExpression!
+       
         
         print("open the docx")
         
         do {
-            re = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"(.*?)>(.*?)</w:p>", options: [])
-//            re = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\">(.*?)</w:p>", options: [])
-            // 예외적인 linefeed를 추가해주기 위한 정규화식
+            rePara = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"(.*?)>(.*?)</w:p>", options: [])
+            // tab 공백 추가해주기 위한 정규화식
             reTab = try NSRegularExpression(pattern: "(.*?)<w:ind w:firstLine=\"800\"/>(.*?)", options: [])
-//            reSpace = try NSRegularExpression(pattern: "<w:t xml:space=\"([a-z+]*\">(.*?)</w:t>")
-            reSpace = try NSRegularExpression(pattern: "(.*?)<w:br/>(.*?)")
-            re2 = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"/>", options: [])
-            re3 = try NSRegularExpression(pattern: "<w:t(\\s?)(.*?)>(.*?)</w:t>", options: [])
+            // 예외적인 linefeed를 추가해주기 위한 정규화식
+            reLF = try NSRegularExpression(pattern: "<w:p(.*?)w:rsidRDefault=\"([A-Z0-9+]*)\"/>", options: [])
+            reWord = try NSRegularExpression(pattern: "(<w:t(\\s?)(.*?)>(.*?)</w:t>|<w:br/>)", options: [])
         } catch {
             
         }
         
-        let lmatches = re2.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
+        let lmatches = reLF.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
         
         for lmatch in lmatches {
             linefeedsRsids.append((originalText as NSString).substring(with: lmatch.range(at: 2)))
         }
         
-        let pmatches = re.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
+        let pmatches = rePara.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
         
         var i = 0
         for pmatch in pmatches {
-            var paragraph = (originalText as NSString).substring(with: pmatch.range(at:4))
-            var rsid = (originalText as NSString).substring(with: pmatch.range(at:2))
+            let paragraph = (originalText as NSString).substring(with: pmatch.range(at:4))
+            let rsid = (originalText as NSString).substring(with: pmatch.range(at:2))
             var sentences = [String]()
-            let components = re3.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count))
+            let components = reWord.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count))
             let istab: Bool = !(reTab.matches(in: paragraph, options: [], range: NSRange(location: 0, length: paragraph.utf16.count)).isEmpty)
             
-            
+            // tab 있으면 tab 추가
             if istab {
                 sentences.append("\t")
             }
@@ -117,8 +116,18 @@ public class SNDocx:NSObject{
                 }
             }
             
+            // words 추출
             for component in components {
-                sentences.append((paragraph as NSString).substring(with: component.range(at: 3)))
+                
+                if component.range(at: 4).location != NSNotFound {
+                    sentences.append((paragraph as NSString).substring(with: component.range(at: 4)))
+                    print(component.range(at: 3))
+                }
+                // <w:br/> 태그 있으면 줄 바꿈
+                else {
+                    sentences.append("\n")
+                }
+                
             }
             result.append(sentences.joined(separator: ""))
         }
