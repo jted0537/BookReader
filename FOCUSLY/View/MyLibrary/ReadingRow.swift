@@ -140,7 +140,7 @@ struct ReadingRow: View {
             .cornerRadius(10)
             .padding(.top, 10)
             .padding(.horizontal, 20)
-            .shadow(color: Color.secondary.opacity(0.5), radius: 5, y: 5)
+            .shadow(color: Color.secondary.opacity(0.3), radius: 5, y: 5)
             /* Action Sheet -> 나중에 수정될 코드 */
             .actionSheet(isPresented: $presentActionSheet){
                 ActionSheet(title: Text("이 글에 대해 수행할 작업을 선택하세요."), buttons: [

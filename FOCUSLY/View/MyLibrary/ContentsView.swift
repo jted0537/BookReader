@@ -172,12 +172,6 @@ struct ContentsView: View {
                 self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
             }
         }
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-//            self.isActive = false
-//        }
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-//            self.isActive = true
-//        }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle(curContent.title)
         .navigationBarItems(leading: btnBack)

@@ -15,13 +15,12 @@ import AVKit
 
 // Making own cotents
 struct MakeContentsView: View {
-    
     @State private var contentsName: String = ""
     @State private var contents: String = ""
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
     @State private var openImage: Bool = false
-    @State private var isLoading: Bool = false
+    @State private var isLoading: Bool = true
     
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
@@ -128,9 +127,7 @@ struct MakeContentsView: View {
             ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, imageLoadState: self.$imageLoadState, sourceType: self.sourceType).edgesIgnoringSafeArea(.all) // When Success, showImagePicker is false
         })
         .onChange(of: self.imageLoadState, perform: { value in
-            self.isLoading = true
             self.recognizeDocumentText()
-            self.isLoading = false
         }) // Each Image input, imageLoadState will toggle
     }
     
@@ -234,19 +231,13 @@ struct MakeContentsView: View {
                 }
             }
             
-            if self.isLoading {
-                LottieView()
-            }
         }
-        
     }
 }
 
 
 
 struct LottieView: UIViewRepresentable {
-    
-
     typealias UIViewType = UIView
     var filename: String = "temp"
     
