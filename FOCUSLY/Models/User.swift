@@ -57,3 +57,10 @@ class User: NSObject, Identifiable {
     }
 }
 
+//struct User: Codable {
+//    let id: Int
+//    let username: String
+//    let playlist: [Contents]
+//    let todayReadingGoal: Int = 0 // 초 단위로 저장
+//    let todayReadingNow: Int = 0 // 초 단위로 저장
+//}

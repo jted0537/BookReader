@@ -13,7 +13,6 @@ class Contents: NSObject, Identifiable {
     public var publisher: String
     public var date: Date
     public var fullContent: String
-    //public var readedContent: String = ""
     public var readTime: Int = 80
     public var readIdx: Int = 0
     
@@ -51,3 +50,13 @@ class Contents: NSObject, Identifiable {
         return readings
     }
 }
+
+//struct Contents: Identifiable {
+//    let id = UUID()
+//    let title: String
+//    let publisher: String
+//    let date: Date
+//    let fullContent: String
+//    let readTime: Int = 80
+//    let readIdx: Int = 0
+//}
