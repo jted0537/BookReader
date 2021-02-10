@@ -26,6 +26,7 @@ struct MakeContentsView: View {
     @State var loadImage : Bool = false
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode> // Get Back with Swipe
+    @ObservedObject var articleViewModel = ArticleViewModel()
     
     // Custom Back Button - leading
     var btnBack : some View {
@@ -124,7 +125,7 @@ struct MakeContentsView: View {
                 
                 // "작성완료" Button
                 Button(action: {
-                    // Not yet
+                    articleViewModel.addArticle(articleTitle: self.contentsName, fullLength: self.contents.count)
                 }){
                     HStack{
                         Spacer()

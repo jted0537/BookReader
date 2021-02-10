@@ -16,4 +16,5 @@ pod 'GoogleSignIn'
 pod 'SNDocx'
 pod 'lottie-ios'
 pod 'Firebase/MLVision'
+pod 'Firebase/Database'
 end

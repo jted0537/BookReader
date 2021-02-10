@@ -12,20 +12,25 @@ import SwiftUI
 struct MyLibraryView: View {
     @State private var editPressed: Bool = false
     @State private var readContent: Int? = nil
-    @State private var editMode = EditMode.active
-
-    @ObservedObject var contentsViewModel = ContentsViewModel()
-    // Time Formatter
+    @State private var editMode = EditMode.inactive
+    let formatter = DateFormatter()
+    @ObservedObject var articleViewModel = ArticleViewModel()
+    
+    
+    init() {
+        self.formatter.dateFormat = "y-M-d"
+    }
+    
     func getTimeFormat(time: Int) -> String {
         return time < 10 ? "0\(time)" : "\(time)"
     }
     
     private func onDelete(offsets: IndexSet) {
-        contentsViewModel.contents.remove(atOffsets: offsets)
+        articleViewModel.article.remove(atOffsets: offsets)
     }
     
     private func onMove(source: IndexSet, destination: Int) {
-        contentsViewModel.contents.move(fromOffsets: source, toOffset: destination)
+        articleViewModel.article.move(fromOffsets: source, toOffset: destination)
     }
     
     // My Library Main View
@@ -67,22 +72,50 @@ struct MyLibraryView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            // Contents Scroll
+            // Article List
             ZStack{
                 grayBackground.ignoresSafeArea()
                 List{
-                    Rectangle().opacity(1).frame(height: 20)
-                    ForEach(contentsViewModel.contents){ content in
-                        SelectContents(editPressed: $editPressed, contents: content)
+                    ForEach(articleViewModel.article) { article in
+                        NavigationLink(destination: ArticleView(curArticle: article)){
+                            VStack{
+                                HStack {
+                                    /* Script Info */
+                                    VStack(alignment: .leading){
+                                        Text(article.articleTitle)
+                                            .foregroundColor(Color.primary)
+                                        Text(formatter.string(from: article.createdDate))
+                                            .font(.footnote)
+                                            .foregroundColor(Color.primary)
+                                    }
+                                    Spacer()
+                                }
+                                /* Script Progress */
+                                Text("진척도: 0%")
+                                    .font(.caption)
+                                    .foregroundColor(Color.primary)
+                            }
+                        }
+                        .padding()
+                        .padding(.vertical, 10)
+                        .background(Color.background)
+                        .cornerRadius(10)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .shadow(color: Color.secondary.opacity(0.3), radius: 5, y: 5)
                     }
                     .onDelete(perform: onDelete)
                     .onMove(perform: onMove)
-                }.onAppear {
-                    UITableView.appearance().separatorStyle = .none
                 }
                 .environment(\.editMode, $editMode)
+                .listStyle(SidebarListStyle())
             }
             
+            Button(action: {
+                //articleViewModel.addArticle()
+            }) {
+                Text("push")
+            }
             
             // Repeat Button
             HStack(spacing: 3){

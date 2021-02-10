@@ -6,6 +6,8 @@ import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
 
+var ref: DatabaseReference!
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = googleDelegate
-        
+        ref = Database.database().reference()
         return true
     }
     

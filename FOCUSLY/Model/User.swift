@@ -60,7 +60,7 @@ import SwiftUI
 struct User: Identifiable {
     let id = UUID()
     //let username: String
-    let playlist: [Contents]
+    let playlist: [Article]
     let todayReadingGoal: Int = 0 // 초 단위로 저장
     let todayReadingNow: Int = 0 // 초 단위로 저장
 }

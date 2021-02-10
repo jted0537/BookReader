@@ -21,18 +21,18 @@
 	<key>STORAGE_BUCKET</key>
 	<string>focuslypractice.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:3039136007:ios:88cff9dc437ee9a7805da2</string>
 	<key>DATABASE_URL</key>
-	<string>https://focuslypractice-default-rtdb.europe-west1.firebasedatabase.app</string>
+	<string>https://focuslyiosdb-2304a.firebaseio.com/</string>
 </dict>
 </plist>
