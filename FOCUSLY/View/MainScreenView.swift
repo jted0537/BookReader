@@ -57,7 +57,7 @@ struct MainScreenView: View {
             VStack(spacing: 0){
                 switch self.currentView{
                 case .Library:
-                    MyLibraryView(user: User.generateUser(), currentView: self.$currentView)
+                    MyLibraryView()
                 case .Folder:
                     Text("추천 글감")
                     Spacer()

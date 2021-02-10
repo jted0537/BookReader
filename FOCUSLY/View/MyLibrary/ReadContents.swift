@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-struct ContentsView: View {
+struct ReadContents: View {
     /* State Variables */
     @State private var rollUp: Bool = false
     @State private var selectColorIdx = 0
@@ -17,15 +17,13 @@ struct ContentsView: View {
     @State private var timer: Timer.TimerPublisher = Timer.publish(every: 0.1, on: .main, in: .common)
     @State private var interval: Double = 0.5
     @State private var place: Double = 0.0
-    @State private var readedContent: String=""
+    @State private var readedContent: String = ""
     
-    /* Binding Variables */
-    @Binding var curContent: Contents
-    
+    @State var curContent: Contents
     /* Custom Back Button Properties */
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-    
+        
     /* Custom Back Button - leading */
     var btnBack : some View {
         Button(action: {
@@ -53,9 +51,7 @@ struct ContentsView: View {
             
             
             VStack(){
-                
                 Spacer()
-                
                 VStack{
                     Divider().padding(.bottom, 5)
                     
@@ -105,9 +101,9 @@ struct ContentsView: View {
                                     },
                                     set: {(newProgress) in
                                         self.place = newProgress
-                                        self.curContent.readIdx = Int(newProgress * Double(self.curContent.fullContent.length))
-                                        self.readedContent = self.curContent.fullContent.substring(toIndex: self.curContent.readIdx)
-                                        self.count = Int(Double(curContent.readTime)*newProgress)
+                                        curContent.readIdx = Int(newProgress * Double(curContent.fullContent.length))
+                                        self.readedContent = curContent.fullContent.substring(toIndex: curContent.readIdx)
+                                        //self.count = Int(Double(curContent.readTime)*newProgress)
                                     }
                                 )).accentColor(usuallyColor)
                             }.padding() /* Location */
@@ -167,8 +163,8 @@ struct ContentsView: View {
         .onReceive(self.timer) { time in
             if self.isActive && curContent.readIdx < curContent.fullContent.length - 1{
                 self.count += 1
-                readedContent.append(curContent.fullContent[self.curContent.readIdx])
-                curContent.readIdx += 1
+                readedContent.append(curContent.fullContent[curContent.readIdx])
+                self.curContent.readIdx += 1
                 self.place = Double(curContent.readIdx+1) / Double(curContent.fullContent.length)
             }
         }
