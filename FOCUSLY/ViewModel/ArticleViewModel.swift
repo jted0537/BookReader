@@ -18,6 +18,25 @@ class ArticleViewModel: ObservableObject {
         formatter.dateFormat = "y-M-d"
     }
 
+    // Fetch Article data from Database
+    func fetchArticle(){
+        let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
+        articleRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let placeDict = snap.value as! [String : Any]
+                let articleTitle = placeDict["articleTitle"] as! String
+                print(articleTitle)
+                let createdDate = placeDict["createdDate"] as! String
+                let fullLength = placeDict["fullLength"] as! Int
+                let lastReadPosition = placeDict["lastReadPosition"] as! Int
+                
+                self.article.append(Article(id: snap.key, articleTitle: articleTitle, createdDate: createdDate, fullLength: fullLength, lastReadPosition: lastReadPosition))
+            }
+        })
+    }
+    
+    // Add Article function
     func addArticle(articleTitle: String, fullLength: Int){
         guard let key = ref.childByAutoId().key else { return }
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(key)
@@ -28,7 +47,7 @@ class ArticleViewModel: ObservableObject {
                 "createdDate" : formatter.string(from:
                 Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: Calendar.current.component(.day, from: Date()) ))!),
                 "fullLength" : fullLength,
-                "lastReadPostion" : 0,
+                "lastReadPosition" : 0,
             ]
         
         articleRef.setValue(newArticle, withCompletionBlock: { (error, ref) in
@@ -42,6 +61,10 @@ class ArticleViewModel: ObservableObject {
                     }
                 })
             })
+    }
+    
+    func removeArticle() {
+        
     }
 }
 

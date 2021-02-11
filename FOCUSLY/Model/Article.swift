@@ -14,7 +14,7 @@ struct Article: Decodable, Identifiable {
     //let articleKey: String
     let articleTitle: String
     //let author: String
-    let createdDate: Date
+    let createdDate: String
     let fullLength: Int
     
     var lastReadPosition: Int

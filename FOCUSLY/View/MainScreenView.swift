@@ -151,6 +151,7 @@ struct textFieldAlert: View {
         })
         showAlert(alert: alert)
     }
+    
     func showAlert(alert: UIAlertController) {
         if let controller = topMostViewController() {
             controller.present(alert, animated: true)

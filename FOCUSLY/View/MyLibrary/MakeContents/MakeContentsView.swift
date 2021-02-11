@@ -19,11 +19,13 @@ struct MakeContentsView: View {
     @State private var openFile: Bool = false
     @State private var openImage: Bool = false
     @State private var isLoading: Bool = false
+    @State private var showAlert: Bool = false
     
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
     @State var showImagePicker : Bool = false // Show Action Sheet
     @State var loadImage : Bool = false
+    
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode> // Get Back with Swipe
     @ObservedObject var articleViewModel = ArticleViewModel()
@@ -125,7 +127,7 @@ struct MakeContentsView: View {
                 
                 // "작성완료" Button
                 Button(action: {
-                    articleViewModel.addArticle(articleTitle: self.contentsName, fullLength: self.contents.count)
+                    self.showAlert.toggle()
                 }){
                     HStack{
                         Spacer()
@@ -137,11 +139,21 @@ struct MakeContentsView: View {
                     .cornerRadius(10)
                     .padding()
                 }
+                .alert(isPresented: self.$showAlert) { () -> Alert in
+                    let primaryButton = Alert.Button.default(Text("확인")) {
+                        articleViewModel.addArticle(articleTitle: self.contentsName, fullLength: self.contents.count)
+                        articleViewModel.fetchArticle()
+                        self.mode.wrappedValue.dismiss()
+                    }
+                    let secondaryButton = Alert.Button.cancel(Text("취소"))
+                    return Alert(title: Text("글 저장"), message: Text("이 글을 나의 서재에 저장하시겠습니까?"), primaryButton: primaryButton, secondaryButton: secondaryButton)
+                } //Alert Message for store Article
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle(Text("직접입력하기"), displayMode: .inline)
             .navigationBarItems(leading: btnBack, trailing: trailingButton)
             .edgesIgnoringSafeArea(.top)
+            // Reading File Part
             .fileImporter(isPresented: $openFile, allowedContentTypes: [.pdf, .docx, .epub, .text]) { (res) in
                 do {
                     let fileURL = try res.get()
@@ -191,7 +203,7 @@ struct MakeContentsView: View {
 }
 
 
-struct LoadLottieView: UIViewRepresentable {
+/*struct LoadLottieView: UIViewRepresentable {
     typealias UIViewType = UIView
     var filename: String = "loading"
     @Binding var isLoading: Bool
@@ -221,7 +233,7 @@ struct LoadLottieView: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoadLottieView>) {
         isLoading ? AnimationView().play() : AnimationView().stop()
     }
-}
+}*/
 
 struct ActivityIndicator: UIViewRepresentable {
     @Binding var animate: Bool

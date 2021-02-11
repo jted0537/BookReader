@@ -18,6 +18,7 @@ struct MyLibraryView: View {
     
     
     init() {
+        articleViewModel.fetchArticle()
         self.formatter.dateFormat = "y-M-d"
     }
     
@@ -26,6 +27,7 @@ struct MyLibraryView: View {
     }
     
     private func onDelete(offsets: IndexSet) {
+        print(offsets)
         articleViewModel.article.remove(atOffsets: offsets)
     }
     
@@ -72,9 +74,10 @@ struct MyLibraryView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            // Article List
+            
             ZStack{
                 grayBackground.ignoresSafeArea()
+                // Article List
                 List{
                     ForEach(articleViewModel.article) { article in
                         NavigationLink(destination: ArticleView(curArticle: article)){
@@ -84,7 +87,7 @@ struct MyLibraryView: View {
                                     VStack(alignment: .leading){
                                         Text(article.articleTitle)
                                             .foregroundColor(Color.primary)
-                                        Text(formatter.string(from: article.createdDate))
+                                        Text(article.createdDate)
                                             .font(.footnote)
                                             .foregroundColor(Color.primary)
                                     }
@@ -109,12 +112,6 @@ struct MyLibraryView: View {
                 }
                 .environment(\.editMode, $editMode)
                 .listStyle(SidebarListStyle())
-            }
-            
-            Button(action: {
-                //articleViewModel.addArticle()
-            }) {
-                Text("push")
             }
             
             // Repeat Button
