@@ -18,8 +18,8 @@ struct MyLibraryView: View {
     
     
     init() {
-        articleViewModel.fetchArticle()
-        self.formatter.dateFormat = "y-M-d"
+        //articleViewModel.fetchArticle()
+        // self.formatter.dateFormat = "y-M-d"
     }
     
     func getTimeFormat(time: Int) -> String {
@@ -27,8 +27,10 @@ struct MyLibraryView: View {
     }
     
     private func onDelete(offsets: IndexSet) {
-        print(offsets)
+        articleViewModel.removeArticle(articleIdx: offsets[offsets.startIndex])
+        // Delete from database should be first (Index problem)
         articleViewModel.article.remove(atOffsets: offsets)
+        print(offsets[offsets.startIndex])
     }
     
     private func onMove(source: IndexSet, destination: Int) {
@@ -136,7 +138,7 @@ struct MyLibraryView: View {
                 }
             }.foregroundColor(Color.white)
             
-        }
+        }.onAppear{ articleViewModel.fetchArticle() }
         
     }
 }

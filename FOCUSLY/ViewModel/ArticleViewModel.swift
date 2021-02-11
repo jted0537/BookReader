@@ -21,12 +21,12 @@ class ArticleViewModel: ObservableObject {
     // Fetch Article data from Database
     func fetchArticle(){
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
+        self.article.removeAll()
         articleRef.observeSingleEvent(of: .value, with: { snapshot in
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
                 let placeDict = snap.value as! [String : Any]
                 let articleTitle = placeDict["articleTitle"] as! String
-                print(articleTitle)
                 let createdDate = placeDict["createdDate"] as! String
                 let fullLength = placeDict["fullLength"] as! Int
                 let lastReadPosition = placeDict["lastReadPosition"] as! Int
@@ -63,8 +63,10 @@ class ArticleViewModel: ObservableObject {
             })
     }
     
-    func removeArticle() {
-        
+    func removeArticle(articleIdx: Int) {
+        let articleId = self.article[articleIdx].id
+        let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(articleId)
+        articleRef.removeValue()
     }
 }
 

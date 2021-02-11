@@ -140,12 +140,12 @@ struct MakeContentsView: View {
                     .padding()
                 }
                 .alert(isPresented: self.$showAlert) { () -> Alert in
-                    let primaryButton = Alert.Button.default(Text("확인")) {
+                    let primaryButton = Alert.Button.cancel(Text("취소"))
+                    let secondaryButton = Alert.Button.default(Text("확인")) {
                         articleViewModel.addArticle(articleTitle: self.contentsName, fullLength: self.contents.count)
-                        articleViewModel.fetchArticle()
+                        //articleViewModel.fetchArticle()
                         self.mode.wrappedValue.dismiss()
                     }
-                    let secondaryButton = Alert.Button.cancel(Text("취소"))
                     return Alert(title: Text("글 저장"), message: Text("이 글을 나의 서재에 저장하시겠습니까?"), primaryButton: primaryButton, secondaryButton: secondaryButton)
                 } //Alert Message for store Article
             }
