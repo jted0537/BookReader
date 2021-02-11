@@ -16,12 +16,6 @@ struct MyLibraryView: View {
     let formatter = DateFormatter()
     @ObservedObject var articleViewModel = ArticleViewModel()
     
-    
-    init() {
-        //articleViewModel.fetchArticle()
-        // self.formatter.dateFormat = "y-M-d"
-    }
-    
     func getTimeFormat(time: Int) -> String {
         return time < 10 ? "0\(time)" : "\(time)"
     }
@@ -35,6 +29,8 @@ struct MyLibraryView: View {
     
     private func onMove(source: IndexSet, destination: Int) {
         articleViewModel.article.move(fromOffsets: source, toOffset: destination)
+        // This will change Article order (Both View and Model)
+        //articleViewModel.updateArticle()
     }
     
     // My Library Main View
@@ -106,8 +102,7 @@ struct MyLibraryView: View {
                         .background(Color.background)
                         .cornerRadius(10)
                         .padding(.vertical, 5)
-                        .padding(.horizontal, 10)
-                        .shadow(color: Color.secondary.opacity(0.3), radius: 5, y: 5)
+                        .shadow(color: Color.secondary.opacity(0.4), radius: 5, y: 5)
                     }
                     .onDelete(perform: onDelete)
                     .onMove(perform: onMove)
