@@ -67,8 +67,10 @@ class ArticleViewModel: ObservableObject {
     // Update order of Article function
     func updateArticle() {
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
-        
+        articleRef.removeValue()
+        var a = 0
         for articles in self.article {
+            articleRef.child(articles.id).removeValue()
             let updatedArticle : [String : Any] = [
                 "id" : articles.id,
                 "articleTitle" : articles.articleTitle,
@@ -76,19 +78,22 @@ class ArticleViewModel: ObservableObject {
                 "fullLength" : articles.fullLength,
                 "lastReadPosition" : articles.lastReadPosition,
             ]
-            
+            print(articles.articleTitle)
             //articleRef.child(articles.id).removeValue()
+
             articleRef.child(articles.id).setValue(updatedArticle, withCompletionBlock: { (error, ref) in
                 if let err = error {
                     print(err.localizedDescription)
                 }
-                
+
                 ref.observe(.value, with: { (snapshot) in
                     guard snapshot.exists() else {
                         return
                     }
                 })
             })
+            a+=1
+            if a>2 { return }
         }
     }
     

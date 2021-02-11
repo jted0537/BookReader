@@ -16,6 +16,13 @@ struct MyLibraryView: View {
     let formatter = DateFormatter()
     @ObservedObject var articleViewModel = ArticleViewModel()
     
+    init() {
+        UITableView.appearance().tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))//Double.leastNonzeroMagnitude))
+        UITableView.appearance().backgroundColor = UIColor(grayBackground)
+    }
+    
+    
+    
     func getTimeFormat(time: Int) -> String {
         return time < 10 ? "0\(time)" : "\(time)"
     }
@@ -24,13 +31,12 @@ struct MyLibraryView: View {
         articleViewModel.removeArticle(articleIdx: offsets[offsets.startIndex])
         // Delete from database should be first (Index problem)
         articleViewModel.article.remove(atOffsets: offsets)
-        print(offsets[offsets.startIndex])
     }
     
     private func onMove(source: IndexSet, destination: Int) {
         articleViewModel.article.move(fromOffsets: source, toOffset: destination)
         // This will change Article order (Both View and Model)
-        //articleViewModel.updateArticle()
+        articleViewModel.updateArticle()
     }
     
     // My Library Main View
@@ -72,44 +78,40 @@ struct MyLibraryView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            
-            ZStack{
-                grayBackground.ignoresSafeArea()
-                // Article List
-                List{
-                    ForEach(articleViewModel.article) { article in
-                        NavigationLink(destination: ArticleView(curArticle: article)){
-                            VStack{
-                                HStack {
-                                    /* Script Info */
-                                    VStack(alignment: .leading){
-                                        Text(article.articleTitle)
-                                            .foregroundColor(Color.primary)
-                                        Text(article.createdDate)
-                                            .font(.footnote)
-                                            .foregroundColor(Color.primary)
-                                    }
-                                    Spacer()
+            // Article List
+            List{
+                ForEach(articleViewModel.article) { article in
+                    NavigationLink(destination: ArticleView(curArticle: article)){
+                        VStack{
+                            HStack {
+                                /* Script Info */
+                                VStack(alignment: .leading){
+                                    Text(article.articleTitle)
+                                        .foregroundColor(Color.primary)
+                                    Text(article.createdDate)
+                                        .font(.footnote)
+                                        .foregroundColor(Color.primary)
                                 }
-                                /* Script Progress */
-                                Text("진척도: 0%")
-                                    .font(.caption)
-                                    .foregroundColor(Color.primary)
+                                Spacer()
                             }
+                            /* Script Progress */
+                            Text("진척도: 0%")
+                                .font(.caption)
+                                .foregroundColor(Color.primary)
                         }
-                        .padding()
-                        .padding(.vertical, 10)
-                        .background(Color.background)
-                        .cornerRadius(10)
-                        .padding(.vertical, 5)
-                        .shadow(color: Color.secondary.opacity(0.4), radius: 5, y: 5)
                     }
-                    .onDelete(perform: onDelete)
-                    .onMove(perform: onMove)
+                    .padding()
+                    .padding(.vertical, 10)
+                    .background(Color.background)
+                    .cornerRadius(10)
+                    .shadow(color: Color.secondary.opacity(0.4), radius: 5, y: 5)
                 }
-                .environment(\.editMode, $editMode)
-                .listStyle(SidebarListStyle())
+                .onDelete(perform: onDelete)
+                //.onMove(perform: onMove)
             }
+            .environment(\.editMode, $editMode)
+            .listStyle(SidebarListStyle())
+            
             
             // Repeat Button
             HStack(spacing: 3){
