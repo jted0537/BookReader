@@ -24,7 +24,6 @@ struct MakeContentsView: View {
     @State var image : UIImage?
     @State var sourceType : UIImagePickerController.SourceType = .camera
     @State var showImagePicker : Bool = false // Show Action Sheet
-    @State var loadImage : Bool = false
     
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode> // Get Back with Swipe
@@ -74,12 +73,10 @@ struct MakeContentsView: View {
                     .default(Text("사진")) {
                         self.showImagePicker = true
                         self.sourceType = .photoLibrary
-                        self.loadImage = true
                     },
                     .default(Text("카메라")) {
                         self.showImagePicker = true
                         self.sourceType = .camera
-                        self.loadImage = true
                     },
                     .cancel(Text("취소"))
                 ])

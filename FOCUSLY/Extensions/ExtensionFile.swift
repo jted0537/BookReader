@@ -21,7 +21,7 @@ let grayCircle: Color = Color.secondary.opacity(0.1)
 let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let grayBackground: Color = Color.secondary.opacity(0.1)
 
-let backColors = [Color.secondary.opacity(0.08), Color.secondary.opacity(0.5), Color.primary.opacity(0.9), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
+let backColors = [Color.secondary.opacity(0.07), Color.secondary.opacity(0.5), Color.primary.opacity(0.9), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
 let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 
@@ -45,8 +45,7 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
-                                            upper: min(length, max(0, r.upperBound))))
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)), upper: min(length, max(0, r.upperBound))))
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])
@@ -105,7 +104,6 @@ extension UTType {
 
 
 struct MultilineTextView: UIViewRepresentable {
-    
     //@State var highlightedWords: NSAttributedString// 쓸지 미지수
     @Binding var text: String
     @Binding var selectFontIdx: Int
@@ -131,9 +129,7 @@ struct MultilineTextView: UIViewRepresentable {
             let yOffset = uiView.contentSize.height - UIScreen.main.bounds.height * 0.5
             uiView.contentOffset.y = yOffset
         }
-        
     }
-    
 }
 
 class MultilineUITextView: UITextView, UITextViewDelegate {

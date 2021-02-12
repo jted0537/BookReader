@@ -17,11 +17,10 @@ struct MyLibraryView: View {
     @ObservedObject var articleViewModel = ArticleViewModel()
     
     init() {
-        UITableView.appearance().tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))//Double.leastNonzeroMagnitude))
+        // Remove Padding and Set BackgroundColor of List
+        UITableView.appearance().tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
         UITableView.appearance().backgroundColor = UIColor(grayBackground)
     }
-    
-    
     
     func getTimeFormat(time: Int) -> String {
         return time < 10 ? "0\(time)" : "\(time)"
@@ -52,12 +51,13 @@ struct MyLibraryView: View {
                         Image(systemName: "gearshape.fill").font(.system(size: 10)).foregroundColor(.secondary).opacity(0.8)
                         
                     }
-                    //                    HStack(spacing:0){Text("\(user.todayReadingNowMin):"+getTimeFormat(time: user.todayReadingNowSec)).foregroundColor(usuallyColor)
-                    //                        Text("/\(user.todayReadingGoalMin):" + getTimeFormat(time: user.todayReadingGoalSec)).foregroundColor(grayLetter)}.padding(.bottom, 15)
+                    HStack(spacing:0){
+                        Text("00:00").foregroundColor(usuallyColor)
+                        Text("/07:00").foregroundColor(grayLetter)
+                    }.padding(.bottom, 15)
                     Text("매일 책을 읽어 통계 수치를 높이고 더 많은 도서를 완독하세요!").foregroundColor(grayLetter).font(.caption)
                 }
                 Spacer()
-                
                 ZStack(alignment: .trailing){
                     Circle()
                         .foregroundColor(grayCircle)
@@ -71,8 +71,8 @@ struct MyLibraryView: View {
                     //                    .frame(width: 120, height: 120)
                     //                    .rotationEffect(.degrees(90))
                     
-                    //                    Text("\(Int(user.todayReadingRatio*100.0))%").foregroundColor(grayLetter).font(.title).bold()
-                    //                        .frame(width: 120, height: 120)
+                    Text("0%").foregroundColor(grayLetter).font(.title).bold()
+                        .frame(width: 120, height: 120)
                 } // Progress Circle
             }
             .padding(.horizontal, 30)
@@ -82,22 +82,19 @@ struct MyLibraryView: View {
             List{
                 ForEach(articleViewModel.article) { article in
                     NavigationLink(destination: ArticleView(curArticle: article)){
-                        VStack{
-                            HStack {
-                                /* Script Info */
-                                VStack(alignment: .leading){
-                                    Text(article.articleTitle)
-                                        .foregroundColor(Color.primary)
-                                    Text(article.createdDate)
-                                        .font(.footnote)
-                                        .foregroundColor(Color.primary)
-                                }
+                        /* Script Info */
+                        VStack(alignment: .leading){
+                            Text(article.articleTitle)
+                                .foregroundColor(grayLetter)
+                            Text(article.createdDate)
+                                .font(.footnote)
+                                .foregroundColor(Color.secondary)
+                            HStack{
                                 Spacer()
+                                Text("0%")
+                                    .font(.caption)
+                                    .foregroundColor(Color.secondary)
                             }
-                            /* Script Progress */
-                            Text("진척도: 0%")
-                                .font(.caption)
-                                .foregroundColor(Color.primary)
                         }
                     }
                     .padding()
@@ -111,7 +108,6 @@ struct MyLibraryView: View {
             }
             .environment(\.editMode, $editMode)
             .listStyle(SidebarListStyle())
-            
             
             // Repeat Button
             HStack(spacing: 3){
