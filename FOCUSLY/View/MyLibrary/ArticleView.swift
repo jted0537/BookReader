@@ -19,6 +19,7 @@ struct ArticleView: View {
     @State private var place: Double = 0.0
     @State private var readedContent: String = ""
     @State private var repeatedContent: String = ""
+    @State private var isHighlightSelect: Bool = false // 하이라이트 색 선택 창 띄울지 말지
     
     @State var curArticle: Article
     /* Custom Back Button Properties */
@@ -52,17 +53,31 @@ struct ArticleView: View {
     
     var body: some View {
         ZStack{
+            if self.isHighlightSelect {
+                HStack(spacing: 10) {
+                    ForEach(0...backColors.count-1, id: \.self) { colorIdx in
+                        Button(action: {
+                            self.selectColorIdx = colorIdx
+                        }){
+                            Circle()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(backColors[colorIdx])
+                        }
+                    }
+                }.padding(.vertical, 10)
+            }
+            
             /* View of each Contents */
             if self.contentsViewModel.isRepeatMode {
                 VStack{
-                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
+                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: self.$contentsViewModel.highlightedContent, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
                 }
                 .background(Color.background)
             }
             else {
                 VStack(spacing: 0){
                     /* Contents Part */
-                    MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
+                    MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: self.$contentsViewModel.highlightedContent, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
                     
                 }
                 .background(Color.background)
@@ -194,6 +209,7 @@ struct ArticleView: View {
                 //self.place = Double(curArticle.lastReadPosition+1) / Double(curArticle.fullContent.length)
             }
             
+            // for test - dummy data
             if self.contentsViewModel.isRepeatMode {
                 // 구간 반복 기능
                 if self.repeatedContent.length < self.contentsViewModel.repeatContent.length{
@@ -203,9 +219,7 @@ struct ArticleView: View {
                     self.repeatedContent = ""
                 }
             }
-            
-            // for test - dummy data
-            if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
+            else if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
                 readedContent.append(self.contentsViewModel.article_content[self.contentsViewModel.article_content_index])
                 self.contentsViewModel.article_content_index += 1
             }

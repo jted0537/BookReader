@@ -109,11 +109,15 @@ struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
+    //하이라이트
+    @Binding var isHighlightSelect: Bool
+    @Binding var highlightedContent: [UITextRange]
+    //구간반복
     @Binding var isRepeatMode: Bool
     @Binding var repeatContent: String
     
     func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
-        let view = MultilineUITextView(isRepeatMode: $isRepeatMode, repeatContent: $repeatContent)
+        let view = MultilineUITextView(isHighlightSelect: self.$isHighlightSelect, highlightedContent: self.$highlightedContent, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatContent)
         view.delegate = view
         view.isScrollEnabled = true
         view.isSelectable = true
@@ -138,10 +142,16 @@ struct MultilineTextView: UIViewRepresentable {
 }
 
 class MultilineUITextView: UITextView, UITextViewDelegate {
+    // 하이라이트
+    @Binding var isHighlightSelect: Bool
+    @Binding var highlightedContent: [UITextRange]
+    // 구간반복
     @Binding var isRepeatMode: Bool
     @Binding var repeatContent: String
     
-    init(isRepeatMode repeatMode: Binding<Bool>, repeatContent repeatedContent: Binding<String>) {
+    init(isHighlightSelect highlightselect: Binding<Bool>, highlightedContent highlightContent: Binding<[UITextRange]>, isRepeatMode repeatMode: Binding<Bool>, repeatContent repeatedContent: Binding<String>) {
+        self._isHighlightSelect = highlightselect
+        self._highlightedContent = highlightContent
         self._isRepeatMode = repeatMode
         self._repeatContent = repeatedContent
         super.init(frame: .zero, textContainer: nil)
@@ -165,15 +175,21 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     /* UIMenuController Functions */
     @objc
     func highlight() {
-//        print("highlight")
-//
-//        let mstr = NSMutableAttributedString(attributedString: self.attributedText)
-//        mstr.addAttribute(NSAttributedString.Key.backgroundColor, value: Color.yellow, range: self.selectedRange)
-//
-//        self.attributedText = NSAttributedString(attributedString: mstr)
-//
-        let attributes = [NSAttributedString.Key.backgroundColor: UIColor(Color.yellow)]
-        self.textStorage.addAttributes(attributes as [NSAttributedString.Key : Any], range: self.selectedRange)
+        let mstr = NSMutableAttributedString(attributedString: self.attributedText)
+        mstr.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor(Color.yellow), range: self.selectedRange)
+
+        self.attributedText = NSAttributedString(attributedString: mstr)
+        
+//        let attribute = [NSAttributedString.Key.backgroundColor: UIColor(Color.yellow)]
+//        self.textStorage.addAttributes(attribute as [NSAttributedString.Key : Any], range: self.selectedRange)
+        
+        
+        // added code
+        //self.isHighlightSelect = true
+        //self.highlightedContent.append(self.selectedTextRange!)
+        
+        print(self.selectedRange)
+        print(self.textStorage)
     }
     
     @objc
@@ -191,4 +207,5 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
         let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(repeatPlay))
         UIMenuController.shared.menuItems = [highlightMenu, repeatMenu]
     }
+    
 }

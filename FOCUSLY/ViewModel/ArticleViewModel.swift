@@ -15,6 +15,7 @@ class ArticleViewModel: ObservableObject {
     @Published var article_content_index = 0
     @Published var isRepeatMode: Bool = false
     @Published var repeatContent: String = ""
+    @Published var highlightedContent = [UITextRange]()
     
     let formatter = DateFormatter()
     
