@@ -18,6 +18,7 @@ struct ArticleView: View {
     @State private var interval: Double = 0.5
     @State private var place: Double = 0.0
     @State private var readedContent: String = ""
+    @State private var repeatedContent: String = ""
     
     @State var curArticle: Article
     /* Custom Back Button Properties */
@@ -33,7 +34,12 @@ struct ArticleView: View {
     /* Custom Back Button - leading */
     var btnBack : some View {
         Button(action: {
-            self.mode.wrappedValue.dismiss()
+            if self.contentsViewModel.isRepeatMode {
+                self.contentsViewModel.isRepeatMode = false
+            }
+            else {
+                self.mode.wrappedValue.dismiss()
+            }
         }){
             HStack(spacing: 0) {
                 Image(systemName: "arrow.left")
@@ -47,14 +53,23 @@ struct ArticleView: View {
     var body: some View {
         ZStack{
             /* View of each Contents */
-            VStack(spacing: 0){
-                /* Contents Part */
-                MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx)
-                
+            if self.contentsViewModel.isRepeatMode {
+                VStack{
+                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
+                }
+                .background(Color.background)
             }
-            .background(Color.background)
+            else {
+                VStack(spacing: 0){
+                    /* Contents Part */
+                    MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
+                    
+                }
+                .background(Color.background)
+            }
             // end of contents VStack
             
+            /* Bottom bar */
             VStack(){
                 Spacer()
                 VStack{
@@ -161,16 +176,43 @@ struct ArticleView: View {
                 
             }
             
+            
+            
         }
         .onAppear() {
             //self.readedContent = self.curArticle.fullContent.substring(toIndex: curArticle.lastReadPosition)
+            
+            // for test
+            self.readedContent = self.contentsViewModel.article_content.substring(toIndex: self.contentsViewModel.article_content_index)
         }
         .onReceive(self.timer) { time in
+    
             if self.isActive && curArticle.lastReadPosition < curArticle.fullLength - 1{
                 self.count += 1
                 //readedContent.append(curArticle.fullContent[curArticle.lastReadPosition])
                 self.curArticle.lastReadPosition += 1
                 //self.place = Double(curArticle.lastReadPosition+1) / Double(curArticle.fullContent.length)
+            }
+            
+            if self.contentsViewModel.isRepeatMode {
+                // 구간 반복 기능
+                if self.repeatedContent.length < self.contentsViewModel.repeatContent.length{
+                    self.repeatedContent.append(self.contentsViewModel.repeatContent[self.repeatedContent.length])
+                }
+                else if self.repeatedContent.length == self.contentsViewModel.repeatContent.length {
+                    self.repeatedContent = ""
+                }
+            }
+            
+            // for test - dummy data
+            if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
+                readedContent.append(self.contentsViewModel.article_content[self.contentsViewModel.article_content_index])
+                self.contentsViewModel.article_content_index += 1
+            }
+        }
+        .onChange(of: self.contentsViewModel.isRepeatMode) { (newVal) in
+            if newVal == false {
+                self.repeatedContent = ""
             }
         }
         .navigationBarBackButtonHidden(true)

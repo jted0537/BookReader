@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
+import Foundation
 
 /* Color Variables */
 /* Like Orange */
@@ -108,9 +109,11 @@ struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
+    @Binding var isRepeatMode: Bool
+    @Binding var repeatContent: String
     
     func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
-        let view = MultilineUITextView(frame: .zero)
+        let view = MultilineUITextView(isRepeatMode: $isRepeatMode, repeatContent: $repeatContent)
         view.delegate = view
         view.isScrollEnabled = true
         view.isSelectable = true
@@ -123,17 +126,32 @@ struct MultilineTextView: UIViewRepresentable {
         uiView.text = self.text
         uiView.font = UIFont(name: scriptFonts[selectFontIdx].0, size: 50)
         uiView.backgroundColor = UIColor(backColors[selectColorIdx])
-        
+
         /* Update the y offset of the textView */
         if (uiView.contentSize.height - uiView.contentOffset.y) > (UIScreen.main.bounds.height * 0.5){
             let yOffset = uiView.contentSize.height - UIScreen.main.bounds.height * 0.5
             uiView.contentOffset.y = yOffset
         }
+        
     }
+    
 }
 
 class MultilineUITextView: UITextView, UITextViewDelegate {
+    @Binding var isRepeatMode: Bool
+    @Binding var repeatContent: String
     
+    init(isRepeatMode repeatMode: Binding<Bool>, repeatContent repeatedContent: Binding<String>) {
+        self._isRepeatMode = repeatMode
+        self._repeatContent = repeatedContent
+        super.init(frame: .zero, textContainer: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+        //super.init(coder: aDecoder) -> error
+    }
+
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         switch action{
         case     #selector(copy(_:)),
@@ -161,6 +179,9 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     @objc
     func repeatPlay() {
         print("repeat the text!")
+        self.isRepeatMode = true
+        // 나중에 가드로 묶어야 함
+        self.repeatContent = self.text(in: self.selectedTextRange!)!
     }
     
    /*  UITextViewDelegate Methods */
