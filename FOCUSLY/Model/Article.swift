@@ -13,6 +13,7 @@ struct Article: Decodable, Identifiable {
     var id: String
     //let articleKey: String
     let articleTitle: String
+    let article: String
     //let author: String
     let createdDate: String
     let fullLength: Int

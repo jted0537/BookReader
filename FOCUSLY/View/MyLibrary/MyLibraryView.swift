@@ -111,7 +111,10 @@ struct MyLibraryView: View {
             
             // Repeat Button
             HStack(spacing: 3){
-                Button(action: {}){
+                // All play
+                Button(action: {
+                    
+                }){
                     HStack{
                         Spacer()
                         Image(systemName: "repeat")
@@ -120,7 +123,10 @@ struct MyLibraryView: View {
                     }.frame(height: 60).background(usuallyColor)
                     
                 }
-                Button(action: {}){
+                // Random play
+                Button(action: {
+                    
+                }){
                     HStack{
                         Spacer()
                         Image(systemName: "shuffle")
@@ -131,7 +137,7 @@ struct MyLibraryView: View {
                 }
             }.foregroundColor(Color.white)
             
-        }.onAppear{ articleViewModel.fetchArticle() }
+        }.onAppear{ articleViewModel.fetchArticle() }.animation(.linear)
         
     }
 }

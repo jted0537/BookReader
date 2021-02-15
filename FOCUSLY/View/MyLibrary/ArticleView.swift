@@ -25,22 +25,13 @@ struct ArticleView: View {
     /* Custom Back Button Properties */
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-    @ObservedObject var contentsViewModel = ArticleViewModel()
-    
-    func nextContents() {
-        
-        
-    }
+    @ObservedObject var articleViewModel = ArticleViewModel()
     
     /* Custom Back Button - leading */
     var btnBack : some View {
         Button(action: {
-            if self.contentsViewModel.isRepeatMode {
-                self.contentsViewModel.isRepeatMode = false
-            }
-            else {
-                self.mode.wrappedValue.dismiss()
-            }
+            self.mode.wrappedValue.dismiss()
+            
         }){
             HStack(spacing: 0) {
                 Image(systemName: "arrow.left")
@@ -53,35 +44,25 @@ struct ArticleView: View {
     
     var body: some View {
         ZStack{
-            if self.isHighlightSelect {
-                HStack(spacing: 10) {
-                    ForEach(0...backColors.count-1, id: \.self) { colorIdx in
-                        Button(action: {
-                            self.selectColorIdx = colorIdx
-                        }){
-                            Circle()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(backColors[colorIdx])
-                        }
-                    }
-                }.padding(.vertical, 10)
-            }
+//            if self.isHighlightSelect {
+//                HStack(spacing: 10) {
+//                    ForEach(0...backColors.count-1, id: \.self) { colorIdx in
+//                        Button(action: {
+//                            self.selectColorIdx = colorIdx
+//                        }){
+//                            Circle()
+//                                .frame(width: 30, height: 30)
+//                                .foregroundColor(backColors[colorIdx])
+//                        }
+//                    }
+//                }.padding(.vertical, 10)
+//            }
             
+            VStack{
+                //MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: $articleViewModel.highlightedContent, isRepeatMode: $articleViewModel.isRepeatMode, repeatContent: $articleViewModel.repeatContent)
+            }
             /* View of each Contents */
-            if self.contentsViewModel.isRepeatMode {
-                VStack{
-                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: self.$contentsViewModel.highlightedContent, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
-                }
-                .background(Color.background)
-            }
-            else {
-                VStack(spacing: 0){
-                    /* Contents Part */
-                    MultilineTextView(text: $readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: self.$contentsViewModel.highlightedContent, isRepeatMode: self.$contentsViewModel.isRepeatMode, repeatContent: self.$contentsViewModel.repeatContent)
-                    
-                }
-                .background(Color.background)
-            }
+        
             // end of contents VStack
             
             /* Bottom bar */
@@ -96,7 +77,7 @@ struct ArticleView: View {
                                 self.rollUp.toggle()
                             }
                         }){
-                            Image(systemName: "chevron.up").font(.system(size: 20)).foregroundColor(grayLetter)
+                            Image(systemName: "chevron.up").font(.system(size: 15)).foregroundColor(grayLetter)
                         }.padding(.bottom, 5)
                     } /* When not roll up */
                     else{
@@ -106,7 +87,7 @@ struct ArticleView: View {
                                     self.rollUp.toggle()
                                 }
                             }){
-                                Image(systemName: "chevron.down").font(.system(size: 20)).foregroundColor(grayLetter)
+                                Image(systemName: "chevron.down").font(.system(size: 15)).foregroundColor(grayLetter)
                             }.padding(.bottom, 5)
                             
                             /* Roll up Menu */
@@ -196,12 +177,10 @@ struct ArticleView: View {
         }
         .onAppear() {
             //self.readedContent = self.curArticle.fullContent.substring(toIndex: curArticle.lastReadPosition)
-            
             // for test
-            self.readedContent = self.contentsViewModel.article_content.substring(toIndex: self.contentsViewModel.article_content_index)
+            //self.readedContent = curArticle.article.substring(toIndex: self.contentsViewModel.article_content_index)
         }
         .onReceive(self.timer) { time in
-    
             if self.isActive && curArticle.lastReadPosition < curArticle.fullLength - 1{
                 self.count += 1
                 //readedContent.append(curArticle.fullContent[curArticle.lastReadPosition])
@@ -210,25 +189,25 @@ struct ArticleView: View {
             }
             
             // for test - dummy data
-            if self.contentsViewModel.isRepeatMode {
-                // 구간 반복 기능
-                if self.repeatedContent.length < self.contentsViewModel.repeatContent.length{
-                    self.repeatedContent.append(self.contentsViewModel.repeatContent[self.repeatedContent.length])
-                }
-                else if self.repeatedContent.length == self.contentsViewModel.repeatContent.length {
-                    self.repeatedContent = ""
-                }
-            }
-            else if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
-                readedContent.append(self.contentsViewModel.article_content[self.contentsViewModel.article_content_index])
-                self.contentsViewModel.article_content_index += 1
-            }
+//            if self.contentsViewModel.isRepeatMode {
+//                // 구간 반복 기능
+//                if self.repeatedContent.length < self.contentsViewModel.repeatContent.length{
+//                    self.repeatedContent.append(self.contentsViewModel.repeatContent[self.repeatedContent.length])
+//                }
+//                else if self.repeatedContent.length == self.contentsViewModel.repeatContent.length {
+//                    self.repeatedContent = ""
+//                }
+//            }
+//            else if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
+//                readedContent.append(self.contentsViewModel.article_content[self.contentsViewModel.article_content_index])
+//                self.contentsViewModel.article_content_index += 1
+//            }
         }
-        .onChange(of: self.contentsViewModel.isRepeatMode) { (newVal) in
-            if newVal == false {
-                self.repeatedContent = ""
-            }
-        }
+//        .onChange(of: self.contentsViewModel.isRepeatMode) { (newVal) in
+//            if newVal == false {
+//                self.repeatedContent = ""
+//            }
+//        }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle(curArticle.articleTitle)
         .navigationBarItems(leading: btnBack)

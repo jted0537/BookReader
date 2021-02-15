@@ -13,8 +13,8 @@ import Lottie
 
 // Making own cotents
 struct MakeContentsView: View {
-    @State private var contentsName: String = ""
-    @State private var contents: String = ""
+    @State private var articleTitle: String = ""
+    @State private var article: String = ""
     @State private var fileName: String = ""
     @State private var openFile: Bool = false
     @State private var openImage: Bool = false
@@ -83,7 +83,7 @@ struct MakeContentsView: View {
             }
         }
         .fullScreenCover(isPresented: self.$showImagePicker, content: { // Make Camera or Album Full Screen
-            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, contents: self.$contents, sourceType: self.sourceType).ignoresSafeArea(.all)
+            ImagePicker(image: self.$image, showImagePicker: self.$showImagePicker, contents: self.$article, sourceType: self.sourceType).ignoresSafeArea(.all)
             // When Success, showImagePicker is false
         })
     }
@@ -96,7 +96,7 @@ struct MakeContentsView: View {
             }
             VStack(spacing: 0) {
                 // Contents Name TextField
-                TextField("제목을 입력하세요", text: $contentsName)
+                TextField("제목을 입력하세요", text: $articleTitle)
                     .font(.title3)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .disableAutocorrection(true)
@@ -107,7 +107,7 @@ struct MakeContentsView: View {
                 
                 // Contents TextField
                 ZStack(alignment: .topLeading) {
-                    TextEditor(text: $contents)
+                    TextEditor(text: $article)
                         .font(.subheadline)
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         .disableAutocorrection(true)
@@ -115,7 +115,7 @@ struct MakeContentsView: View {
                         .padding(5)
                         .offset(y: 3)
                         .foregroundColor(.secondary).opacity(0.6)
-                        .opacity(self.contents == "" ? 1 : 0)
+                        .opacity(self.article == "" ? 1 : 0)
                 }
                 .padding(20)
                 .background(Color.background)
@@ -139,8 +139,7 @@ struct MakeContentsView: View {
                 .alert(isPresented: self.$showAlert) { () -> Alert in
                     let primaryButton = Alert.Button.cancel(Text("취소"))
                     let secondaryButton = Alert.Button.default(Text("확인")) {
-                        articleViewModel.addArticle(articleTitle: self.contentsName, fullLength: self.contents.count)
-                        //articleViewModel.fetchArticle()
+                        articleViewModel.addArticle(articleTitle: self.articleTitle, article: self.article, fullLength: self.article.count)
                         self.mode.wrappedValue.dismiss()
                     }
                     return Alert(title: Text("글 저장"), message: Text("이 글을 나의 서재에 저장하시겠습니까?"), primaryButton: primaryButton, secondaryButton: secondaryButton)
@@ -159,7 +158,7 @@ struct MakeContentsView: View {
                     self.fileName = fileURL.lastPathComponent
                     
                     // Remove FileName extensions {ex) .pdf, .docx}
-                    self.contentsName = String(fileURL.lastPathComponent.prefix(upTo: self.fileName.lastIndex { $0 == "." } ?? self.fileName.endIndex))
+                    self.articleTitle = String(fileURL.lastPathComponent.prefix(upTo: self.fileName.lastIndex { $0 == "." } ?? self.fileName.endIndex))
                     let extensionFormat = String(fileURL.lastPathComponent.suffix(from: self.fileName.lastIndex { $0 == "." } ?? self.fileName.endIndex))
                     
                     // Read Content from File
@@ -173,17 +172,17 @@ struct MakeContentsView: View {
                                 guard let pageContent = page.attributedString else { continue }
                                 documentContent.append(pageContent)
                             }
-                            self.contents = documentContent.string
+                            self.article = documentContent.string
                         }
                     }
                     else if extensionFormat == ".docx" {
-                        self.contents = SNDocx.shared.getText(fileUrl: fileURL) ?? "Load Failed"
+                        self.article = SNDocx.shared.getText(fileUrl: fileURL) ?? "Load Failed"
                     }
                     else if extensionFormat == ".epub" {
                         
                     }
                     else if extensionFormat == ".txt" {
-                        self.contents = try String(contentsOf: fileURL, encoding: .utf8)
+                        self.article = try String(contentsOf: fileURL, encoding: .utf8)
                     }
                     else {}
                     fileURL.stopAccessingSecurityScopedResource() // Stop Access to File
