@@ -83,7 +83,7 @@ When running the app, the first login view:<br/>
 <img width="266" alt="KakaoTalk_Photo_2021-02-19-15-27-07" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png">
 
 After logged in, users can add a new article which is taken from .docx file:
-![KakaoTalk_Photo_2021-02-19-15-31-03](https://user-images.githubusercontent.com/47416192/108467431-8a0c0000-72c8-11eb-9661-da4c45b90f42.gif)
+![KakaoTalk_Photo_2021-02-19-15-31-03](https://user-images.githubusercontent.com/47416192/108467431-8a0c0000-72c8-11eb-9661-da4c45b90f42.gif){: width="266" }
 <br/>
 
 ## To-be Fixed Problems
