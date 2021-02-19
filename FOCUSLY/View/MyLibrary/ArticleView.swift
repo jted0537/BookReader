@@ -35,6 +35,7 @@ struct ArticleView: View {
     var btnBack : some View {
         Button(action: {
             if self.isRepeatMode {
+                self.isActive = false
                 self.isRepeatMode = false
             }
             else {
@@ -142,9 +143,11 @@ struct ArticleView: View {
                         
                         Button(action: {
                             if self.isActive {
+                                self.timer.connect().cancel()
                                 self.isActive = false
                             }
                             else {
+                                self.timer = Timer.publish(every: (1.1 - self.interval)/7, on: .main, in: .common)
                                 self.timer.connect()
                                 self.isActive = true
                             }
@@ -181,8 +184,17 @@ struct ArticleView: View {
         .onAppear() {
             self.readedContent = self.curArticle.article.substring(toIndex: self.cnt)
         }
+        .onChange(of: self.isRepeatMode) { (newVal) in
+            if newVal == false {
+                self.repeatedContent = ""
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle(curArticle.articleTitle)
+        .navigationBarItems(leading: btnBack)
+        .edgesIgnoringSafeArea(.vertical)
         .onReceive(self.timer) { time in
-            if self.isRepeatMode {
+            if self.isActive && self.isRepeatMode {
                 // 구간 반복 기능
                 if self.repeatedContent.length < self.repeatedFullContent.length{
                     self.repeatedContent.append(self.repeatedFullContent[self.repeatedContent.length])
@@ -198,15 +210,6 @@ struct ArticleView: View {
                 self.curArticle.lastReadPosition = self.cnt
             }
         }
-        .onChange(of: self.isRepeatMode) { (newVal) in
-            if newVal == false {
-                self.repeatedContent = ""
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarTitle(curArticle.articleTitle)
-        .navigationBarItems(leading: btnBack)
-        .edgesIgnoringSafeArea(.vertical)
         
     }
 }
