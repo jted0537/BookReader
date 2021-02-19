@@ -12,17 +12,40 @@ FOCUSLY는 읽기장애로 인하여 글을 읽을 때 집중력 유지에 어�
 이러한 메커니즘을 이용해 효과적인 읽기/학습 환경을 제공합니다.
 또한 텍스트 확대, 속도 조절, 구간 반복, 퀴즈 기능 등을 제공하여 독서한 내용을 암기하기에도 효과적이죠.
 
-## Environment
+## Development Environment
 ---------------------
-Written in Xcode, Swift
 
-Xcode Version:
+- Xcode 12.4(12D4e)
+- Language: Swift 5
+- SwiftUI
+- Database Model: Realtime Database
+- used SDK: Firebase
+
+## Podfile Installation
+--------------------
+
+There are some files to be installed in Podfile for some functions:
 ```
-Version 12.4(12D4e)
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'GoogleSignIn'
+pod 'SNDocx'
+pod 'lottie-ios'
+pod 'Firebase/MLVision'
+pod 'Firebase/Database'
 ```
 
-Swift Language Version:
+After add the required elements listed above, execute the installation command in the terminal:
 ```
-Swift 5
+pod install
+```
+
+##License
+------------
+
+License Info for SNDocx:
+```
+Copyright (c) 2018 ahmedAlmasri <ahmed.almasri@ymail.com>
 ```
 
