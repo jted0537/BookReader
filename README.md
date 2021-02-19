@@ -79,10 +79,14 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 ## Application Execution Flow
 --------------------------
 
-When running the app, the first login view:<br/>
+When running the app, the login view:<br/>
 <img width="266" alt="login-view" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png">
 
-After logged in, users can add a new article which is taken from .pdf, .docx, .txt files:<br/>
+After logged in, the first main view(displaying MyLibrary View):<br/>
+<img width="266" alt="myLibrary-view" src="https://user-images.githubusercontent.com/47416192/108469755-33082a00-72cc-11eb-8866-5f9f07a132ce.png">
+
+
+Users can add a new article which is taken from .pdf, .docx, .txt files:<br/>
 <img width="266" alt="extract-docx" src="https://user-images.githubusercontent.com/47416192/108468707-7eb9d400-72ca-11eb-8aa2-4cfa5ce90a27.gif">
 
 
