@@ -82,8 +82,10 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 When running the app, the first login view:<br/>
 <img width="266" alt="login-view" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png">
 
-After logged in, users can add a new article which is taken from .docx file:
-<img width="266" alt="extract-docx" src="https://user-images.githubusercontent.com/47416192/108467431-8a0c0000-72c8-11eb-9661-da4c45b90f42.gif">
+After logged in, users can add a new article which is taken from .pdf, .docx, .txt files:<br/>
+<img width="266" alt="extract-docx" src="https://user-images.githubusercontent.com/47416192/108468707-7eb9d400-72ca-11eb-8aa2-4cfa5ce90a27.gif">
+
+
 <br/>
 
 ## To-be Fixed Problems
