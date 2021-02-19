@@ -86,4 +86,9 @@ when running the app, the first view:
 --------------------------
 
 - Repeat Mode : When repeat play is being executed, return button is not listening well
-- 
+- Higlight Mode : Cannot choose the highlight color & Highlights are applied temporarily
+- Data Model: Folder Model is not implemented & Higlight Model in Article Model is not applied yet(unstable)
+- Tab Item: Settings page is not implemented yet
+- Progress circle: Representation of reading progress circle is unstable
+- Epub File: Extracting epub file is not supported yet
+<br/>
