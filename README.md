@@ -42,7 +42,7 @@ After add the required elements listed above, execute the installation command i
 pod install
 ```
 
-##License
+## License
 ------------
 
 License Info for SNDocx:
@@ -77,3 +77,9 @@ License Info for ImagePicker.swift:
 ```
 Copyright © 2020 Mohammad Azam. All rights reserved.
 ```
+
+## Application Execution Flow
+--------------------------
+
+when running the app, the first view:
+
