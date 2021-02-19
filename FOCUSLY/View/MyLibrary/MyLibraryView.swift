@@ -139,7 +139,7 @@ struct MyLibraryView: View {
                 }
             }.foregroundColor(Color.white)
             
-        }.onAppear{ articleViewModel.fetchArticle() }.animation(.linear)
+        }.onAppear{ articleViewModel.fetchArticle() }.animation(.default)
         
     }
 }

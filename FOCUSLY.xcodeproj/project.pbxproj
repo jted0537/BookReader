@@ -25,7 +25,7 @@
 		E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */; };
 		E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */; };
 		E08CAC1525B9548D00B37165 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E08CAC1425B9548D00B37165 /* FacebookLogin */; };
-		E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E08CAC1725B954D100B37165 /* focuslyIcon.png */; };
+		E08CAC1825B954D100B37165 /* FocuslyIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E08CAC1725B954D100B37165 /* FocuslyIcon.png */; };
 		E08CAC1B25B9554F00B37165 /* FacebookDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC1A25B9554F00B37165 /* FacebookDelegate.swift */; };
 		E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */; };
 		E08CAC2125B9556F00B37165 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08CAC2025B9556F00B37165 /* LoginView.swift */; };
@@ -56,7 +56,7 @@
 		E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E08343E125B951E7009F3DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E08343E325B951E7009F3DF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E08CAC1725B954D100B37165 /* focuslyIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = focuslyIcon.png; sourceTree = "<group>"; };
+		E08CAC1725B954D100B37165 /* FocuslyIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FocuslyIcon.png; sourceTree = "<group>"; };
 		E08CAC1A25B9554F00B37165 /* FacebookDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookDelegate.swift; sourceTree = "<group>"; };
 		E08CAC1D25B9555600B37165 /* GoogleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDelegate.swift; sourceTree = "<group>"; };
 		E08CAC2025B9556F00B37165 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		E08CAC2725B955B300B37165 /* ICON */ = {
 			isa = PBXGroup;
 			children = (
-				E08CAC1725B954D100B37165 /* focuslyIcon.png */,
+				E08CAC1725B954D100B37165 /* FocuslyIcon.png */,
 			);
 			path = ICON;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 				E08343E225B951E7009F3DF3 /* LaunchScreen.storyboard in Resources */,
 				E042920B25BEBC760054BD6F /* PottaOne-Regular.ttf in Resources */,
 				E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */,
-				E08CAC1825B954D100B37165 /* focuslyIcon.png in Resources */,
+				E08CAC1825B954D100B37165 /* FocuslyIcon.png in Resources */,
 				E0715BE725CCD77D007DB0C5 /* GoogleService-Info.plist in Resources */,
 				E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */,
 				E0754AD825CBD2C400455A2E /* loading.json in Resources */,
