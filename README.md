@@ -81,15 +81,16 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 
 When running the app, the login view:<br/>
 <img width="266" alt="login-view" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png">
-
+<br/>
 After logged in, the first main view(displaying MyLibrary View):<br/>
 <img width="266" alt="myLibrary-view" src="https://user-images.githubusercontent.com/47416192/108469755-33082a00-72cc-11eb-8866-5f9f07a132ce.png">
-
-
+<br/>
+When users select one of their articles, the article vew:<br/>
+<img width="266" alt="Article-view" src="https://user-images.githubusercontent.com/47416192/108470214-f7219480-72cc-11eb-8372-84a7f04ca2c1.gif">
+<br/>
 Users can add a new article which is taken from .pdf, .docx, .txt files:<br/>
 <img width="266" alt="extract-docx" src="https://user-images.githubusercontent.com/47416192/108468707-7eb9d400-72ca-11eb-8aa2-4cfa5ce90a27.gif">
-
-
+<br/>
 <br/>
 
 ## To-be Fixed Problems
