@@ -20,3 +20,4 @@ struct User: Identifiable {
     let todayReadingGoal: Int = 0 // 초 단위로 저장
     let todayReadingNow: Int = 0 // 초 단위로 저장
 }
+
