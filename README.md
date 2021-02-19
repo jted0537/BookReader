@@ -1,11 +1,12 @@
 # FOCUSLY
 ------------------
+<br/>
 
 ## FOCUSLY Project Description
 ---------------------
 
 <img width="684" alt="스크린샷 2021-02-19 오후 2 14 10" src="https://user-images.githubusercontent.com/47416192/108461251-b0786e00-72bd-11eb-802e-3bcad3443c5e.png">
-
+<br/>
  
 ## Development Environment
 ---------------------
@@ -15,6 +16,7 @@
 - SwiftUI
 - Database Model: Realtime Database
 - used SDK: Firebase
+<br/>
 
 ## Podfile Installation
 --------------------
@@ -35,6 +37,7 @@ After add the required elements listed above, execute the installation command i
 ```
 pod install
 ```
+<br/>
 
 ## License
 ------------
@@ -71,9 +74,10 @@ License Info for ImagePicker.swift:
 ```
 Copyright © 2020 Mohammad Azam. All rights reserved.
 ```
+<br/>
 
 ## Application Execution Flow
 --------------------------
 
 when running the app, the first view:
-
+<br/>
