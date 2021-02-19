@@ -81,3 +81,9 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 
 when running the app, the first view:
 <br/>
+
+## To-be Fixed Problems
+--------------------------
+
+- Repeat Mode : When repeat play is being executed, return button is not listening well
+- 
