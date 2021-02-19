@@ -1,6 +1,7 @@
 //
 //  GoogleDelegate.swift
-//  FirebasePractice
+//  Based on Firebase sdk
+//  DB reference: FirebasePractice
 //
 //  Created by 정동혁 on 2021/01/20.
 //
@@ -20,10 +21,12 @@ class FacebookDelegate: NSObject, LoginButtonDelegate, ObservableObject {
     
     func logintWithFacebook (){
         manager.logIn(permissions: ["public_profile", "email"], from: nil){ (result, err) in
+            // If error occurs
             if err != nil {
                 print(err!.localizedDescription)
                 return
             }
+            //
             if !result!.isCancelled{
 
                 let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)

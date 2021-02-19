@@ -1,6 +1,6 @@
 //
-//  ContentsViewModel.swift
-//  FOCUSLY
+//  ArticleViewModel.swift
+//  purpose: managing viewmodel for user articles
 //
 //  Created by 정동혁 on 2021/02/09.
 //
@@ -8,17 +8,18 @@
 import Foundation
 import Firebase
 
+/* 현재 user의 article들을 관리해주는 viewmodel */
 class ArticleViewModel: ObservableObject {
+    // article들 저장
     @Published var article = [Article]()
-    // just for test
-    
+    // 날짜 표시용 dateFormatter
     let formatter = DateFormatter()
-    
     init() {
         formatter.dateFormat = "y-M-d"
     }
     
     // Fetch Article data from Database
+    // Based on Firebase's Realtime Database
     func fetchArticle(){
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
         var articleList = [Article]()
@@ -29,16 +30,16 @@ class ArticleViewModel: ObservableObject {
                 let articleTitle = placeDict["articleTitle"] as! String
                 let article = placeDict["article"] as! String
                 let createdDate = placeDict["createdDate"] as! String
-                let fullLength = placeDict["fullLength"] as! Int
                 let lastReadPosition = placeDict["lastReadPosition"] as! Int
                 
-                articleList.append(Article(id: snap.key, articleTitle: articleTitle, article: article, createdDate: createdDate, fullLength: fullLength, lastReadPosition: lastReadPosition))
+                articleList.append(Article(id: snap.key, articleTitle: articleTitle, article: article, createdDate: createdDate, lastReadPosition: lastReadPosition))
             }
             self.article = articleList
         })
     }
     
     // Add Article function
+    // Based on Firebase's Realtime Database
     func addArticle(articleTitle: String, article: String, fullLength: Int){
         guard let key = ref.childByAutoId().key else { return }
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(key)
@@ -49,7 +50,6 @@ class ArticleViewModel: ObservableObject {
             "article" : article,
             "createdDate" : formatter.string(from:
                                                 Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: Calendar.current.component(.day, from: Date()) ))!),
-            "fullLength" : fullLength,
             "lastReadPosition" : 0,
         ]
         
@@ -66,7 +66,8 @@ class ArticleViewModel: ObservableObject {
         })
     }
     
-    // Update order of Article function
+    // Update Article function
+    // Based on Firebase's Realtime Database
     func updateArticle() {
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
         articleRef.removeValue()
@@ -77,7 +78,6 @@ class ArticleViewModel: ObservableObject {
                 "id" : articles.id,
                 "articleTitle" : articles.articleTitle,
                 "createdDate" : articles.createdDate,
-                "fullLength" : articles.fullLength,
                 "lastReadPosition" : articles.lastReadPosition,
             ]
             print(articles.articleTitle)
@@ -100,6 +100,7 @@ class ArticleViewModel: ObservableObject {
     }
     
     // Remove Article function
+    // Based on Firebase's Realtime Database
     func removeArticle(articleIdx: Int) {
         let articleId = self.article[articleIdx].id
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(articleId)

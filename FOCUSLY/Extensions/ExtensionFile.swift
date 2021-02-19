@@ -1,6 +1,9 @@
 //
 //  ExtensionFile.swift
-//  FOCUSLY
+//
+//  purpose: 다른 뷰에서 사용될 struct, class, color 값, extension들 저장
+//  contents: Color variables, String&Color&UINavigationController&View&UTType extensions,
+//            Customized MultilineTextView, MultilineUITextView
 //
 //  Created by 정동혁 on 2021/01/25.
 //
@@ -11,7 +14,7 @@ import UniformTypeIdentifiers
 import Foundation
 
 /* Color Variables */
-/* Like Orange */
+/* Orange Values */
 let gradationColor: Gradient = Gradient(colors: [Color(red: 1, green: 196/255, blue: 0), Color(red: 1, green: 147/255, blue: 0)])
 let originalColor: Color = Color(red: 1, green: 176/255, blue: 0)
 let usuallyColor: Color = Color(red: 245/255, green: 166/255, blue: 35/255)
@@ -21,12 +24,12 @@ let grayLetter: Color = Color.secondary.opacity(1.5)
 let grayCircle: Color = Color.secondary.opacity(0.1)
 let grayIcon: Color = Color(red: 159/255, green: 159/255, blue: 159/255)
 let grayBackground: Color = Color.secondary.opacity(0.1)
-
+/* Article View custom (배경색, 폰트) */
 let backColors = [Color.secondary.opacity(0.07), Color.secondary.opacity(0.5), Color.primary.opacity(0.9), Color(hex: 0x9FE2BF), Color(hex: 0xFEF5E7), Color(hex: 0xEDBB99), Color(hex: 0x6495ED)]
 let scriptFonts = [("Calibri", "칼리브리"), ("Inconsolata", "인콘솔라타"), ("PottaOne-Regular", "PottaOne")]
 
 
-/* String length, substring */
+/* String length, substring extensions */
 extension String {
     
     var length: Int {
@@ -87,7 +90,7 @@ extension UINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-/* Hiding KeyBoard extension */
+/* Hiding KeyBoard extension for MakeContentsView.swift */
 extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -95,6 +98,7 @@ extension View {
 }
 
 /* Bring Data from .docx file */
+/* for docx parsing & upload */
 extension UTType {
     // Word documents are not an existing property on UTType
     static var docx: UTType {
@@ -103,21 +107,20 @@ extension UTType {
     }
 }
 
-
+/* for ArticleView */
+/* customized MultilineTextView */
+/* Purpose: to make view to be multiline & scrollable & selectable */
 struct MultilineTextView: UIViewRepresentable {
-    //@State var highlightedWords: NSAttributedString// 쓸지 미지수
+    // TextView Customize Properties
     @Binding var text: String
     @Binding var selectFontIdx: Int
     @Binding var selectColorIdx: Int
-    //하이라이트
-    @Binding var isHighlightSelect: Bool
-    @Binding var highlightedContent: [UITextRange]
-    //구간반복
+    // Repeat Function Variables
     @Binding var isRepeatMode: Bool
     @Binding var repeatContent: String
     
     func makeUIView(context: UIViewRepresentableContext<MultilineTextView>) -> MultilineUITextView {
-        let view = MultilineUITextView(isHighlightSelect: self.$isHighlightSelect, highlightedContent: self.$highlightedContent, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatContent)
+        let view = MultilineUITextView(isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatContent)
         view.delegate = view
         view.isScrollEnabled = true
         view.isSelectable = true
@@ -127,11 +130,13 @@ struct MultilineTextView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MultilineUITextView, context: UIViewRepresentableContext<MultilineTextView>) {
+        // In case view's properties modified
         uiView.text = self.text
         uiView.font = UIFont(name: scriptFonts[selectFontIdx].0, size: 50)
         uiView.backgroundColor = UIColor(backColors[selectColorIdx])
 
         /* Update the y offset of the textView */
+        /* to make current text view's display in the right place */
         if (uiView.contentSize.height - uiView.contentOffset.y) > (UIScreen.main.bounds.height * 0.5){
             let yOffset = uiView.contentSize.height - UIScreen.main.bounds.height * 0.5
             uiView.contentOffset.y = yOffset
@@ -141,27 +146,28 @@ struct MultilineTextView: UIViewRepresentable {
     
 }
 
+/* to customize MultilineTextView */
+/* Add highlight & repea† Functions to UIMenuController */
+/* isRepeatMode, repeatContent : ArticleView's State Variables */
 class MultilineUITextView: UITextView, UITextViewDelegate {
-    // 하이라이트
-    @Binding var isHighlightSelect: Bool
-    @Binding var highlightedContent: [UITextRange]
-    // 구간반복
+    // RepeatMode Properties
     @Binding var isRepeatMode: Bool
     @Binding var repeatContent: String
     
-    init(isHighlightSelect highlightselect: Binding<Bool>, highlightedContent highlightContent: Binding<[UITextRange]>, isRepeatMode repeatMode: Binding<Bool>, repeatContent repeatedContent: Binding<String>) {
-        self._isHighlightSelect = highlightselect
-        self._highlightedContent = highlightContent
+    init(isRepeatMode repeatMode: Binding<Bool>, repeatContent repeatedContent: Binding<String>) {
         self._isRepeatMode = repeatMode
         self._repeatContent = repeatedContent
         super.init(frame: .zero, textContainer: nil)
     }
     
+    // Required Initializer for Binding Variables
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        //super.init(coder: aDecoder) -> error
     }
-
+    
+    // For Customizing uiMenuController
+    // After Selecting, Add copy, highlight, repeatPlay selector to menu
+    // Else, Return false
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         switch action{
         case     #selector(copy(_:)),
@@ -173,6 +179,7 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
     }
     
     /* UIMenuController Functions */
+    // Add Yellow Background Highlight to Selected Text
     @objc
     func highlight() {
         let mstr = NSMutableAttributedString(attributedString: self.attributedText)
@@ -180,28 +187,20 @@ class MultilineUITextView: UITextView, UITextViewDelegate {
 
         self.attributedText = NSAttributedString(attributedString: mstr)
         
-//        let attribute = [NSAttributedString.Key.backgroundColor: UIColor(Color.yellow)]
-//        self.textStorage.addAttributes(attribute as [NSAttributedString.Key : Any], range: self.selectedRange)
-        
-        
-        // added code
-        //self.isHighlightSelect = true
-        //self.highlightedContent.append(self.selectedTextRange!)
-        
+        // For Debugging
         print(self.selectedRange)
         print(self.textStorage)
     }
     
+    // Turn on the RepeatMode flag & Repeat the Selected Text
     @objc
     func repeatPlay() {
-        print("repeat the text!")
         self.isRepeatMode = true
-        // 나중에 가드로 묶어야 함
         self.repeatContent = self.text(in: self.selectedTextRange!)!
     }
     
-   /*  UITextViewDelegate Methods */
-    
+    /*  UITextViewDelegate Methods */
+    // If Selected Section Changes
     func textViewDidChangeSelection(_ textView: UITextView) {
         let highlightMenu = UIMenuItem(title: "하이라이트", action: #selector(highlight))
         let repeatMenu = UIMenuItem(title: "반복재생", action: #selector(repeatPlay))

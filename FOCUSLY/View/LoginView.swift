@@ -1,6 +1,7 @@
 //
-//  ContentView.swift
-//  FirebasePractice
+//  LoginViewView.swift
+//  Based on Firebase sdk
+//  DB reference: FirebasePractice
 //
 //  Created by 정동혁 on 2021/01/19.
 //
@@ -10,6 +11,9 @@ import FBSDKLoginKit
 import GoogleSignIn
 import Firebase
 
+//  LoginView
+//  If facebook or google Logged in, direct to MainScreenView
+//  If not Logged in, direct to SocialLoginView
 struct LoginView: View {
     @EnvironmentObject var FacebookLogin: FacebookDelegate
     @EnvironmentObject var GoogleLogin: GoogleDelegate
@@ -23,11 +27,11 @@ struct LoginView: View {
         else {
             SocialLoginView()
         }
-        //MainScreenView()
     }
 }
 
 // Login Interface
+// Based on customized GoogleDelegate & FacebookDelegate
 struct SocialLoginView: View{
     @EnvironmentObject var GoogleLogin: GoogleDelegate
     @EnvironmentObject var FacebookLogin: FacebookDelegate
@@ -37,7 +41,7 @@ struct SocialLoginView: View{
             Image("focuslyImg").resizable().scaledToFit().frame(width:99, height:99).cornerRadius(22.0)
             Text("FOCUSLY").foregroundColor(Color(red: 1.0, green: 176/255, blue: 0.0)).bold().font(.system(.largeTitle, design: .rounded))
             
-            // Facebook Login
+            // Facebook Login Button
             Button(action: {
                 FacebookLogin.logintWithFacebook()
             }){
@@ -58,7 +62,7 @@ struct SocialLoginView: View{
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
             
-            // Google Login
+            // Google Login Button
             Button(action: {
                 GIDSignIn.sharedInstance().signIn()
             }){

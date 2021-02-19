@@ -18,19 +18,28 @@ struct ArticleView: View {
     @State private var interval: Double = 0.5
     @State private var place: Double = 0.0
     @State private var readedContent: String = ""
-    @State private var repeatedContent: String = ""
+    @State private var repeatedContent: String = "" // 구간반복 뷰 띄우기 용 텍스트
+    @State private var repeatedFullContent: String = "" // 구간반복 전체 컨텐츠
+    @State private var isRepeatMode: Bool = false // 구간반복 여부
     @State private var isHighlightSelect: Bool = false // 하이라이트 색 선택 창 띄울지 말지
     
-    @State var curArticle: Article
+    @State var cnt: Int = 0
+    
+    @Binding var curArticle: Article
     /* Custom Back Button Properties */
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-    @ObservedObject var articleViewModel = ArticleViewModel()
+    //@ObservedObject var articleViewModel = ArticleViewModel()
     
     /* Custom Back Button - leading */
     var btnBack : some View {
         Button(action: {
-            self.mode.wrappedValue.dismiss()
+            if self.isRepeatMode {
+                self.isRepeatMode = false
+            }
+            else {
+                self.mode.wrappedValue.dismiss()
+            }
             
         }){
             HStack(spacing: 0) {
@@ -44,23 +53,17 @@ struct ArticleView: View {
     
     var body: some View {
         ZStack{
-//            if self.isHighlightSelect {
-//                HStack(spacing: 10) {
-//                    ForEach(0...backColors.count-1, id: \.self) { colorIdx in
-//                        Button(action: {
-//                            self.selectColorIdx = colorIdx
-//                        }){
-//                            Circle()
-//                                .frame(width: 30, height: 30)
-//                                .foregroundColor(backColors[colorIdx])
-//                        }
-//                    }
-//                }.padding(.vertical, 10)
-//            }
-            
-            VStack{
-                //MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isHighlightSelect:self.$isHighlightSelect, highlightedContent: $articleViewModel.highlightedContent, isRepeatMode: $articleViewModel.isRepeatMode, repeatContent: $articleViewModel.repeatContent)
+            if self.isRepeatMode {
+                VStack{
+                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent)
+                }
             }
+            else {
+                VStack{
+                    MultilineTextView(text: self.$readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent)
+                }
+            }
+            
             /* View of each Contents */
         
             // end of contents VStack
@@ -117,9 +120,9 @@ struct ArticleView: View {
                                     },
                                     set: {(newProgress) in
                                         self.place = newProgress
-                                        curArticle.lastReadPosition = Int(newProgress * Double(curArticle.fullLength))
-                                       // self.readedContent = curArticle.fullContent.substring(toIndex: curArticle.lastReadPosition)
-                                        //self.count = Int(Double(curContent.readTime)*newProgress)
+                                        self.cnt = Int(newProgress * Double(curArticle.article.length))
+                                        self.curArticle.lastReadPosition = self.cnt
+                                        self.readedContent = curArticle.article.substring(toIndex: curArticle.lastReadPosition)
                                     }
                                 )).accentColor(usuallyColor)
                             }.padding() /* Location */
@@ -176,38 +179,30 @@ struct ArticleView: View {
             
         }
         .onAppear() {
-            //self.readedContent = self.curArticle.fullContent.substring(toIndex: curArticle.lastReadPosition)
-            // for test
-            //self.readedContent = curArticle.article.substring(toIndex: self.contentsViewModel.article_content_index)
+            self.readedContent = self.curArticle.article.substring(toIndex: self.cnt)
         }
         .onReceive(self.timer) { time in
-            if self.isActive && curArticle.lastReadPosition < curArticle.fullLength - 1{
-                self.count += 1
-                //readedContent.append(curArticle.fullContent[curArticle.lastReadPosition])
-                self.curArticle.lastReadPosition += 1
-                //self.place = Double(curArticle.lastReadPosition+1) / Double(curArticle.fullContent.length)
+            if self.isRepeatMode {
+                // 구간 반복 기능
+                if self.repeatedContent.length < self.repeatedFullContent.length{
+                    self.repeatedContent.append(self.repeatedFullContent[self.repeatedContent.length])
+                }
+                else if self.repeatedContent.length == self.repeatedFullContent.length {
+                    self.repeatedContent = ""
+                }
             }
-            
-            // for test - dummy data
-//            if self.contentsViewModel.isRepeatMode {
-//                // 구간 반복 기능
-//                if self.repeatedContent.length < self.contentsViewModel.repeatContent.length{
-//                    self.repeatedContent.append(self.contentsViewModel.repeatContent[self.repeatedContent.length])
-//                }
-//                else if self.repeatedContent.length == self.contentsViewModel.repeatContent.length {
-//                    self.repeatedContent = ""
-//                }
-//            }
-//            else if self.isActive && self.contentsViewModel.article_content_index < self.contentsViewModel.article_content.length-2 {
-//                readedContent.append(self.contentsViewModel.article_content[self.contentsViewModel.article_content_index])
-//                self.contentsViewModel.article_content_index += 1
-//            }
+            else if self.isActive && self.readedContent.length < self.curArticle.article.length {
+                self.place = Double(curArticle.lastReadPosition+1) / Double(curArticle.article.length)
+                readedContent.append(self.curArticle.article[self.cnt])
+                self.cnt += 1
+                self.curArticle.lastReadPosition = self.cnt
+            }
         }
-//        .onChange(of: self.contentsViewModel.isRepeatMode) { (newVal) in
-//            if newVal == false {
-//                self.repeatedContent = ""
-//            }
-//        }
+        .onChange(of: self.isRepeatMode) { (newVal) in
+            if newVal == false {
+                self.repeatedContent = ""
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle(curArticle.articleTitle)
         .navigationBarItems(leading: btnBack)

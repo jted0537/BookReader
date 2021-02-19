@@ -1,4 +1,4 @@
-//
+//License Info:
 //Copyright (c) 2018 ahmedAlmasri <ahmed.almasri@ymail.com>
 //
 //Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,6 +20,12 @@
 //THE SOFTWARE.
 //
 
+
+// SNDocx
+// implemented: open source + modified
+// purpose: extract the text contents of docx files
+// method: zip the docx file and extract xml file & filter the conents
+
 import Foundation
 import Zippy
 
@@ -33,6 +39,7 @@ public class SNDocx:NSObject{
         super.init()
     }
     
+    // get the text of docx
     public func getText(fileUrl url:URL)->String?{
         var result:String?  = nil
         do {
@@ -53,8 +60,7 @@ public class SNDocx:NSObject{
         return result
     }
     
-    
-    
+    // parse the docx
     private func parseDocx(_ data:Data?)->String?{
         guard let data = data else {
             return nil
@@ -63,7 +69,7 @@ public class SNDocx:NSObject{
         return matches(str ?? "")
     }
     
-    
+    // 정규화식 통해 tag filter 후 docx 내용 추출 & return
     private func matches(_ originalText:String)->String{
         var linefeedsRsids = [String]()
         var result = [String]()

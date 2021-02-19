@@ -6,12 +6,12 @@ import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
 
+// 데이터베이스 참조
 var ref: DatabaseReference!
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+    // for social login
     let googleDelegate = GoogleDelegate()
     let facebookDelegate = FacebookDelegate()
     

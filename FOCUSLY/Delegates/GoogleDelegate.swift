@@ -1,6 +1,7 @@
 //
 //  GoogleDelegate.swift
-//  FirebasePractice
+//  Based on Firebase sdk
+//  DB reference: FirebasePractice
 //
 //  Created by 정동혁 on 2021/01/20.
 //

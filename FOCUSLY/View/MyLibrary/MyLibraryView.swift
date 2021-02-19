@@ -58,11 +58,13 @@ struct MyLibraryView: View {
                     Text("매일 책을 읽어 통계 수치를 높이고 더 많은 도서를 완독하세요!").foregroundColor(grayLetter).font(.caption)
                 }
                 Spacer()
+                
+                /* View for Progress Circle */
                 ZStack(alignment: .trailing){
                     Circle()
                         .foregroundColor(grayCircle)
                         .frame(width: 120, height: 120)
-                    
+                
                     //                    Path { path in
                     //                        path.addArc(center: .init(x: 60, y: 60), radius: 60, startAngle: .degrees(0), endAngle: .degrees(360*user.todayReadingRatio), clockwise: true)
                     //                    }
@@ -73,20 +75,20 @@ struct MyLibraryView: View {
                     
                     Text("0%").foregroundColor(grayLetter).font(.title).bold()
                         .frame(width: 120, height: 120)
-                } // Progress Circle
+                }
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            // Article List
+            /* Article List */
             List{
-                ForEach(articleViewModel.article) { article in
-                    NavigationLink(destination: ArticleView(curArticle: article)){
+                ForEach(articleViewModel.article.indices, id: \.self) { idx in
+                    NavigationLink(destination: ArticleView(cnt: articleViewModel.article[idx].lastReadPosition, curArticle: $articleViewModel.article[idx])){
                         /* Script Info */
                         VStack(alignment: .leading){
-                            Text(article.articleTitle)
+                            Text(articleViewModel.article[idx].articleTitle)
                                 .foregroundColor(grayLetter)
-                            Text(article.createdDate)
+                            Text(articleViewModel.article[idx].createdDate)
                                 .font(.footnote)
                                 .foregroundColor(Color.secondary)
                             HStack{

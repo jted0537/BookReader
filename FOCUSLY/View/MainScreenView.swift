@@ -1,6 +1,6 @@
 //
 //  TabView.swift
-//  SwiftPlaygroud
+//  purpose: to show the current main screen view
 //
 //  Created by 정동혁 on 2021/01/15.
 //
