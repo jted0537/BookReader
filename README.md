@@ -21,7 +21,7 @@
 ## Podfile Installation
 --------------------
 
-There are some files to be installed in Podfile for some functions:
+There are some files to be installed in Podfile:
 ```
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
