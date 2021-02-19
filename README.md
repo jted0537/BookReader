@@ -80,6 +80,7 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 --------------------------
 
 when running the app, the first view:
+<img width="266" alt="KakaoTalk_Photo_2021-02-19-15-27-07" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png">
 <br/>
 
 ## To-be Fixed Problems
