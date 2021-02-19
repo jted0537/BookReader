@@ -91,4 +91,5 @@ when running the app, the first view:
 - Tab Item: Settings page is not implemented yet
 - Progress circle: Representation of reading progress circle is unstable
 - Epub File: Extracting epub file is not supported yet
+- Docx File: Needed to be optimized to reduce the loading time
 <br/>
