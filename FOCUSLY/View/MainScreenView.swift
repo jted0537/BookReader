@@ -10,10 +10,10 @@ import Firebase
 
 // Tab enum
 enum Tab{
-    case Library
-    case Folder
-    case Statics
-    case Preference
+    case Library // 나의 서재
+    case Folder // 나의 보관함
+    case Statics // 통계
+    case Preference // 환경설정
 }
 
 // When Login Success
@@ -24,6 +24,7 @@ struct MainScreenView: View {
         // NaviationBar Background
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().isTranslucent = false
+        
         // NavigationBar foreground
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .foregroundColor: UIColor(usuallyColor),

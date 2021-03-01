@@ -18,18 +18,23 @@ struct ArticleView: View {
     @State private var interval: Double = 0.5
     @State private var place: Double = 0.0
     @State private var readedContent: String = ""
-    @State private var repeatedContent: String = "" // 구간반복 뷰 띄우기 용 텍스트
-    @State private var repeatedFullContent: String = "" // 구간반복 전체 컨텐츠
-    @State private var isRepeatMode: Bool = false // 구간반복 여부
-    @State private var isHighlightSelect: Bool = false // 하이라이트 색 선택 창 띄울지 말지
-    
+
+    @State private var repeatedContent: String = "" // Represented repeat mode view
+    @State private var repeatedFullContent: String = "" // Full content of repeat mode
+    @State private var isRepeatMode: Bool = false
     @State var cnt: Int = 0
+    @State private var highlightContent = [NSRange]()
+
     
+    /* Binding Variable */
     @Binding var curArticle: Article
+    
     /* Custom Back Button Properties */
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-    //@ObservedObject var articleViewModel = ArticleViewModel()
+    
+    @ObservedObject var articleViewModel = ArticleViewModel()
+
     
     /* Custom Back Button - leading */
     var btnBack : some View {
@@ -54,14 +59,15 @@ struct ArticleView: View {
     
     var body: some View {
         ZStack{
+            
             if self.isRepeatMode {
                 VStack{
-                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent)
+                    MultilineTextView(text: self.$repeatedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent, highlightContent: self.$highlightContent)
                 }
             }
             else {
                 VStack{
-                    MultilineTextView(text: self.$readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent)
+                    MultilineTextView(text: self.$readedContent, selectFontIdx: $selectFontIdx, selectColorIdx: $selectColorIdx, isRepeatMode: self.$isRepeatMode, repeatContent: self.$repeatedFullContent , highlightContent: self.$highlightContent)
                 }
             }
             
@@ -123,6 +129,7 @@ struct ArticleView: View {
                                         self.place = newProgress
                                         self.cnt = Int(newProgress * Double(curArticle.article.length))
                                         self.curArticle.lastReadPosition = self.cnt
+                                        print(cnt)
                                         self.readedContent = curArticle.article.substring(toIndex: curArticle.lastReadPosition)
                                     }
                                 )).accentColor(usuallyColor)
@@ -182,7 +189,7 @@ struct ArticleView: View {
             
         }
         .onAppear() {
-            self.readedContent = self.curArticle.article.substring(toIndex: self.cnt)
+            self.readedContent = self.curArticle.article.substring(toIndex: self.curArticle.lastReadPosition)
         }
         .onChange(of: self.isRepeatMode) { (newVal) in
             if newVal == false {
@@ -195,7 +202,7 @@ struct ArticleView: View {
         .edgesIgnoringSafeArea(.vertical)
         .onReceive(self.timer) { time in
             if self.isActive && self.isRepeatMode {
-                // 구간 반복 기능
+                // for repeat mode
                 if self.repeatedContent.length < self.repeatedFullContent.length{
                     self.repeatedContent.append(self.repeatedFullContent[self.repeatedContent.length])
                 }
@@ -210,6 +217,9 @@ struct ArticleView: View {
                 self.curArticle.lastReadPosition = self.cnt
             }
         }
+        .onDisappear() {
+            articleViewModel.updateArticlePosition(changedArticle: curArticle)
+        } // Update last Read Position
         
     }
 }

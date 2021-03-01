@@ -1,7 +1,7 @@
 //
 //  PreferenceView.swift
-//  FOCUSLY
 //
+//  purpose: to support user log-in
 //  Created by 정동혁 on 2021/01/22.
 //
 

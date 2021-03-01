@@ -17,9 +17,9 @@
 		E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E042921D25BEC3800054BD6F /* ExtensionFile.swift */; };
 		E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0438F2425C118D2001662EC /* MakeContentsView.swift */; };
 		E06F3AE925CCF69700968B4C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06F3AE825CCF69700968B4C /* ImagePicker.swift */; };
+		E06F669F25DFBEA3006C7ACD /* MultiLineText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06F669E25DFBEA3006C7ACD /* MultiLineText.swift */; };
 		E07087CA25D231AB0055B1D1 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07087C925D231AB0055B1D1 /* ArticleViewModel.swift */; };
 		E0715BE725CCD77D007DB0C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */; };
-		E0754AD825CBD2C400455A2E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E0754AD725CBD2C400455A2E /* loading.json */; };
 		E08343D625B951E7009F3DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D525B951E7009F3DF3 /* AppDelegate.swift */; };
 		E08343D825B951E7009F3DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08343D725B951E7009F3DF3 /* SceneDelegate.swift */; };
 		E08343DF25B951E7009F3DF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */; };
@@ -47,9 +47,9 @@
 		E042921D25BEC3800054BD6F /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		E0438F2425C118D2001662EC /* MakeContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeContentsView.swift; sourceTree = "<group>"; };
 		E06F3AE825CCF69700968B4C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E06F669E25DFBEA3006C7ACD /* MultiLineText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineText.swift; sourceTree = "<group>"; };
 		E07087C925D231AB0055B1D1 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E0754AD725CBD2C400455A2E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08343D725B951E7009F3DF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				E0438F2425C118D2001662EC /* MakeContentsView.swift */,
-				E06F3AE825CCF69700968B4C /* ImagePicker.swift */,
 			);
 			path = MakeContents;
 			sourceTree = "<group>";
@@ -130,6 +129,15 @@
 				E042921D25BEC3800054BD6F /* ExtensionFile.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E06F669D25DFBE7B006C7ACD /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				E06F3AE825CCF69700968B4C /* ImagePicker.swift */,
+				E06F669E25DFBEA3006C7ACD /* MultiLineText.swift */,
+			);
+			path = Functions;
 			sourceTree = "<group>";
 		};
 		E07087C825D231720055B1D1 /* ViewModel */ = {
@@ -161,7 +169,7 @@
 		E08343D425B951E7009F3DF3 /* FOCUSLY */ = {
 			isa = PBXGroup;
 			children = (
-				E0754AD725CBD2C400455A2E /* loading.json */,
+				E06F669D25DFBE7B006C7ACD /* Functions */,
 				E042921C25BEC36A0054BD6F /* Extensions */,
 				E08CAC2725B955B300B37165 /* ICON */,
 				E09B66D125BE958E005BD237 /* Fonts */,
@@ -170,8 +178,8 @@
 				E08CAC2625B955AB00B37165 /* View */,
 				E08CAC2425B9558200B37165 /* Delegates */,
 				E08343E025B951E7009F3DF3 /* LaunchScreen.storyboard */,
-				E08343E325B951E7009F3DF3 /* Info.plist */,
 				E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */,
+				E08343E325B951E7009F3DF3 /* Info.plist */,
 				E02ED0B725CD449000AAFFE7 /* Assets.xcassets */,
 				E08343DD25B951E7009F3DF3 /* Preview Content */,
 			);
@@ -309,7 +317,6 @@
 				E08CAC1825B954D100B37165 /* FocuslyIcon.png in Resources */,
 				E0715BE725CCD77D007DB0C5 /* GoogleService-Info.plist in Resources */,
 				E008ABE325C3A47500CD9EC4 /* Inconsolata.ttf in Resources */,
-				E0754AD825CBD2C400455A2E /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +392,7 @@
 				E042921E25BEC3800054BD6F /* ExtensionFile.swift in Sources */,
 				E08CAC3125B959FD00B37165 /* Article.swift in Sources */,
 				E0438F2525C118D2001662EC /* MakeContentsView.swift in Sources */,
+				E06F669F25DFBEA3006C7ACD /* MultiLineText.swift in Sources */,
 				E08CAC3025B959FD00B37165 /* User.swift in Sources */,
 				E0A79F7B25BE64F3000A4A06 /* ArticleView.swift in Sources */,
 				E08CAC1E25B9555600B37165 /* GoogleDelegate.swift in Sources */,

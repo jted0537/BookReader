@@ -8,18 +8,19 @@
 import Foundation
 import Firebase
 
-/* 현재 user의 article들을 관리해주는 viewmodel */
+/* viewmodel for managing the current user's article */
 class ArticleViewModel: ObservableObject {
-    // article들 저장
-    @Published var article = [Article]()
-    // 날짜 표시용 dateFormatter
+    // save the articles into the current user model
+    @Published var user = User()
+    
+    // DateFormatter for presenting the date
     let formatter = DateFormatter()
     init() {
         formatter.dateFormat = "y-M-d"
     }
     
-    // Fetch Article data from Database
-    // Based on Firebase's Realtime Database
+    // Fetch article data from database
+    // Based on firebase's realtime database
     func fetchArticle(){
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
         var articleList = [Article]()
@@ -32,14 +33,16 @@ class ArticleViewModel: ObservableObject {
                 let createdDate = placeDict["createdDate"] as! String
                 let lastReadPosition = placeDict["lastReadPosition"] as! Int
                 
+                // fetch the Highlight structs - need to be added
+                
                 articleList.append(Article(id: snap.key, articleTitle: articleTitle, article: article, createdDate: createdDate, lastReadPosition: lastReadPosition))
             }
-            self.article = articleList
+            self.user.articles = articleList
         })
     }
     
-    // Add Article function
-    // Based on Firebase's Realtime Database
+    // Add article function
+    // Based on firebase's realtime database
     func addArticle(articleTitle: String, article: String, fullLength: Int){
         guard let key = ref.childByAutoId().key else { return }
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(key)
@@ -66,45 +69,81 @@ class ArticleViewModel: ObservableObject {
         })
     }
     
+//<<<<<<< HEAD
+//    // Update article function
+//    // Based on firebase's realtime database
+//    func updateArticle() {
+//        let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
+//        articleRef.removeValue()
+//        var a = 0
+//        for articles in self.user.articles {
+//            articleRef.child(articles.id).removeValue()
+//            let updatedArticle : [String : Any] = [
+//                "id" : articles.id,
+//                "articleTitle" : articles.articleTitle,
+//                "createdDate" : articles.createdDate,
+//                "lastReadPosition" : articles.lastReadPosition,
+//            ]
+//            print(articles.articleTitle)
+//            //articleRef.child(articles.id).removeValue()
+//
+//            articleRef.child(articles.id).setValue(updatedArticle, withCompletionBlock: { (error, ref) in
+//                if let err = error {
+//                    print(err.localizedDescription)
+//                }
+//
+//                ref.observe(.value, with: { (snapshot) in
+//                    guard snapshot.exists() else {
+//                        return
+//                    }
+//                })
+//            })
+//            a+=1
+//            if a>2 { return }
+//        }
+//=======
     // Update Article function
     // Based on Firebase's Realtime Database
-    func updateArticle() {
-        let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE")
-        articleRef.removeValue()
-        var a = 0
-        for articles in self.article {
-            articleRef.child(articles.id).removeValue()
-            let updatedArticle : [String : Any] = [
-                "id" : articles.id,
-                "articleTitle" : articles.articleTitle,
-                "createdDate" : articles.createdDate,
-                "lastReadPosition" : articles.lastReadPosition,
-            ]
-            print(articles.articleTitle)
-            //articleRef.child(articles.id).removeValue()
-
-            articleRef.child(articles.id).setValue(updatedArticle, withCompletionBlock: { (error, ref) in
-                if let err = error {
-                    print(err.localizedDescription)
-                }
-
-                ref.observe(.value, with: { (snapshot) in
-                    guard snapshot.exists() else {
-                        return
-                    }
-                })
-            })
-            a+=1
-            if a>2 { return }
-        }
+    func updateArticlePosition(changedArticle: Article) {
+        let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(changedArticle.id)
+        let values = ["lastReadPosition": changedArticle.lastReadPosition]
+        articleRef.updateChildValues(values)
+        
     }
     
     // Remove Article function
     // Based on Firebase's Realtime Database
     func removeArticle(articleIdx: Int) {
-        let articleId = self.article[articleIdx].id
+        let articleId = self.user.articles[articleIdx].id
         let articleRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(articleId)
         articleRef.removeValue()
     }
+    
+    /* Not used */
+    // Add Highlight struct to the given article
+//    func addHighlight(article: Article, colorSelect: Int, highlightRange: NSRange) {
+//        guard let highlightKey = ref.childByAutoId().key else { return }
+//        let highlightRef = ref.child("USER").child("\(Auth.auth().currentUser!.uid)").child("ARTICLE").child(article.id).child("HIGHLIGHT").child(highlightKey)
+//
+//        let newHighlight : [String : Any] = [
+//            "highlightKey" : highlightKey,
+//            "color" : colorSelect,
+//            "startPosition" : highlightRange.location,
+//            "length" : highlightRange.length,
+//        ]
+//
+//        highlightRef.setValue(newHighlight, withCompletionBlock: { (error, ref) in
+//            if let err = error {
+//                print(err.localizedDescription)
+//            }
+//
+//            ref.observe(.value, with: { (snapshot) in
+//                guard snapshot.exists() else {
+//                    return
+//                }
+//            })
+//        })
+//
+//    }
 }
 

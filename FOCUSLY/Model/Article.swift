@@ -8,21 +8,23 @@
 import Foundation
 import SwiftUI
 
+/* not used */
 // Higlight Model
-// highlightKey: 하이라이트된 객체의 key
-// color: 하이라이트 색상
-// highlightRange: 하이라이트된 범위 (후에 range 형 변수로 변환)
+// highlightKey: key of higlighted object
+// color: highlight color
+// highlightRange: highlighted range (transferred to range variable later)
 struct Highlight {
-    var highlightKey: String
-    var color: String
-    var highlightRange: String
+    let highlightKey: String
+    var color: Int
+    let startPosition: Int
+    let length: Int
 }
 
 // Article Model
-// id: article key (Identifiable protocol 준수하기 위한 변수 이름)
-// articleTitle: article 제목
-// article: article 내용
-// createdDate: article 생성날짜
+// id: article key (variable name to observe Identifiable protocol)
+// articleTitle: article's title
+// article: article's contents
+// createdDate: article's created date
 struct Article: Identifiable {
     let id: String
     let articleTitle: String
@@ -33,5 +35,6 @@ struct Article: Identifiable {
     var lastReadPosition: Int
     //let ownerUid: String
     
-    //var highlightInfo: Highlight
+    //var highlights: [Highlight] = []
 }
+

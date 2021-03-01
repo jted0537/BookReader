@@ -82,7 +82,7 @@ struct SocialLoginView: View{
             .cornerRadius(60)
             .shadow(color: .secondary, radius: 0.7)
             
-            // Apple Login - not ready
+            // Apple Login - need to be added
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }

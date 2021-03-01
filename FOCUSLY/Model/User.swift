@@ -10,14 +10,13 @@ import SwiftUI
 
 // UserModel
 // id: user key
-// playlist: article 저장
-// todayReadingGoal: 오늘의 읽기 목표 시간
-// todayReadingNow: 오늘의 읽기 현재 읽은 시간
+// playlist: to save article
+// todayReadingGoal: Today's reading goal time
+// todayReadingNow: Today's reading current time
 struct User: Identifiable {
     let id = UUID()
-    //let username: String
-    let playlist: [Article]
-    let todayReadingGoal: Int = 0 // 초 단위로 저장
-    let todayReadingNow: Int = 0 // 초 단위로 저장
+    var articles: [Article] = []
+    var todayReadingGoal: Int = 0 // save the time in seconds
+    var todayReadingNow: Int = 0 // save the time in seconds
 }
 

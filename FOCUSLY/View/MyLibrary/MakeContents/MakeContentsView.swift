@@ -1,7 +1,7 @@
 //
-//  MakeScriptView.swift
-//  FOCUSLY
+//  MakeContentsView.swift
 //
+//  purpose: to add a new contents
 //  Created by 정동혁 on 2021/01/27.
 //
 import SwiftUI

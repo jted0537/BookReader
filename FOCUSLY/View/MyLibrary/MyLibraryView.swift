@@ -29,14 +29,15 @@ struct MyLibraryView: View {
     private func onDelete(offsets: IndexSet) {
         articleViewModel.removeArticle(articleIdx: offsets[offsets.startIndex])
         // Delete from database should be first (Index problem)
-        articleViewModel.article.remove(atOffsets: offsets)
+        articleViewModel.user.articles.remove(atOffsets: offsets)
     }
-    
-    private func onMove(source: IndexSet, destination: Int) {
-        articleViewModel.article.move(fromOffsets: source, toOffset: destination)
-        // This will change Article order (Both View and Model)
-        articleViewModel.updateArticle()
-    }
+
+/* not used */
+//    private func onMove(source: IndexSet, destination: Int) {
+//        articleViewModel.article.move(fromOffsets: source, toOffset: destination)
+//        // This will change Article order (Both View and Model)
+//        articleViewModel.updateArticle()
+//    }
     
     // My Library Main View
     var body: some View {
@@ -64,7 +65,7 @@ struct MyLibraryView: View {
                     Circle()
                         .foregroundColor(grayCircle)
                         .frame(width: 120, height: 120)
-                
+                    /* Need to be fixed */
                     //                    Path { path in
                     //                        path.addArc(center: .init(x: 60, y: 60), radius: 60, startAngle: .degrees(0), endAngle: .degrees(360*user.todayReadingRatio), clockwise: true)
                     //                    }
@@ -82,13 +83,13 @@ struct MyLibraryView: View {
             
             /* Article List */
             List{
-                ForEach(articleViewModel.article.indices, id: \.self) { idx in
-                    NavigationLink(destination: ArticleView(cnt: articleViewModel.article[idx].lastReadPosition, curArticle: $articleViewModel.article[idx])){
+                ForEach(articleViewModel.user.articles.indices, id: \.self) { idx in
+                    NavigationLink(destination: ArticleView(cnt: articleViewModel.user.articles[idx].lastReadPosition, curArticle: $articleViewModel.user.articles[idx])){
                         /* Script Info */
                         VStack(alignment: .leading){
-                            Text(articleViewModel.article[idx].articleTitle)
+                            Text(articleViewModel.user.articles[idx].articleTitle)
                                 .foregroundColor(grayLetter)
-                            Text(articleViewModel.article[idx].createdDate)
+                            Text(articleViewModel.user.articles[idx].createdDate)
                                 .font(.footnote)
                                 .foregroundColor(Color.secondary)
                             HStack{
@@ -106,6 +107,7 @@ struct MyLibraryView: View {
                     .shadow(color: Color.secondary.opacity(0.4), radius: 5, y: 5)
                 }
                 .onDelete(perform: onDelete)
+                /* not used */
                 //.onMove(perform: onMove)
             }
             .environment(\.editMode, $editMode)

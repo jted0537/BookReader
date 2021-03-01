@@ -1,5 +1,5 @@
 //
-//  GoogleDelegate.swift
+//  FacebookDelegate.swift
 //  Based on Firebase sdk
 //  DB reference: FirebasePractice
 //
