@@ -50,7 +50,7 @@
 		E06F669E25DFBEA3006C7ACD /* MultiLineText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineText.swift; sourceTree = "<group>"; };
 		E07087C925D231AB0055B1D1 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		E0715BE625CCD77D007DB0C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E08343D225B951E7009F3DF3 /* FOCUSLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCUSLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08343D225B951E7009F3DF3 /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08343D525B951E7009F3DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08343D725B951E7009F3DF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E08343DE25B951E7009F3DF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		E08343C925B951E7009F3DF3 = {
 			isa = PBXGroup;
 			children = (
-				E08343D425B951E7009F3DF3 /* FOCUSLY */,
+				E08343D425B951E7009F3DF3 /* BookReader */,
 				E08343D325B951E7009F3DF3 /* Products */,
 				03E000439FBCF8D57334FECD /* Pods */,
 				9E8FACD6CDD6438087117C15 /* Frameworks */,
@@ -161,12 +161,12 @@
 		E08343D325B951E7009F3DF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E08343D225B951E7009F3DF3 /* FOCUSLY.app */,
+				E08343D225B951E7009F3DF3 /* BookReader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E08343D425B951E7009F3DF3 /* FOCUSLY */ = {
+		E08343D425B951E7009F3DF3 /* BookReader */ = {
 			isa = PBXGroup;
 			children = (
 				E06F669D25DFBE7B006C7ACD /* Functions */,
@@ -183,7 +183,7 @@
 				E02ED0B725CD449000AAFFE7 /* Assets.xcassets */,
 				E08343DD25B951E7009F3DF3 /* Preview Content */,
 			);
-			path = FOCUSLY;
+			path = BookReader;
 			sourceTree = "<group>";
 		};
 		E08343DD25B951E7009F3DF3 /* Preview Content */ = {
@@ -246,9 +246,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E08343D125B951E7009F3DF3 /* FOCUSLY */ = {
+		E08343D125B951E7009F3DF3 /* BookReader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "FOCUSLY" */;
+			buildConfigurationList = E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "BookReader" */;
 			buildPhases = (
 				DB9DC0030DDEFAF362A23A9D /* [CP] Check Pods Manifest.lock */,
 				E08343CE25B951E7009F3DF3 /* Sources */,
@@ -261,12 +261,12 @@
 			);
 			dependencies = (
 			);
-			name = FOCUSLY;
+			name = BookReader;
 			packageProductDependencies = (
 				E08CAC1425B9548D00B37165 /* FacebookLogin */,
 			);
 			productName = FOCUSLY;
-			productReference = E08343D225B951E7009F3DF3 /* FOCUSLY.app */;
+			productReference = E08343D225B951E7009F3DF3 /* BookReader.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -283,7 +283,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "FOCUSLY" */;
+			buildConfigurationList = E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "BookReader" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -299,7 +299,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E08343D125B951E7009F3DF3 /* FOCUSLY */,
+				E08343D125B951E7009F3DF3 /* BookReader */,
 			);
 		};
 /* End PBXProject section */
@@ -544,15 +544,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"FOCUSLY/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BookReader/Preview Content\"";
 				DEVELOPMENT_TEAM = 6U9D6MFS2N;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = FOCUSLY/Info.plist;
+				INFOPLIST_FILE = BookReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.FOCUSLY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.BookReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -566,15 +566,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"FOCUSLY/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BookReader/Preview Content\"";
 				DEVELOPMENT_TEAM = 6U9D6MFS2N;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = FOCUSLY/Info.plist;
+				INFOPLIST_FILE = BookReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.FOCUSLY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IOS.BookReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -584,7 +584,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "FOCUSLY" */ = {
+		E08343CD25B951E7009F3DF3 /* Build configuration list for PBXProject "BookReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E08343E425B951E7009F3DF3 /* Debug */,
@@ -593,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "FOCUSLY" */ = {
+		E08343E625B951E7009F3DF3 /* Build configuration list for PBXNativeTarget "BookReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E08343E725B951E7009F3DF3 /* Debug */,

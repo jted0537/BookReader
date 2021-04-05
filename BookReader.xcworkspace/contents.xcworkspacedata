@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:FOCUSLY.xcodeproj">
+      location = "group:/Users/donghyuk/Desktop/BookReader/BookReader.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E08343D125B951E7009F3DF3"
-               BuildableName = "FOCUSLY.app"
-               BlueprintName = "FOCUSLY"
-               ReferencedContainer = "container:FOCUSLY.xcodeproj">
+               BuildableName = "BookReader.app"
+               BlueprintName = "BookReader"
+               ReferencedContainer = "container:BookReader.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,11 +45,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E08343D125B951E7009F3DF3"
-            BuildableName = "FOCUSLY.app"
-            BlueprintName = "FOCUSLY"
-            ReferencedContainer = "container:FOCUSLY.xcodeproj">
+            BuildableName = "BookReader.app"
+            BlueprintName = "BookReader"
+            ReferencedContainer = "container:BookReader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "CG_PDF_VERBOSE"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E08343D125B951E7009F3DF3"
-            BuildableName = "FOCUSLY.app"
-            BlueprintName = "FOCUSLY"
-            ReferencedContainer = "container:FOCUSLY.xcodeproj">
+            BuildableName = "BookReader.app"
+            BlueprintName = "BookReader"
+            ReferencedContainer = "container:BookReader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
