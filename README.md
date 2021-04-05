@@ -1,13 +1,7 @@
-# FOCUSLY
+# BookReader
 ------------------
 <br/>
 
-## FOCUSLY Project Description
----------------------
-
-<img width="684" alt="스크린샷 2021-02-19 오후 2 14 10" src="https://user-images.githubusercontent.com/47416192/108461251-b0786e00-72bd-11eb-802e-3bcad3443c5e.png">
-<br/>
- 
 ## Development Environment
 ---------------------
 
@@ -78,10 +72,6 @@ Copyright © 2020 Mohammad Azam. All rights reserved.
 
 ## Application Execution Flow
 --------------------------
-
-When running the app, the login view:<br/>
-<img width="266" alt="login-view" src="https://user-images.githubusercontent.com/47416192/108466462-0d2c5680-72c7-11eb-9bd1-2710b7e9b900.png"><br/>
-
 After logged in, the first main view(displaying MyLibrary View):<br/>
 <img width="266" alt="myLibrary-view" src="https://user-images.githubusercontent.com/47416192/108469755-33082a00-72cc-11eb-8866-5f9f07a132ce.png"><br/>
 
