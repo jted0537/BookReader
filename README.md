@@ -1,5 +1,8 @@
 # BookReader
 ------------------
+For reading book contents.
+<br/>
+We provide convert .docx, .pdf to book contents and OCR functions
 <br/>
 
 ## Development Environment
