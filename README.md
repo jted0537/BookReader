@@ -1,4 +1,4 @@
-# BookReader
+# BookReader Application
 ------------------
 For reading book contents.
 <br/>
